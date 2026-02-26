@@ -1,0 +1,157 @@
+#pragma once
+
+#include "chat.hpp"
+#include "chat_background.hpp"
+#include "chat_boost_added.hpp"
+#include "chat_owner_changed.hpp"
+#include "chat_owner_left.hpp"
+#include "chat_shared.hpp"
+#include "checklist_tasks_added.hpp"
+#include "checklist_tasks_done.hpp"
+#include "common.hpp"
+#include "direct_message_price_changed.hpp"
+#include "direct_messages_topic.hpp"
+#include "external_reply_info.hpp"
+#include "forum_topc_created.hpp"
+#include "general_forum_topic_hidden.hpp"
+#include "general_forum_topic_unhidden.hpp"
+#include "gift_info.hpp"
+#include "giveaway_completed.hpp"
+#include "giveaway_created.hpp"
+#include "inline_keyboard_markup.hpp"
+#include "maybe_inaccessible_message.hpp"
+#include "message_auto_delete_timer_changed.hpp"
+#include "message_origin.hpp"
+#include "paid_message_price_changed.hpp"
+#include "passport_data.hpp"
+#include "proximity_alert_triggered.hpp"
+#include "refunded_payment.hpp"
+#include "successful_payment.hpp"
+#include "suggested_post_approval_failed.hpp"
+#include "suggested_post_approved.hpp"
+#include "suggested_post_declined.hpp"
+#include "suggested_post_info.hpp"
+#include "suggested_post_refunded.hpp"
+#include "text_quote.hpp"
+#include "unique_gift_info.hpp"
+#include "user.hpp"
+#include "users_shared.hpp"
+#include "video_chat_ended.hpp"
+#include "video_chat_participants_invited.hpp"
+#include "video_chat_scheduled.hpp"
+#include "video_chat_started.hpp"
+#include "web_app_data.hpp"
+#include "write_access_allowed.hpp"
+
+namespace tg {
+
+struct Message {
+    Integer message_id;
+    Optional<Integer> message_thread_id;
+    Optional<DirectMessagesTopic> direct_messages_topic;
+    Optional<User> from;
+    Optional<Chat> sender_chat;
+    Optional<Integer> sender_boost_count;
+    Optional<User> sender_business_bot;
+    Integer date;
+    Optional<String> business_connection_id;
+    Chat chat;
+    Optional<MessageOrigin> forward_origin;
+    OptionalTrue is_topic_message;
+    OptionalTrue is_automatic_forward;
+    Ptr<Message> reply_to_message;
+    Optional<ExternalReplyInfo> external_reply;
+    Optional<TextQuote> quote;
+    Optional<Story> reply_to_story;
+    Optional<Integer> reply_to_checklist_task_id;
+    Optional<User> via_bot;
+    Optional<Integer> edit_date;
+    OptionalTrue has_protected_content;
+    OptionalTrue is_from_offline;
+    OptionalTrue is_paid_post;
+    Optional<String> media_group_id;
+    Optional<String> author_signature;
+    Optional<Integer> paid_star_count;
+    Optional<String> text;
+    Optional<Array<MessageEntity>> entities;
+    Optional<LinkPreviewOptions> link_preview_options;
+    Optional<SuggestedPostInfo> suggested_post_info;
+    Optional<String> effect_id;
+    Optional<Animation> animation;
+    Optional<Audio> audio;
+    Optional<Document> document;
+    Optional<PaidMediaInfo> paid_media;
+    Optional<Array<PhotoSize>> photo;
+    Optional<Sticker> sticker;
+    Optional<Story> story;
+    Optional<Video> video;
+    Optional<VideoNote> video_note;
+    Optional<Voice> voice;
+    Optional<String> caption;
+    Optional<MessageEntity> caption_entities;
+    OptionalTrue show_caption_above_media;
+    OptionalTrue has_media_spoiler;
+    Optional<Checklist> checklist;
+    Optional<Contact> contact;
+    Optional<Dice> dice;
+    Optional<Game> game;
+    Optional<Poll> poll;
+    Optional<Venue> venue;
+    Optional<Location> location;
+    Optional<Array<User>> new_chat_members;
+    Optional<User> left_chat_member;
+    Optional<ChatOwnerLeft> chat_owner_left;
+    Optional<ChatOwnerChanged> chat_owner_changed;
+    Optional<String> new_chat_title;
+    Optional<Array<PhotoSize>> new_chat_photo;
+    OptionalTrue delete_chat_photo;
+    OptionalTrue group_chat_created;
+    OptionalTrue supergroup_chat_created;
+    OptionalTrue channel_chat_created;
+    Optional<MessageAutoDeleteTimerChanged> message_auto_delete_timer_changed;
+    Optional<Integer> migrate_to_chat_id;
+    Optional<Integer> migrate_from_chat_id;
+    Optional<MaybeInaccessibleMessage> pinned_message;
+    Optional<Invoice> invoice;
+    Optional<SuccessfulPayment> successful_payment;
+    Optional<RefundedPayment> refunded_payment;
+    Optional<UsersShared> users_shared;
+    Optional<ChatShared> chat_shared;
+    Optional<GiftInfo> gift;
+    Optional<UniqueGiftInfo> unique_gift;
+    Optional<GiftInfo> gift_upgrade_sent;
+    Optional<String> connected_website;
+    Optional<WriteAccessAllowed> write_access_allowed;
+    Optional<PassportData> passport_data;
+    Optional<ProximityAlertTriggered> proximity_alert_triggered;
+    Optional<ChatBoostAdded> boost_added;
+    Optional<ChatBackground> chat_background_set;
+    Optional<ChecklistTasksDone> checklist_tasks_done;
+    Optional<ChecklistTasksAdded> checklist_tasks_added;
+    Optional<DirectMessagePriceChanged> direct_message_price_changed;
+    Optional<ForumTopicCreated> forum_topic_created;
+    Optional<ForumTopicCreated> forum_topic_edited;
+    Optional<ForumTopicCreated> forum_topic_closed;
+    Optional<ForumTopicCreated> forum_topic_reopened;
+    Optional<GeneralForumTopicUnhidden> general_forum_topic_unhidden;
+    Optional<GeneralForumTopicHidden> general_forum_topic_hidden;
+    Optional<GiveawayCreated> giveaway_created;
+    Optional<Giveaway> giveaway;
+    Optional<GiveawayWinners> giveaway_winners;
+    Optional<GiveawayCompleted> giveaway_completed;
+    Optional<PaidMessagePriceChanged> paid_message_price_changed;
+    Optional<SuggestedPostApproved> suggested_post_approved;
+    Optional<SuggestedPostApprovalFailed> suggested_post_approval_failed;
+    Optional<SuggestedPostDeclined> suggested_post_declined;
+    Optional<SuggestedPostRefunded> suggested_post_refunded;
+    Optional<VideoChatScheduled> video_chat_scheduled;
+    Optional<VideoChatStarted> video_chat_started;
+    Optional<VideoChatEnded> video_chat_ended;
+    Optional<VideoChatParticipantsInvited> video_chat_participants_invited;
+    Optional<WebAppData> web_app_data;
+    Optional<InlineKeyboardMarkup> reply_markup;
+};
+
+Message Parse(const Value& value, To<Message>);
+
+}  // namespace tg

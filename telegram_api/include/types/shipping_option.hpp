@@ -1,0 +1,16 @@
+#pragma once
+
+#include "common.hpp"
+#include "labeled_price.hpp"
+
+namespace tg {
+
+struct ShippingOption {
+    String id;
+    String title;
+    Array<LabeledPrice> prices;
+};
+
+ShippingOption Parse(const Value& value, To<ShippingOption>);
+
+}  // namespace tg

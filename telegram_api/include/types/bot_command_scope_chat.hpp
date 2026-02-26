@@ -1,0 +1,14 @@
+#pragma once
+
+#include "common.hpp"
+
+namespace tg {
+
+struct BotCommandScopeChat {
+    String type;
+    OneOf<Integer, String> chat_id;
+};
+
+BotCommandScopeChat Parse(const Value& value, To<BotCommandScopeChat>);
+
+}  // namespace tg

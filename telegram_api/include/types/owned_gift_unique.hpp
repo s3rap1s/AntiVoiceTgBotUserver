@@ -1,0 +1,23 @@
+#pragma once
+
+#include "common.hpp"
+#include "unique_gift.hpp"
+#include "user.hpp"
+
+namespace tg {
+
+struct OwnedGiftUnique {
+    String type;
+    UniqueGift gift;
+    Optional<String> owned_gift_id;
+    Optional<User> sender_user;
+    Integer send_date;
+    OptionalTrue is_saved;
+    OptionalTrue can_be_transferred;
+    Optional<Integer> transfer_star_count;
+    Optional<Integer> next_transfer_date;
+};
+
+OwnedGiftUnique Parse(const Value& value, To<OwnedGiftUnique>);
+
+}  // namespace tg

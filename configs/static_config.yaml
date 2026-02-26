@@ -1,0 +1,40 @@
+components_manager:
+  task_processors:
+    main-task-processor:
+      worker_threads: 4
+
+    fs-task-processor:
+      worker_threads: 2
+
+  components:
+    server:
+      listener:
+        port: $server-port
+        task_processor: main-task-processor
+
+    logging:
+      fs-task-processor: fs-task-processor
+      loggers:
+        default:
+          file_path: '@stderr'
+          level: $logger-level
+          overflow_behavior: discard
+
+    dynamic-config:
+      defaults:
+        HTTP_CLIENT_CONNECTION_POOL_SIZE: 1000
+
+
+    http-client:
+    dns-client:
+      fs-task-processor: fs-task-processor
+
+    handler-ping:
+      path: /ping
+      method: GET
+      task_processor: main-task-processor
+
+    telegram-bot:
+      token: $bot-token
+      poll-timeout-seconds: 20
+      limit: 100
