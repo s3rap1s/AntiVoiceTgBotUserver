@@ -1,6 +1,6 @@
-#include <types/input_profile_photo.hpp>
-#include <types/input_profile_photo_animated.hpp>
-#include <types/input_profile_photo_static.hpp>
+#include <tg/types/input_profile_photo.hpp>
+#include <tg/types/input_profile_photo_animated.hpp>
+#include <tg/types/input_profile_photo_static.hpp>
 
 #include "common.hpp"
 

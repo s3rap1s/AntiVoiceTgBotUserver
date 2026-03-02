@@ -1,4 +1,4 @@
-#include <types/paid_media_preview.hpp>
+#include <tg/types/paid_media_preview.hpp>
 
 #include "common.hpp"
 

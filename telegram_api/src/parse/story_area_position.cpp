@@ -1,4 +1,4 @@
-#include <types/story_area_position.hpp>
+#include <tg/types/story_area_position.hpp>
 
 #include "common.hpp"
 

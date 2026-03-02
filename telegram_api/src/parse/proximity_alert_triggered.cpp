@@ -1,5 +1,5 @@
-#include <types/proximity_alert_triggered.hpp>
-#include <types/user.hpp>
+#include <tg/types/proximity_alert_triggered.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

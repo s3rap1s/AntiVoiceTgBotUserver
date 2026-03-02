@@ -1,6 +1,6 @@
-#include <types/encrypted_credentials.hpp>
-#include <types/encrypted_passport_element.hpp>
-#include <types/passport_data.hpp>
+#include <tg/types/encrypted_credentials.hpp>
+#include <tg/types/encrypted_passport_element.hpp>
+#include <tg/types/passport_data.hpp>
 
 #include "common.hpp"
 

@@ -1,7 +1,7 @@
-#include <types/chat.hpp>
-#include <types/message_reaction_updated.hpp>
-#include <types/reaction_type.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/message_reaction_updated.hpp>
+#include <tg/types/reaction_type.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

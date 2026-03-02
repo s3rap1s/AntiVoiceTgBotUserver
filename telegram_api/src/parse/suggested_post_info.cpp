@@ -1,5 +1,5 @@
-#include <types/suggested_post_info.hpp>
-#include <types/suggested_post_price.hpp>
+#include <tg/types/suggested_post_info.hpp>
+#include <tg/types/suggested_post_price.hpp>
 
 #include "common.hpp"
 

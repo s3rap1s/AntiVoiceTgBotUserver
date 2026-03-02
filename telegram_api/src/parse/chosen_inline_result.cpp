@@ -1,6 +1,6 @@
-#include <types/chosen_inline_result.hpp>
-#include <types/location.hpp>
-#include <types/user.hpp>
+#include <tg/types/chosen_inline_result.hpp>
+#include <tg/types/location.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

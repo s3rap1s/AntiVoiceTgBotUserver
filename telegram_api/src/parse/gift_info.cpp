@@ -1,6 +1,6 @@
-#include <types/gift.hpp>
-#include <types/gift_info.hpp>
-#include <types/message_entity.hpp>
+#include <tg/types/gift.hpp>
+#include <tg/types/gift_info.hpp>
+#include <tg/types/message_entity.hpp>
 
 #include "common.hpp"
 

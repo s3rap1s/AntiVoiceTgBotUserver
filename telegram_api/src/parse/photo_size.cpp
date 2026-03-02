@@ -1,4 +1,4 @@
-#include <types/photo_size.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

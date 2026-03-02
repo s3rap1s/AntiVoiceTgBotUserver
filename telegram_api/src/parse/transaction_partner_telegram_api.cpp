@@ -1,4 +1,4 @@
-#include <types/transaction_partner_telegram_api.hpp>
+#include <tg/types/transaction_partner_telegram_api.hpp>
 
 #include "common.hpp"
 

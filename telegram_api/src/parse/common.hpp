@@ -11,7 +11,7 @@
 #include <userver/formats/json/value.hpp>
 #include <userver/formats/parse/to.hpp>
 
-#include <types/common.hpp>
+#include <tg/types/common.hpp>
 
 namespace tg {
 

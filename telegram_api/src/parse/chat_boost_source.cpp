@@ -1,7 +1,7 @@
-#include <types/chat_boost_source.hpp>
-#include <types/chat_boost_source_gift_code.hpp>
-#include <types/chat_boost_source_giveaway.hpp>
-#include <types/chat_boost_source_premium.hpp>
+#include <tg/types/chat_boost_source.hpp>
+#include <tg/types/chat_boost_source_gift_code.hpp>
+#include <tg/types/chat_boost_source_giveaway.hpp>
+#include <tg/types/chat_boost_source_premium.hpp>
 
 #include "common.hpp"
 

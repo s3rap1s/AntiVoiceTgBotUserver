@@ -1,5 +1,5 @@
-#include <types/chat_location.hpp>
-#include <types/location.hpp>
+#include <tg/types/chat_location.hpp>
+#include <tg/types/location.hpp>
 
 #include "common.hpp"
 

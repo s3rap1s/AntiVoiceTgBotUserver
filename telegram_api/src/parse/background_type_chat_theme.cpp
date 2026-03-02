@@ -1,4 +1,4 @@
-#include <types/background_type_chat_theme.hpp>
+#include <tg/types/background_type_chat_theme.hpp>
 
 #include "common.hpp"
 

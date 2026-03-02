@@ -1,4 +1,4 @@
-#include <types/contact.hpp>
+#include <tg/types/contact.hpp>
 
 #include "common.hpp"
 

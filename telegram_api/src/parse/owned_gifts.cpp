@@ -1,5 +1,5 @@
-#include <types/owned_gift.hpp>
-#include <types/owned_gifts.hpp>
+#include <tg/types/owned_gift.hpp>
+#include <tg/types/owned_gifts.hpp>
 
 #include "common.hpp"
 

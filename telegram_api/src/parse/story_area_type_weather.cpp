@@ -1,4 +1,4 @@
-#include <types/story_area_type_weather.hpp>
+#include <tg/types/story_area_type_weather.hpp>
 
 #include "common.hpp"
 

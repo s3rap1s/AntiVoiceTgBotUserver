@@ -1,5 +1,5 @@
-#include <types/chat.hpp>
-#include <types/giveaway.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/giveaway.hpp>
 
 #include "common.hpp"
 

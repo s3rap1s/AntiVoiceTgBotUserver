@@ -1,7 +1,7 @@
-#include <types/file.hpp>
-#include <types/mask_position.hpp>
-#include <types/photo_size.hpp>
-#include <types/sticker.hpp>
+#include <tg/types/file.hpp>
+#include <tg/types/mask_position.hpp>
+#include <tg/types/photo_size.hpp>
+#include <tg/types/sticker.hpp>
 
 #include "common.hpp"
 

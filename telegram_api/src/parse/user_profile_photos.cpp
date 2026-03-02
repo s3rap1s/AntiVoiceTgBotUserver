@@ -1,5 +1,5 @@
-#include <types/photo_size.hpp>
-#include <types/user_profile_photos.hpp>
+#include <tg/types/photo_size.hpp>
+#include <tg/types/user_profile_photos.hpp>
 
 #include "common.hpp"
 

@@ -1,6 +1,6 @@
-#include <types/affiliate_info.hpp>
-#include <types/chat.hpp>
-#include <types/user.hpp>
+#include <tg/types/affiliate_info.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

@@ -1,7 +1,7 @@
-#include <types/menu_button.hpp>
-#include <types/menu_button_commands.hpp>
-#include <types/menu_button_default.hpp>
-#include <types/menu_button_web_app.hpp>
+#include <tg/types/menu_button.hpp>
+#include <tg/types/menu_button_commands.hpp>
+#include <tg/types/menu_button_default.hpp>
+#include <tg/types/menu_button_web_app.hpp>
 
 #include "common.hpp"
 

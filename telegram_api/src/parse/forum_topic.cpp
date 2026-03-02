@@ -1,4 +1,4 @@
-#include <types/forum_topic.hpp>
+#include <tg/types/forum_topic.hpp>
 
 #include "common.hpp"
 

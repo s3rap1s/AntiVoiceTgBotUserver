@@ -1,4 +1,4 @@
-#include <types/bot_command.hpp>
+#include <tg/types/bot_command.hpp>
 
 #include "common.hpp"
 

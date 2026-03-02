@@ -1,8 +1,8 @@
-#include <types/message_origin.hpp>
-#include <types/message_origin_channel.hpp>
-#include <types/message_origin_chat.hpp>
-#include <types/message_origin_hidden_user.hpp>
-#include <types/message_origin_user.hpp>
+#include <tg/types/message_origin.hpp>
+#include <tg/types/message_origin_channel.hpp>
+#include <tg/types/message_origin_chat.hpp>
+#include <tg/types/message_origin_hidden_user.hpp>
+#include <tg/types/message_origin_user.hpp>
 
 #include "common.hpp"
 

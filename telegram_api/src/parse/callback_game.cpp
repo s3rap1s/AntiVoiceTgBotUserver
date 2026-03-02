@@ -1,6 +1,6 @@
-#include <types/callback_game.hpp>
-#include <types/message_entity.hpp>
-#include <types/photo_size.hpp>
+#include <tg/types/callback_game.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

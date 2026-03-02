@@ -1,5 +1,5 @@
-#include <types/paid_media_video.hpp>
-#include <types/video.hpp>
+#include <tg/types/paid_media_video.hpp>
+#include <tg/types/video.hpp>
 
 #include "common.hpp"
 

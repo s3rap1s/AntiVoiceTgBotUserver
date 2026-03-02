@@ -1,8 +1,8 @@
-#include <types/affiliate_info.hpp>
-#include <types/gift.hpp>
-#include <types/paid_media.hpp>
-#include <types/transaction_partner_user.hpp>
-#include <types/user.hpp>
+#include <tg/types/affiliate_info.hpp>
+#include <tg/types/gift.hpp>
+#include <tg/types/paid_media.hpp>
+#include <tg/types/transaction_partner_user.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

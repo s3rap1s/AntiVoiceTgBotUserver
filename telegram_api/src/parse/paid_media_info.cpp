@@ -1,5 +1,5 @@
-#include <types/paid_media.hpp>
-#include <types/paid_media_info.hpp>
+#include <tg/types/paid_media.hpp>
+#include <tg/types/paid_media_info.hpp>
 
 #include "common.hpp"
 

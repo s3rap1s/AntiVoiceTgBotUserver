@@ -1,7 +1,7 @@
-#include <types/animation.hpp>
-#include <types/game.hpp>
-#include <types/message_entity.hpp>
-#include <types/photo_size.hpp>
+#include <tg/types/animation.hpp>
+#include <tg/types/game.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

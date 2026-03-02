@@ -1,4 +1,4 @@
-#include <types/dice.hpp>
+#include <tg/types/dice.hpp>
 
 #include "common.hpp"
 

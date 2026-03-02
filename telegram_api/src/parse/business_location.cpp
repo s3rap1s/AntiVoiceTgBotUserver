@@ -1,5 +1,5 @@
-#include <types/business_location.hpp>
-#include <types/location.hpp>
+#include <tg/types/business_location.hpp>
+#include <tg/types/location.hpp>
 
 #include "common.hpp"
 

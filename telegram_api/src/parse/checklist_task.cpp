@@ -1,7 +1,7 @@
-#include <types/chat.hpp>
-#include <types/checklist_task.hpp>
-#include <types/message_entity.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/checklist_task.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

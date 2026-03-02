@@ -1,5 +1,5 @@
-#include <types/order_info.hpp>
-#include <types/shipping_address.hpp>
+#include <tg/types/order_info.hpp>
+#include <tg/types/shipping_address.hpp>
 
 #include "common.hpp"
 

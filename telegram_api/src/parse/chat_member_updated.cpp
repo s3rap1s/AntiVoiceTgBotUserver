@@ -1,8 +1,8 @@
-#include <types/chat.hpp>
-#include <types/chat_invite_link.hpp>
-#include <types/chat_member.hpp>
-#include <types/chat_member_updated.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/chat_invite_link.hpp>
+#include <tg/types/chat_member.hpp>
+#include <tg/types/chat_member_updated.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

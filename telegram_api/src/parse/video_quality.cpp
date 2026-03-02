@@ -1,4 +1,4 @@
-#include <types/video_quality.hpp>
+#include <tg/types/video_quality.hpp>
 
 #include "common.hpp"
 

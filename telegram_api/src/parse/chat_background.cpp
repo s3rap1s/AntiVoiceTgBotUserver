@@ -1,5 +1,5 @@
-#include <types/background_type.hpp>
-#include <types/chat_background.hpp>
+#include <tg/types/background_type.hpp>
+#include <tg/types/chat_background.hpp>
 
 #include "common.hpp"
 

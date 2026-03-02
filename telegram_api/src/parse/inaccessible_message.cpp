@@ -1,5 +1,5 @@
-#include <types/chat.hpp>
-#include <types/inaccessible_message.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/inaccessible_message.hpp>
 
 #include "common.hpp"
 

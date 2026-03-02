@@ -1,4 +1,4 @@
-#include <types/input_paid_media_photo.hpp>
+#include <tg/types/input_paid_media_photo.hpp>
 
 #include "common.hpp"
 

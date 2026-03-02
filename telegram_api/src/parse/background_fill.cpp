@@ -1,7 +1,7 @@
-#include <types/background_fill.hpp>
-#include <types/background_fill_freeform_gradient.hpp>
-#include <types/background_fill_gradient.hpp>
-#include <types/background_fill_solid.hpp>
+#include <tg/types/background_fill.hpp>
+#include <tg/types/background_fill_freeform_gradient.hpp>
+#include <tg/types/background_fill_gradient.hpp>
+#include <tg/types/background_fill_solid.hpp>
 
 #include "common.hpp"
 

@@ -1,6 +1,6 @@
-#include <types/chat.hpp>
-#include <types/message_reaction_count_updated.hpp>
-#include <types/reaction_count.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/message_reaction_count_updated.hpp>
+#include <tg/types/reaction_count.hpp>
 
 #include "common.hpp"
 

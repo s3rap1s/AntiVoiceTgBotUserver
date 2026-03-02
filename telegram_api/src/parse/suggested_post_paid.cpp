@@ -1,6 +1,6 @@
-#include <types/message.hpp>
-#include <types/star_amount.hpp>
-#include <types/suggested_post_paid.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/star_amount.hpp>
+#include <tg/types/suggested_post_paid.hpp>
 
 #include "common.hpp"
 

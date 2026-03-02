@@ -1,7 +1,7 @@
-#include <types/gift.hpp>
-#include <types/message_entity.hpp>
-#include <types/owned_gift_regular.hpp>
-#include <types/user.hpp>
+#include <tg/types/gift.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/owned_gift_regular.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

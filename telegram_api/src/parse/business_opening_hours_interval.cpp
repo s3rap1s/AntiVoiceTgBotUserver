@@ -1,4 +1,4 @@
-#include <types/business_opening_hours_interval.hpp>
+#include <tg/types/business_opening_hours_interval.hpp>
 
 #include "common.hpp"
 

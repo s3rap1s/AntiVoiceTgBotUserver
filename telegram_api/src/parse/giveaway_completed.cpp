@@ -1,5 +1,5 @@
-#include <types/giveaway_completed.hpp>
-#include <types/message.hpp>
+#include <tg/types/giveaway_completed.hpp>
+#include <tg/types/message.hpp>
 
 #include "common.hpp"
 

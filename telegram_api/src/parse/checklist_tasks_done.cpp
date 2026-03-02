@@ -1,5 +1,5 @@
-#include <types/checklist_tasks_done.hpp>
-#include <types/message.hpp>
+#include <tg/types/checklist_tasks_done.hpp>
+#include <tg/types/message.hpp>
 
 #include "common.hpp"
 

@@ -1,4 +1,4 @@
-#include <types/input_story_content_photo.hpp>
+#include <tg/types/input_story_content_photo.hpp>
 
 #include "common.hpp"
 

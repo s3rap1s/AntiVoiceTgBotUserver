@@ -1,4 +1,4 @@
-#include <types/chat_photo.hpp>
+#include <tg/types/chat_photo.hpp>
 
 #include "common.hpp"
 

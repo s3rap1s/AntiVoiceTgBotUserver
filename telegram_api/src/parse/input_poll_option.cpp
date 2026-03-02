@@ -1,5 +1,5 @@
-#include <types/input_poll_option.hpp>
-#include <types/message_entity.hpp>
+#include <tg/types/input_poll_option.hpp>
+#include <tg/types/message_entity.hpp>
 
 #include "common.hpp"
 

@@ -1,5 +1,5 @@
-#include <types/chat.hpp>
-#include <types/message_origin_chat.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/message_origin_chat.hpp>
 
 #include "common.hpp"
 

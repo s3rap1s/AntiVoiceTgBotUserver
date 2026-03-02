@@ -1,5 +1,5 @@
-#include <types/order_info.hpp>
-#include <types/successful_payment.hpp>
+#include <tg/types/order_info.hpp>
+#include <tg/types/successful_payment.hpp>
 
 #include "common.hpp"
 

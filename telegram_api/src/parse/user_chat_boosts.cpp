@@ -1,5 +1,5 @@
-#include <types/chat_boost.hpp>
-#include <types/user_chat_boosts.hpp>
+#include <tg/types/chat_boost.hpp>
+#include <tg/types/user_chat_boosts.hpp>
 
 #include "common.hpp"
 

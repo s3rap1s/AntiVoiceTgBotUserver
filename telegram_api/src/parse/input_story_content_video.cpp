@@ -1,4 +1,4 @@
-#include <types/input_story_content_video.hpp>
+#include <tg/types/input_story_content_video.hpp>
 
 #include "common.hpp"
 

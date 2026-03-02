@@ -1,5 +1,5 @@
-#include <types/star_transaction.hpp>
-#include <types/transaction_partner.hpp>
+#include <tg/types/star_transaction.hpp>
+#include <tg/types/transaction_partner.hpp>
 
 #include "common.hpp"
 

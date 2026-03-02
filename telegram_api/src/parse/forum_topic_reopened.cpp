@@ -1,4 +1,4 @@
-#include <types/forum_topic_reopened.hpp>
+#include <tg/types/forum_topic_reopened.hpp>
 
 #include "common.hpp"
 

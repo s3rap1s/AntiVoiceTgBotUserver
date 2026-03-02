@@ -1,8 +1,8 @@
-#include <types/background_type.hpp>
-#include <types/background_type_chat_theme.hpp>
-#include <types/background_type_fill.hpp>
-#include <types/background_type_pattern.hpp>
-#include <types/background_type_wallpaper.hpp>
+#include <tg/types/background_type.hpp>
+#include <tg/types/background_type_chat_theme.hpp>
+#include <tg/types/background_type_fill.hpp>
+#include <tg/types/background_type_pattern.hpp>
+#include <tg/types/background_type_wallpaper.hpp>
 
 #include "common.hpp"
 

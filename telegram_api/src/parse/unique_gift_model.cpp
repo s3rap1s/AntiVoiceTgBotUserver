@@ -1,5 +1,5 @@
-#include <types/sticker.hpp>
-#include <types/unique_gift_model.hpp>
+#include <tg/types/sticker.hpp>
+#include <tg/types/unique_gift_model.hpp>
 
 #include "common.hpp"
 

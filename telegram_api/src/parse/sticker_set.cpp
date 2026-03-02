@@ -1,6 +1,6 @@
-#include <types/photo_size.hpp>
-#include <types/sticker.hpp>
-#include <types/sticker_set.hpp>
+#include <tg/types/photo_size.hpp>
+#include <tg/types/sticker.hpp>
+#include <tg/types/sticker_set.hpp>
 
 #include "common.hpp"
 

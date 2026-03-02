@@ -1,5 +1,5 @@
-#include <types/chat_shared.hpp>
-#include <types/photo_size.hpp>
+#include <tg/types/chat_shared.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

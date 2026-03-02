@@ -1,7 +1,7 @@
-#include <types/chat.hpp>
-#include <types/chat_invite_link.hpp>
-#include <types/chat_join_request.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/chat_invite_link.hpp>
+#include <tg/types/chat_join_request.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

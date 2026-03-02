@@ -1,4 +1,4 @@
-#include <types/business_bot_rights.hpp>
+#include <tg/types/business_bot_rights.hpp>
 
 #include "common.hpp"
 

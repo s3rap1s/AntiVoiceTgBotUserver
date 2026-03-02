@@ -1,4 +1,4 @@
-#include <types/reaction_type_paid.hpp>
+#include <tg/types/reaction_type_paid.hpp>
 
 #include "common.hpp"
 

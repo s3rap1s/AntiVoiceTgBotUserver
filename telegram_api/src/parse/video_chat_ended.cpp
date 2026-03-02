@@ -1,4 +1,4 @@
-#include <types/video_chat_ended.hpp>
+#include <tg/types/video_chat_ended.hpp>
 
 #include "common.hpp"
 

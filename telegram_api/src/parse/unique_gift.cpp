@@ -1,9 +1,9 @@
-#include <types/chat.hpp>
-#include <types/unique_gift.hpp>
-#include <types/unique_gift_backdrop.hpp>
-#include <types/unique_gift_colors.hpp>
-#include <types/unique_gift_model.hpp>
-#include <types/unique_gift_symbol.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/unique_gift.hpp>
+#include <tg/types/unique_gift_backdrop.hpp>
+#include <tg/types/unique_gift_colors.hpp>
+#include <tg/types/unique_gift_model.hpp>
+#include <tg/types/unique_gift_symbol.hpp>
 
 #include "common.hpp"
 

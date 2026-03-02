@@ -1,6 +1,6 @@
-#include <types/input_paid_media.hpp>
-#include <types/input_paid_media_photo.hpp>
-#include <types/input_paid_media_video.hpp>
+#include <tg/types/input_paid_media.hpp>
+#include <tg/types/input_paid_media_photo.hpp>
+#include <tg/types/input_paid_media_video.hpp>
 
 #include "common.hpp"
 

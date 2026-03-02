@@ -1,9 +1,9 @@
-#include <types/input_media.hpp>
-#include <types/input_media_animation.hpp>
-#include <types/input_media_audio.hpp>
-#include <types/input_media_document.hpp>
-#include <types/input_media_photo.hpp>
-#include <types/input_media_video.hpp>
+#include <tg/types/input_media.hpp>
+#include <tg/types/input_media_animation.hpp>
+#include <tg/types/input_media_audio.hpp>
+#include <tg/types/input_media_document.hpp>
+#include <tg/types/input_media_photo.hpp>
+#include <tg/types/input_media_video.hpp>
 
 #include "common.hpp"
 

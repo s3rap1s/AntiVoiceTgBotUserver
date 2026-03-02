@@ -1,5 +1,5 @@
-#include <types/document.hpp>
-#include <types/photo_size.hpp>
+#include <tg/types/document.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

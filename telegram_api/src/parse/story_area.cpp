@@ -1,6 +1,6 @@
-#include <types/story_area.hpp>
-#include <types/story_area_position.hpp>
-#include <types/story_area_type.hpp>
+#include <tg/types/story_area.hpp>
+#include <tg/types/story_area_position.hpp>
+#include <tg/types/story_area_type.hpp>
 
 #include "common.hpp"
 

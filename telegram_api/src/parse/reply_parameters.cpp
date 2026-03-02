@@ -1,5 +1,5 @@
-#include <types/message_entity.hpp>
-#include <types/reply_parameters.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/reply_parameters.hpp>
 
 #include "common.hpp"
 

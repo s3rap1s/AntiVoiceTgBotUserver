@@ -1,20 +1,20 @@
-#include <types/business_connection.hpp>
-#include <types/business_messages_deleted.hpp>
-#include <types/chat_boost_removed.hpp>
-#include <types/chat_boost_updated.hpp>
-#include <types/chat_join_request.hpp>
-#include <types/chat_member_updated.hpp>
-#include <types/chosen_inline_result.hpp>
-#include <types/inline_query.hpp>
-#include <types/message.hpp>
-#include <types/message_reaction_count_updated.hpp>
-#include <types/message_reaction_updated.hpp>
-#include <types/paid_media_purchased.hpp>
-#include <types/poll.hpp>
-#include <types/poll_answer.hpp>
-#include <types/pre_checkout_query.hpp>
-#include <types/shipping_query.hpp>
-#include <types/update.hpp>
+#include <tg/types/business_connection.hpp>
+#include <tg/types/business_messages_deleted.hpp>
+#include <tg/types/chat_boost_removed.hpp>
+#include <tg/types/chat_boost_updated.hpp>
+#include <tg/types/chat_join_request.hpp>
+#include <tg/types/chat_member_updated.hpp>
+#include <tg/types/chosen_inline_result.hpp>
+#include <tg/types/inline_query.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/message_reaction_count_updated.hpp>
+#include <tg/types/message_reaction_updated.hpp>
+#include <tg/types/paid_media_purchased.hpp>
+#include <tg/types/poll.hpp>
+#include <tg/types/poll_answer.hpp>
+#include <tg/types/pre_checkout_query.hpp>
+#include <tg/types/shipping_query.hpp>
+#include <tg/types/update.hpp>
 
 #include "common.hpp"
 

@@ -1,5 +1,5 @@
-#include <types/chat_invite_link.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat_invite_link.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

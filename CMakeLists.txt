@@ -39,7 +39,6 @@ add_library(
 target_include_directories(
     ${PROJECT_NAME}_objs
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/telegram_api/include
 )
 target_link_libraries(

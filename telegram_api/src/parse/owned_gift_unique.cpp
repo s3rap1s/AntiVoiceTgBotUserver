@@ -1,6 +1,6 @@
-#include <types/owned_gift_unique.hpp>
-#include <types/unique_gift.hpp>
-#include <types/user.hpp>
+#include <tg/types/owned_gift_unique.hpp>
+#include <tg/types/unique_gift.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

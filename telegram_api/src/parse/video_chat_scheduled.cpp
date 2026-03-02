@@ -1,4 +1,4 @@
-#include <types/video_chat_scheduled.hpp>
+#include <tg/types/video_chat_scheduled.hpp>
 
 #include "common.hpp"
 

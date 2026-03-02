@@ -1,10 +1,10 @@
-#include <types/chat_member.hpp>
-#include <types/chat_member_administrator.hpp>
-#include <types/chat_member_banned.hpp>
-#include <types/chat_member_left.hpp>
-#include <types/chat_member_member.hpp>
-#include <types/chat_member_owner.hpp>
-#include <types/chat_member_restricted.hpp>
+#include <tg/types/chat_member.hpp>
+#include <tg/types/chat_member_administrator.hpp>
+#include <tg/types/chat_member_banned.hpp>
+#include <tg/types/chat_member_left.hpp>
+#include <tg/types/chat_member_member.hpp>
+#include <tg/types/chat_member_owner.hpp>
+#include <tg/types/chat_member_restricted.hpp>
 
 #include "common.hpp"
 

@@ -1,6 +1,6 @@
-#include <types/inline_keyboard_markup.hpp>
-#include <types/inline_query_result_venue.hpp>
-#include <types/input_message_content.hpp>
+#include <tg/types/inline_keyboard_markup.hpp>
+#include <tg/types/inline_query_result_venue.hpp>
+#include <tg/types/input_message_content.hpp>
 
 #include "common.hpp"
 

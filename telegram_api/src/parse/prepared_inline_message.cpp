@@ -1,4 +1,4 @@
-#include <types/prepared_inline_message.hpp>
+#include <tg/types/prepared_inline_message.hpp>
 
 #include "common.hpp"
 

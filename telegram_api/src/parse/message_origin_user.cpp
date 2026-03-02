@@ -1,5 +1,5 @@
-#include <types/message_origin_user.hpp>
-#include <types/user.hpp>
+#include <tg/types/message_origin_user.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

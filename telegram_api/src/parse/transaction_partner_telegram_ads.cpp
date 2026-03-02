@@ -1,4 +1,4 @@
-#include <types/transaction_partner_telegram_ads.hpp>
+#include <tg/types/transaction_partner_telegram_ads.hpp>
 
 #include "common.hpp"
 

@@ -1,4 +1,4 @@
-#include <types/revenue_withdrawal_state_pending.hpp>
+#include <tg/types/revenue_withdrawal_state_pending.hpp>
 
 #include "common.hpp"
 

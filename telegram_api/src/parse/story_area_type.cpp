@@ -1,9 +1,9 @@
-#include <types/story_area_type.hpp>
-#include <types/story_area_type_link.hpp>
-#include <types/story_area_type_location.hpp>
-#include <types/story_area_type_suggested_reaction.hpp>
-#include <types/story_area_type_unique_gift.hpp>
-#include <types/story_area_type_weather.hpp>
+#include <tg/types/story_area_type.hpp>
+#include <tg/types/story_area_type_link.hpp>
+#include <tg/types/story_area_type_location.hpp>
+#include <tg/types/story_area_type_suggested_reaction.hpp>
+#include <tg/types/story_area_type_unique_gift.hpp>
+#include <tg/types/story_area_type_weather.hpp>
 
 #include "common.hpp"
 

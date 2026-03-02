@@ -1,8 +1,8 @@
-#include <types/keyboard_button.hpp>
-#include <types/keyboard_button_poll_type.hpp>
-#include <types/keyboard_button_request_chat.hpp>
-#include <types/keyboard_button_request_users.hpp>
-#include <types/web_app_info.hpp>
+#include <tg/types/keyboard_button.hpp>
+#include <tg/types/keyboard_button_poll_type.hpp>
+#include <tg/types/keyboard_button_request_chat.hpp>
+#include <tg/types/keyboard_button_request_users.hpp>
+#include <tg/types/web_app_info.hpp>
 
 #include "common.hpp"
 

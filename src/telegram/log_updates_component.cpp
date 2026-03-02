@@ -12,7 +12,7 @@
 #include <userver/yaml_config/schema.hpp>
 #include <userver/yaml_config/yaml_config.hpp>
 
-#include <bot_api.hpp>
+#include <tg/bot_api.hpp>
 
 namespace tg_bot {
 

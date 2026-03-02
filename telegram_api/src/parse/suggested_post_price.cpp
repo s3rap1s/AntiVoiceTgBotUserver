@@ -1,4 +1,4 @@
-#include <types/suggested_post_price.hpp>
+#include <tg/types/suggested_post_price.hpp>
 
 #include "common.hpp"
 

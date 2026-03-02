@@ -1,6 +1,6 @@
-#include <types/chat.hpp>
-#include <types/gift.hpp>
-#include <types/transaction_partner_chat.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/gift.hpp>
+#include <tg/types/transaction_partner_chat.hpp>
 
 #include "common.hpp"
 namespace tg {

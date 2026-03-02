@@ -1,4 +1,4 @@
-#include <types/revenue_withdrawal_state_succeeded.hpp>
+#include <tg/types/revenue_withdrawal_state_succeeded.hpp>
 
 #include "common.hpp"
 

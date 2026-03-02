@@ -1,4 +1,4 @@
-#include <types/story_area_type_link.hpp>
+#include <tg/types/story_area_type_link.hpp>
 
 #include "common.hpp"
 

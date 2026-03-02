@@ -1,5 +1,5 @@
-#include <types/labeled_price.hpp>
-#include <types/shipping_option.hpp>
+#include <tg/types/labeled_price.hpp>
+#include <tg/types/shipping_option.hpp>
 
 #include "common.hpp"
 

@@ -1,5 +1,5 @@
-#include <types/game_high_score.hpp>
-#include <types/user.hpp>
+#include <tg/types/game_high_score.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

@@ -1,4 +1,4 @@
-#include <types/star_amount.hpp>
+#include <tg/types/star_amount.hpp>
 
 #include "common.hpp"
 

@@ -1,6 +1,6 @@
-#include <types/checklist_task.hpp>
-#include <types/checklist_tasks_added.hpp>
-#include <types/message.hpp>
+#include <tg/types/checklist_task.hpp>
+#include <tg/types/checklist_tasks_added.hpp>
+#include <tg/types/message.hpp>
 
 #include "common.hpp"
 

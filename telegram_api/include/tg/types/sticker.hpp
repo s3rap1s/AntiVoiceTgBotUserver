@@ -1,0 +1,30 @@
+#pragma once
+
+#include <tg/types/common.hpp>
+#include <tg/types/file.hpp>
+#include <tg/types/mask_position.hpp>
+#include <tg/types/photo_size.hpp>
+
+namespace tg {
+
+struct Sticker {
+    String file_id;
+    String file_unique_id;
+    String type;
+    Integer width;
+    Integer height;
+    Boolean is_animated;
+    Boolean is_video;
+    Optional<PhotoSize> thumbnail;
+    Optional<String> emoji;
+    Optional<String> set_name;
+    Optional<File> premium_animation;
+    Optional<MaskPosition> mask_position;
+    Optional<String> custom_emoji_id;
+    OptionalTrue needs_repainting;
+    Optional<Integer> file_size;
+};
+
+Sticker Parse(const Value& value, To<Sticker>);
+
+}  // namespace tg

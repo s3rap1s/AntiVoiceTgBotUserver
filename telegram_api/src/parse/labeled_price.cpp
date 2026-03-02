@@ -1,4 +1,4 @@
-#include <types/labeled_price.hpp>
+#include <tg/types/labeled_price.hpp>
 
 #include "common.hpp"
 

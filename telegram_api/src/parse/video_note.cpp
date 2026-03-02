@@ -1,5 +1,5 @@
-#include <types/photo_size.hpp>
-#include <types/video_note.hpp>
+#include <tg/types/photo_size.hpp>
+#include <tg/types/video_note.hpp>
 
 #include "common.hpp"
 

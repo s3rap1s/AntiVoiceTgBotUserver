@@ -1,5 +1,5 @@
-#include <types/business_messages_deleted.hpp>
-#include <types/chat.hpp>
+#include <tg/types/business_messages_deleted.hpp>
+#include <tg/types/chat.hpp>
 
 #include "common.hpp"
 

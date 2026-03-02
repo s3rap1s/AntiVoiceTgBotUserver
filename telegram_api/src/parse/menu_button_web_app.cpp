@@ -1,5 +1,5 @@
-#include <types/menu_button_web_app.hpp>
-#include <types/web_app_info.hpp>
+#include <tg/types/menu_button_web_app.hpp>
+#include <tg/types/web_app_info.hpp>
 
 #include "common.hpp"
 

@@ -1,4 +1,4 @@
-#include <types/user_rating.hpp>
+#include <tg/types/user_rating.hpp>
 
 #include "common.hpp"
 

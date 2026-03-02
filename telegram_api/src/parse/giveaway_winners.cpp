@@ -1,6 +1,6 @@
-#include <types/chat.hpp>
-#include <types/giveaway_winners.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/giveaway_winners.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

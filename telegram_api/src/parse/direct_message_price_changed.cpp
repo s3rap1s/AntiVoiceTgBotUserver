@@ -1,4 +1,4 @@
-#include <types/direct_message_price_changed.hpp>
+#include <tg/types/direct_message_price_changed.hpp>
 
 #include "common.hpp"
 

@@ -1,4 +1,4 @@
-#include <types/message_origin_hidden_user.hpp>
+#include <tg/types/message_origin_hidden_user.hpp>
 
 #include "common.hpp"
 

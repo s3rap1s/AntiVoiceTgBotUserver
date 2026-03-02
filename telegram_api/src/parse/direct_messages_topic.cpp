@@ -1,5 +1,5 @@
-#include <types/direct_messages_topic.hpp>
-#include <types/user.hpp>
+#include <tg/types/direct_messages_topic.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

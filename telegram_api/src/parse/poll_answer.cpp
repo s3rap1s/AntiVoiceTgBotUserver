@@ -1,6 +1,6 @@
-#include <types/chat.hpp>
-#include <types/poll_answer.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/poll_answer.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

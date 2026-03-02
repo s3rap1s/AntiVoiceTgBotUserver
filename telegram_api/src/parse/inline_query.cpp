@@ -1,6 +1,6 @@
-#include <types/inline_query.hpp>
-#include <types/location.hpp>
-#include <types/user.hpp>
+#include <tg/types/inline_query.hpp>
+#include <tg/types/location.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

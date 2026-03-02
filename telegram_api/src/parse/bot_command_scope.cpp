@@ -1,11 +1,11 @@
-#include <types/bot_command_scope.hpp>
-#include <types/bot_command_scope_all_chat_administrators.hpp>
-#include <types/bot_command_scope_all_group_chats.hpp>
-#include <types/bot_command_scope_all_private_chats.hpp>
-#include <types/bot_command_scope_chat.hpp>
-#include <types/bot_command_scope_chat_administrators.hpp>
-#include <types/bot_command_scope_chat_member.hpp>
-#include <types/bot_command_scope_default.hpp>
+#include <tg/types/bot_command_scope.hpp>
+#include <tg/types/bot_command_scope_all_chat_administrators.hpp>
+#include <tg/types/bot_command_scope_all_group_chats.hpp>
+#include <tg/types/bot_command_scope_all_private_chats.hpp>
+#include <tg/types/bot_command_scope_chat.hpp>
+#include <tg/types/bot_command_scope_chat_administrators.hpp>
+#include <tg/types/bot_command_scope_chat_member.hpp>
+#include <tg/types/bot_command_scope_default.hpp>
 
 #include "common.hpp"
 

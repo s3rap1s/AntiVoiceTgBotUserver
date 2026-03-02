@@ -1,5 +1,5 @@
-#include <types/chat.hpp>
-#include <types/story.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/story.hpp>
 
 #include "common.hpp"
 

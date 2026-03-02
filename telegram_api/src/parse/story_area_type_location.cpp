@@ -1,5 +1,5 @@
-#include <types/location_address.hpp>
-#include <types/story_area_type_location.hpp>
+#include <tg/types/location_address.hpp>
+#include <tg/types/story_area_type_location.hpp>
 
 #include "common.hpp"
 

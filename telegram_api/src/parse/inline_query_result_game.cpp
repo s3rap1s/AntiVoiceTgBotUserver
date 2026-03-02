@@ -1,5 +1,5 @@
-#include <types/inline_keyboard_markup.hpp>
-#include <types/inline_query_result_game.hpp>
+#include <tg/types/inline_keyboard_markup.hpp>
+#include <tg/types/inline_query_result_game.hpp>
 
 #include "common.hpp"
 

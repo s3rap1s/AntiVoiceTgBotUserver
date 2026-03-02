@@ -1,6 +1,6 @@
-#include <types/shipping_address.hpp>
-#include <types/shipping_query.hpp>
-#include <types/user.hpp>
+#include <tg/types/shipping_address.hpp>
+#include <tg/types/shipping_query.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

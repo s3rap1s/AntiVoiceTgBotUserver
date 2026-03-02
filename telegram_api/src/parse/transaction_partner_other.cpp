@@ -1,4 +1,4 @@
-#include <types/transaction_partner_other.hpp>
+#include <tg/types/transaction_partner_other.hpp>
 
 #include "common.hpp"
 

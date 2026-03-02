@@ -1,13 +1,13 @@
-#include <types/passport_element_error.hpp>
-#include <types/passport_element_error_data_field.hpp>
-#include <types/passport_element_error_file.hpp>
-#include <types/passport_element_error_files.hpp>
-#include <types/passport_element_error_front_side.hpp>
-#include <types/passport_element_error_reverse_side.hpp>
-#include <types/passport_element_error_selfie.hpp>
-#include <types/passport_element_error_translation_file.hpp>
-#include <types/passport_element_error_translation_files.hpp>
-#include <types/passport_element_error_unspecified.hpp>
+#include <tg/types/passport_element_error.hpp>
+#include <tg/types/passport_element_error_data_field.hpp>
+#include <tg/types/passport_element_error_file.hpp>
+#include <tg/types/passport_element_error_files.hpp>
+#include <tg/types/passport_element_error_front_side.hpp>
+#include <tg/types/passport_element_error_reverse_side.hpp>
+#include <tg/types/passport_element_error_selfie.hpp>
+#include <tg/types/passport_element_error_translation_file.hpp>
+#include <tg/types/passport_element_error_translation_files.hpp>
+#include <tg/types/passport_element_error_unspecified.hpp>
 
 #include "common.hpp"
 

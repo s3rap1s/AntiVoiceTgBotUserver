@@ -1,4 +1,4 @@
-#include <types/chat_boost_added.hpp>
+#include <tg/types/chat_boost_added.hpp>
 
 #include "common.hpp"
 

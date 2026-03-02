@@ -1,5 +1,5 @@
-#include <types/unique_gift.hpp>
-#include <types/unique_gift_info.hpp>
+#include <tg/types/unique_gift.hpp>
+#include <tg/types/unique_gift_info.hpp>
 
 #include "common.hpp"
 

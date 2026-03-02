@@ -1,5 +1,5 @@
-#include <types/shared_user.hpp>
-#include <types/users_shared.hpp>
+#include <tg/types/shared_user.hpp>
+#include <tg/types/users_shared.hpp>
 
 #include "common.hpp"
 

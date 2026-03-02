@@ -1,5 +1,5 @@
-#include <types/business_intro.hpp>
-#include <types/sticker.hpp>
+#include <tg/types/business_intro.hpp>
+#include <tg/types/sticker.hpp>
 
 #include "common.hpp"
 

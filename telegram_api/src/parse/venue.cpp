@@ -1,5 +1,5 @@
-#include <types/location.hpp>
-#include <types/venue.hpp>
+#include <tg/types/location.hpp>
+#include <tg/types/venue.hpp>
 
 #include "common.hpp"
 

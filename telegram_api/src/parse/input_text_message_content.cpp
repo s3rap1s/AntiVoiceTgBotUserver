@@ -1,6 +1,6 @@
-#include <types/input_text_message_content.hpp>
-#include <types/link_preview_options.hpp>
-#include <types/message_entity.hpp>
+#include <tg/types/input_text_message_content.hpp>
+#include <tg/types/link_preview_options.hpp>
+#include <tg/types/message_entity.hpp>
 
 #include "common.hpp"
 

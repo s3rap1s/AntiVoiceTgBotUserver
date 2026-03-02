@@ -1,6 +1,6 @@
-#include <types/message.hpp>
-#include <types/suggested_post_approved.hpp>
-#include <types/suggested_post_price.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/suggested_post_approved.hpp>
+#include <tg/types/suggested_post_price.hpp>
 
 #include "common.hpp"
 

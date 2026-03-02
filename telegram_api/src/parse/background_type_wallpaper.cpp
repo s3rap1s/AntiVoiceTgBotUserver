@@ -1,5 +1,5 @@
-#include <types/background_type_wallpaper.hpp>
-#include <types/document.hpp>
+#include <tg/types/background_type_wallpaper.hpp>
+#include <tg/types/document.hpp>
 
 #include "common.hpp"
 

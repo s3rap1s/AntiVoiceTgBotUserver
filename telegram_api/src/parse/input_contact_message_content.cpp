@@ -1,4 +1,4 @@
-#include <types/input_contact_message_content.hpp>
+#include <tg/types/input_contact_message_content.hpp>
 
 #include "common.hpp"
 

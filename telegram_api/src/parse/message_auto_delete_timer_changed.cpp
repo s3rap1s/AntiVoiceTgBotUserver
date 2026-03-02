@@ -1,4 +1,4 @@
-#include <types/message_auto_delete_timer_changed.hpp>
+#include <tg/types/message_auto_delete_timer_changed.hpp>
 
 #include "common.hpp"
 

@@ -1,5 +1,5 @@
-#include <types/audio.hpp>
-#include <types/user_profile_audios.hpp>
+#include <tg/types/audio.hpp>
+#include <tg/types/user_profile_audios.hpp>
 
 #include "common.hpp"
 

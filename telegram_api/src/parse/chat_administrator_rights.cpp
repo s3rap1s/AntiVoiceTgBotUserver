@@ -1,4 +1,4 @@
-#include <types/chat_administrator_rights.hpp>
+#include <tg/types/chat_administrator_rights.hpp>
 
 #include "common.hpp"
 

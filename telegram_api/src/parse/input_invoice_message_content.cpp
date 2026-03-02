@@ -1,5 +1,5 @@
-#include <types/input_invoice_message_content.hpp>
-#include <types/labeled_price.hpp>
+#include <tg/types/input_invoice_message_content.hpp>
+#include <tg/types/labeled_price.hpp>
 
 #include "common.hpp"
 

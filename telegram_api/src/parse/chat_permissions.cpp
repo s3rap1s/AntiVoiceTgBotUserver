@@ -1,4 +1,4 @@
-#include <types/chat_permissions.hpp>
+#include <tg/types/chat_permissions.hpp>
 
 #include "common.hpp"
 

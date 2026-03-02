@@ -1,5 +1,5 @@
-#include <types/input_media_document.hpp>
-#include <types/message_entity.hpp>
+#include <tg/types/input_media_document.hpp>
+#include <tg/types/message_entity.hpp>
 
 #include "common.hpp"
 

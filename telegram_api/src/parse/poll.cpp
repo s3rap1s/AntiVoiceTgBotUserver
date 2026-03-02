@@ -1,6 +1,6 @@
-#include <types/message_entity.hpp>
-#include <types/poll.hpp>
-#include <types/poll_option.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/poll.hpp>
+#include <tg/types/poll_option.hpp>
 
 #include "common.hpp"
 

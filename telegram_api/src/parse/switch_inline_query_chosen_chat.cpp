@@ -1,4 +1,4 @@
-#include <types/switch_inline_query_chosen_chat.hpp>
+#include <tg/types/switch_inline_query_chosen_chat.hpp>
 
 #include "common.hpp"
 

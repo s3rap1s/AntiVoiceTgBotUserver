@@ -1,5 +1,5 @@
-#include <types/message.hpp>
-#include <types/message_ptr.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/message_ptr.hpp>
 
 namespace tg {
 

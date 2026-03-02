@@ -1,4 +1,4 @@
-#include <types/story_area_type_unique_gift.hpp>
+#include <tg/types/story_area_type_unique_gift.hpp>
 
 #include "common.hpp"
 

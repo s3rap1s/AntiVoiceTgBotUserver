@@ -1,6 +1,6 @@
-#include <types/input_checklist.hpp>
-#include <types/input_checklist_task.hpp>
-#include <types/message_entity.hpp>
+#include <tg/types/input_checklist.hpp>
+#include <tg/types/input_checklist_task.hpp>
+#include <tg/types/message_entity.hpp>
 
 #include "common.hpp"
 

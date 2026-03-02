@@ -1,5 +1,5 @@
-#include <types/inline_keyboard_button.hpp>
-#include <types/inline_keyboard_markup.hpp>
+#include <tg/types/inline_keyboard_button.hpp>
+#include <tg/types/inline_keyboard_markup.hpp>
 
 #include "common.hpp"
 

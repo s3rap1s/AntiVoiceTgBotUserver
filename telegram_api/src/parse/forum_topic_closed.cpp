@@ -1,4 +1,4 @@
-#include <types/forum_topic_closed.hpp>
+#include <tg/types/forum_topic_closed.hpp>
 
 #include "common.hpp"
 

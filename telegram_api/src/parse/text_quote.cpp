@@ -1,5 +1,5 @@
-#include <types/message_entity.hpp>
-#include <types/text_quote.hpp>
+#include <tg/types/message_entity.hpp>
+#include <tg/types/text_quote.hpp>
 
 #include "common.hpp"
 

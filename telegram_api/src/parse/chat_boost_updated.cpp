@@ -1,6 +1,6 @@
-#include <types/chat.hpp>
-#include <types/chat_boost.hpp>
-#include <types/chat_boost_updated.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/chat_boost.hpp>
+#include <tg/types/chat_boost_updated.hpp>
 
 #include "common.hpp"
 

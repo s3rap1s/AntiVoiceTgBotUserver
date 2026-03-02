@@ -1,7 +1,7 @@
-#include <types/reaction_type.hpp>
-#include <types/reaction_type_custom_emoji.hpp>
-#include <types/reaction_type_emoji.hpp>
-#include <types/reaction_type_paid.hpp>
+#include <tg/types/reaction_type.hpp>
+#include <tg/types/reaction_type_custom_emoji.hpp>
+#include <tg/types/reaction_type_emoji.hpp>
+#include <tg/types/reaction_type_paid.hpp>
 
 #include "common.hpp"
 

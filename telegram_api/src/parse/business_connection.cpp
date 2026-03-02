@@ -1,6 +1,6 @@
-#include <types/business_bot_rights.hpp>
-#include <types/business_connection.hpp>
-#include <types/user.hpp>
+#include <tg/types/business_bot_rights.hpp>
+#include <tg/types/business_connection.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

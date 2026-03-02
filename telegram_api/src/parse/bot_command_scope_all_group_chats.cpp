@@ -1,4 +1,4 @@
-#include <types/bot_command_scope_all_group_chats.hpp>
+#include <tg/types/bot_command_scope_all_group_chats.hpp>
 
 #include "common.hpp"
 

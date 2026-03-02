@@ -1,5 +1,5 @@
-#include <types/reaction_count.hpp>
-#include <types/reaction_type.hpp>
+#include <tg/types/reaction_count.hpp>
+#include <tg/types/reaction_type.hpp>
 
 #include "common.hpp"
 

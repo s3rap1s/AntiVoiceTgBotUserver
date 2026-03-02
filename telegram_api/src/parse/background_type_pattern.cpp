@@ -1,6 +1,6 @@
-#include <types/background_fill.hpp>
-#include <types/background_type_pattern.hpp>
-#include <types/document.hpp>
+#include <tg/types/background_fill.hpp>
+#include <tg/types/background_type_pattern.hpp>
+#include <tg/types/document.hpp>
 
 #include "common.hpp"
 

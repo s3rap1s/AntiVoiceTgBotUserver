@@ -1,5 +1,5 @@
-#include <types/reaction_type.hpp>
-#include <types/story_area_type_suggested_reaction.hpp>
+#include <tg/types/reaction_type.hpp>
+#include <tg/types/story_area_type_suggested_reaction.hpp>
 
 #include "common.hpp"
 

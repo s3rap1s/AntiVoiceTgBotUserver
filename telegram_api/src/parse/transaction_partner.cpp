@@ -1,11 +1,11 @@
-#include <types/transaction_partner.hpp>
-#include <types/transaction_partner_affiliate_program.hpp>
-#include <types/transaction_partner_chat.hpp>
-#include <types/transaction_partner_fragment.hpp>
-#include <types/transaction_partner_other.hpp>
-#include <types/transaction_partner_telegram_ads.hpp>
-#include <types/transaction_partner_telegram_api.hpp>
-#include <types/transaction_partner_user.hpp>
+#include <tg/types/transaction_partner.hpp>
+#include <tg/types/transaction_partner_affiliate_program.hpp>
+#include <tg/types/transaction_partner_chat.hpp>
+#include <tg/types/transaction_partner_fragment.hpp>
+#include <tg/types/transaction_partner_other.hpp>
+#include <tg/types/transaction_partner_telegram_ads.hpp>
+#include <tg/types/transaction_partner_telegram_api.hpp>
+#include <tg/types/transaction_partner_user.hpp>
 
 #include "common.hpp"
 

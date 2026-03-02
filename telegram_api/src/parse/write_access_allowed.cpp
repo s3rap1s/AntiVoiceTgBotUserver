@@ -1,4 +1,4 @@
-#include <types/write_access_allowed.hpp>
+#include <tg/types/write_access_allowed.hpp>
 
 #include "common.hpp"
 

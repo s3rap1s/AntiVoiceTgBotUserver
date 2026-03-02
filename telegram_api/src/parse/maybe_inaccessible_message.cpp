@@ -1,5 +1,5 @@
-#include <types/maybe_inaccessible_message.hpp>
-#include <types/message.hpp>
+#include <tg/types/maybe_inaccessible_message.hpp>
+#include <tg/types/message.hpp>
 
 #include "common.hpp"
 

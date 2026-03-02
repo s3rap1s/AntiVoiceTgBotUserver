@@ -1,5 +1,5 @@
-#include <types/input_sticker.hpp>
-#include <types/mask_position.hpp>
+#include <tg/types/input_sticker.hpp>
+#include <tg/types/mask_position.hpp>
 
 #include "common.hpp"
 

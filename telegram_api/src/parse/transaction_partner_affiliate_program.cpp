@@ -1,5 +1,5 @@
-#include <types/transaction_partner_affiliate_program.hpp>
-#include <types/user.hpp>
+#include <tg/types/transaction_partner_affiliate_program.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

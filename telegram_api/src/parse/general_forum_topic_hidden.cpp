@@ -1,4 +1,4 @@
-#include <types/general_forum_topic_hidden.hpp>
+#include <tg/types/general_forum_topic_hidden.hpp>
 
 #include "common.hpp"
 

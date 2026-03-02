@@ -1,5 +1,5 @@
-#include <types/user.hpp>
-#include <types/video_chat_participants_invited.hpp>
+#include <tg/types/user.hpp>
+#include <tg/types/video_chat_participants_invited.hpp>
 
 #include "common.hpp"
 

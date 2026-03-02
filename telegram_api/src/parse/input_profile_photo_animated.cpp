@@ -1,4 +1,4 @@
-#include <types/input_profile_photo_animated.hpp>
+#include <tg/types/input_profile_photo_animated.hpp>
 
 #include "common.hpp"
 

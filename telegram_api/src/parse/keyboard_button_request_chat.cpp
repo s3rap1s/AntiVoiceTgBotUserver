@@ -1,5 +1,5 @@
-#include <types/chat_administrator_rights.hpp>
-#include <types/keyboard_button_request_chat.hpp>
+#include <tg/types/chat_administrator_rights.hpp>
+#include <tg/types/keyboard_button_request_chat.hpp>
 
 #include "common.hpp"
 

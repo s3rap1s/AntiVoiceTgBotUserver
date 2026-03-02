@@ -1,5 +1,5 @@
-#include <types/paid_media_photo.hpp>
-#include <types/photo_size.hpp>
+#include <tg/types/paid_media_photo.hpp>
+#include <tg/types/photo_size.hpp>
 
 #include "common.hpp"
 

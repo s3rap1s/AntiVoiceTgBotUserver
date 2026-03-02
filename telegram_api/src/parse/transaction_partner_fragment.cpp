@@ -1,5 +1,5 @@
-#include <types/revenue_withdrawal_state.hpp>
-#include <types/transaction_partner_fragment.hpp>
+#include <tg/types/revenue_withdrawal_state.hpp>
+#include <tg/types/transaction_partner_fragment.hpp>
 
 #include "common.hpp"
 

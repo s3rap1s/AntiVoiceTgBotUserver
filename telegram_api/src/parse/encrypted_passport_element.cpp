@@ -1,5 +1,5 @@
-#include <types/encrypted_passport_element.hpp>
-#include <types/passport_file.hpp>
+#include <tg/types/encrypted_passport_element.hpp>
+#include <tg/types/passport_file.hpp>
 
 #include "common.hpp"
 

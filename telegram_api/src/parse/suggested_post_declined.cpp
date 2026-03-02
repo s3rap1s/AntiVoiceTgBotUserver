@@ -1,5 +1,5 @@
-#include <types/message.hpp>
-#include <types/suggested_post_declined.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/suggested_post_declined.hpp>
 
 #include "common.hpp"
 

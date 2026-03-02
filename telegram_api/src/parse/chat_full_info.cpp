@@ -1,18 +1,18 @@
-#include <types/accepted_gift_types.hpp>
-#include <types/audio.hpp>
-#include <types/birthdate.hpp>
-#include <types/business_intro.hpp>
-#include <types/business_location.hpp>
-#include <types/business_opening_hours.hpp>
-#include <types/chat.hpp>
-#include <types/chat_full_info.hpp>
-#include <types/chat_location.hpp>
-#include <types/chat_permissions.hpp>
-#include <types/chat_photo.hpp>
-#include <types/message.hpp>
-#include <types/reaction_type.hpp>
-#include <types/unique_gift_colors.hpp>
-#include <types/user_rating.hpp>
+#include <tg/types/accepted_gift_types.hpp>
+#include <tg/types/audio.hpp>
+#include <tg/types/birthdate.hpp>
+#include <tg/types/business_intro.hpp>
+#include <tg/types/business_location.hpp>
+#include <tg/types/business_opening_hours.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/chat_full_info.hpp>
+#include <tg/types/chat_location.hpp>
+#include <tg/types/chat_permissions.hpp>
+#include <tg/types/chat_photo.hpp>
+#include <tg/types/message.hpp>
+#include <tg/types/reaction_type.hpp>
+#include <tg/types/unique_gift_colors.hpp>
+#include <tg/types/user_rating.hpp>
 
 #include "common.hpp"
 

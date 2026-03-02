@@ -1,9 +1,9 @@
-#include <types/callback_game.hpp>
-#include <types/copy_text_button.hpp>
-#include <types/inline_keyboard_button.hpp>
-#include <types/login_url.hpp>
-#include <types/switch_inline_query_chosen_chat.hpp>
-#include <types/web_app_info.hpp>
+#include <tg/types/callback_game.hpp>
+#include <tg/types/copy_text_button.hpp>
+#include <tg/types/inline_keyboard_button.hpp>
+#include <tg/types/login_url.hpp>
+#include <tg/types/switch_inline_query_chosen_chat.hpp>
+#include <tg/types/web_app_info.hpp>
 
 #include "common.hpp"
 

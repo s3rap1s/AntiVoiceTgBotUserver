@@ -1,6 +1,6 @@
-#include <types/callback_query.hpp>
-#include <types/maybe_inaccessible_message.hpp>
-#include <types/user.hpp>
+#include <tg/types/callback_query.hpp>
+#include <tg/types/maybe_inaccessible_message.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

@@ -1,6 +1,6 @@
-#include <types/order_info.hpp>
-#include <types/pre_checkout_query.hpp>
-#include <types/user.hpp>
+#include <tg/types/order_info.hpp>
+#include <tg/types/pre_checkout_query.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

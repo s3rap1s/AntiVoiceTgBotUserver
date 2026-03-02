@@ -1,7 +1,7 @@
-#include <types/paid_media.hpp>
-#include <types/paid_media_photo.hpp>
-#include <types/paid_media_preview.hpp>
-#include <types/paid_media_video.hpp>
+#include <tg/types/paid_media.hpp>
+#include <tg/types/paid_media_photo.hpp>
+#include <tg/types/paid_media_preview.hpp>
+#include <tg/types/paid_media_video.hpp>
 
 #include "common.hpp"
 

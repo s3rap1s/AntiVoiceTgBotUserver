@@ -1,5 +1,5 @@
-#include <types/chat_member_owner.hpp>
-#include <types/user.hpp>
+#include <tg/types/chat_member_owner.hpp>
+#include <tg/types/user.hpp>
 
 #include "common.hpp"
 

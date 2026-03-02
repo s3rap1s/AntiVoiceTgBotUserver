@@ -1,7 +1,7 @@
-#include <types/chat.hpp>
-#include <types/gift.hpp>
-#include <types/gift_background.hpp>
-#include <types/sticker.hpp>
+#include <tg/types/chat.hpp>
+#include <tg/types/gift.hpp>
+#include <tg/types/gift_background.hpp>
+#include <tg/types/sticker.hpp>
 
 #include "common.hpp"
 
