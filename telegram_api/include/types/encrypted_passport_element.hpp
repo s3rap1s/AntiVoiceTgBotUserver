@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "passport_file.hpp"
+#include <types/common.hpp>
+#include <types/passport_file.hpp>
 
 namespace tg {
 

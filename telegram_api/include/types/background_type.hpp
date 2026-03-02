@@ -1,9 +1,9 @@
 #pragma once
 
-#include "background_type_chat_theme.hpp"
-#include "background_type_fill.hpp"
-#include "background_type_pattern.hpp"
-#include "background_type_wallpaper.hpp"
+#include <types/background_type_chat_theme.hpp>
+#include <types/background_type_fill.hpp>
+#include <types/background_type_pattern.hpp>
+#include <types/background_type_wallpaper.hpp>
 
 namespace tg {
 

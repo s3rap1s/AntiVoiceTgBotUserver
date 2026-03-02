@@ -1,7 +1,7 @@
 #pragma once
 
-#include "chat_administrator_rights.hpp"
-#include "common.hpp"
+#include <types/chat_administrator_rights.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

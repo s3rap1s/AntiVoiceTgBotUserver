@@ -1,14 +1,13 @@
 #pragma once
 
-#include "common.hpp"
-#include "suggested_post_price.hpp"
+#include <types/common.hpp>
+#include <types/message_ptr.hpp>
+#include <types/suggested_post_price.hpp>
 
 namespace tg {
 
-struct Message;
-
 struct SuggestedPostApprovalFailed {
-    Ptr<Message> suggested_post_message;
+    MessagePtr suggested_post_message;
     SuggestedPostPrice price;
 };
 

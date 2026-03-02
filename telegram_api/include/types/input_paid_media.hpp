@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "input_paid_media_photo.hpp"
-#include "input_paid_media_video.hpp"
+#include <types/common.hpp>
+#include <types/input_paid_media_photo.hpp>
+#include <types/input_paid_media_video.hpp>
 
 namespace tg {
 

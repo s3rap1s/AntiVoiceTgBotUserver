@@ -1,8 +1,8 @@
 #pragma once
 
-#include "checklist_task.hpp"
-#include "common.hpp"
-#include "message_entity.hpp"
+#include <types/checklist_task.hpp>
+#include <types/common.hpp>
+#include <types/message_entity.hpp>
 
 namespace tg {
 

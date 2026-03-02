@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "unique_gift_backdrop_colors.hpp"
+#include <types/common.hpp>
+#include <types/unique_gift_backdrop_colors.hpp>
 
 namespace tg {
 

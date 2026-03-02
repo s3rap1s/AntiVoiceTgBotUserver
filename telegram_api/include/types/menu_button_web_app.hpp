@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "web_app_info.hpp"
+#include <types/common.hpp>
+#include <types/web_app_info.hpp>
 
 namespace tg {
 

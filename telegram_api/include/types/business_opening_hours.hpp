@@ -1,7 +1,7 @@
 #pragma once
 
-#include "business_opening_hours_interval.hpp"
-#include "common.hpp"
+#include <types/business_opening_hours_interval.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

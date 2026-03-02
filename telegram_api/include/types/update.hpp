@@ -1,21 +1,22 @@
 #pragma once
 
-#include "business_connection.hpp"
-#include "business_messages_deleted.hpp"
-#include "chat_boost_removed.hpp"
-#include "chat_boost_updated.hpp"
-#include "chat_join_request.hpp"
-#include "chat_member_updated.hpp"
-#include "chosen_inline_result.hpp"
-#include "common.hpp"
-#include "inline_query.hpp"
-#include "message.hpp"
-#include "message_reaction_count_updated.hpp"
-#include "message_reaction_updated.hpp"
-#include "paid_media_purchased.hpp"
-#include "poll_answer.hpp"
-#include "pre_checkout_query.hpp"
-#include "shipping_query.hpp"
+#include <types/business_connection.hpp>
+#include <types/business_messages_deleted.hpp>
+#include <types/chat_boost_removed.hpp>
+#include <types/chat_boost_updated.hpp>
+#include <types/chat_join_request.hpp>
+#include <types/chat_member_updated.hpp>
+#include <types/chosen_inline_result.hpp>
+#include <types/common.hpp>
+#include <types/inline_query.hpp>
+#include <types/message.hpp>
+#include <types/message_reaction_count_updated.hpp>
+#include <types/message_reaction_updated.hpp>
+#include <types/paid_media_purchased.hpp>
+#include <types/poll.hpp>
+#include <types/poll_answer.hpp>
+#include <types/pre_checkout_query.hpp>
+#include <types/shipping_query.hpp>
 
 namespace tg {
 

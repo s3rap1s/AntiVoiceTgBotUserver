@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "photo_size.hpp"
-#include "sticker.hpp"
+#include <types/common.hpp>
+#include <types/photo_size.hpp>
+#include <types/sticker.hpp>
 
 namespace tg {
 

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "common.hpp"
-#include "transaction_partner_affiliate_program.hpp"
-#include "transaction_partner_chat.hpp"
-#include "transaction_partner_fragment.hpp"
-#include "transaction_partner_other.hpp"
-#include "transaction_partner_telegram_ads.hpp"
-#include "transaction_partner_telegram_api.hpp"
-#include "transaction_partner_user.hpp"
+#include <types/common.hpp>
+#include <types/transaction_partner_affiliate_program.hpp>
+#include <types/transaction_partner_chat.hpp>
+#include <types/transaction_partner_fragment.hpp>
+#include <types/transaction_partner_other.hpp>
+#include <types/transaction_partner_telegram_ads.hpp>
+#include <types/transaction_partner_telegram_api.hpp>
+#include <types/transaction_partner_user.hpp>
 
 namespace tg {
 

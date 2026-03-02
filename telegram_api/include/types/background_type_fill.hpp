@@ -1,7 +1,7 @@
 #pragma once
 
-#include "background_fill.hpp"
-#include "common.hpp"
+#include <types/background_fill.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

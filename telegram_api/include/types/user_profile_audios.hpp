@@ -1,7 +1,7 @@
 #pragma once
 
-#include "audio.hpp"
-#include "common.hpp"
+#include <types/audio.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "maybe_inaccessible_message.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/maybe_inaccessible_message.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

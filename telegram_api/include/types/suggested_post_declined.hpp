@@ -1,13 +1,12 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
+#include <types/message_ptr.hpp>
 
 namespace tg {
 
-struct Message;
-
 struct SuggestedPostDeclined {
-    Ptr<Message> suggested_post_message;
+    MessagePtr suggested_post_message;
     Optional<String> comment;
 };
 

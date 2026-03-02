@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "gift.hpp"
-#include "message_entity.hpp"
+#include <types/common.hpp>
+#include <types/gift.hpp>
+#include <types/message_entity.hpp>
 
 namespace tg {
 

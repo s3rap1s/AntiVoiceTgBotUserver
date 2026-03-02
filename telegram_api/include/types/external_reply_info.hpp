@@ -1,40 +1,41 @@
 #pragma once
 
-#include "animation.hpp"
-#include "audio.hpp"
-#include "chat.hpp"
-#include "checklist.hpp"
-#include "common.hpp"
-#include "contact.hpp"
-#include "dice.hpp"
-#include "document.hpp"
-#include "game.hpp"
-#include "giveaway.hpp"
-#include "giveaway_winners.hpp"
-#include "invoice.hpp"
-#include "link_preview_options.hpp"
-#include "location.hpp"
-#include "message_origin.hpp"
-#include "paid_media_info.hpp"
-#include "poll.hpp"
-#include "sticker.hpp"
-#include "story.hpp"
-#include "venue.hpp"
-#include "video_note.hpp"
-#include "voice.hpp"
+#include <types/animation.hpp>
+#include <types/audio.hpp>
+#include <types/chat.hpp>
+#include <types/checklist.hpp>
+#include <types/common.hpp>
+#include <types/contact.hpp>
+#include <types/dice.hpp>
+#include <types/document.hpp>
+#include <types/game.hpp>
+#include <types/giveaway.hpp>
+#include <types/giveaway_winners.hpp>
+#include <types/invoice.hpp>
+#include <types/link_preview_options.hpp>
+#include <types/location.hpp>
+#include <types/message_origin.hpp>
+#include <types/paid_media_info.hpp>
+#include <types/photo_size.hpp>
+#include <types/poll.hpp>
+#include <types/sticker.hpp>
+#include <types/story.hpp>
+#include <types/venue.hpp>
+#include <types/video_note.hpp>
+#include <types/voice.hpp>
 
 namespace tg {
 
 struct ExternalReplyInfo {
     MessageOrigin origin;
     Optional<Chat> chat;
-    Integer message_id;
+    Optional<Integer> message_id;
     Optional<LinkPreviewOptions> link_preview_options;
     Optional<Animation> animation;
     Optional<Audio> audio;
     Optional<Document> document;
     Optional<PaidMediaInfo> paid_media;
-    Optional<OneOf<PhotoSize>> photo;
+    Optional<Array<PhotoSize>> photo;
     Optional<Sticker> sticker;
     Optional<Story> story;
     Optional<Video> video;

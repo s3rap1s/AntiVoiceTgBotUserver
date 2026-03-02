@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "reaction_type_custom_emoji.hpp"
-#include "reaction_type_emoji.hpp"
-#include "reaction_type_paid.hpp"
+#include <types/common.hpp>
+#include <types/reaction_type_custom_emoji.hpp>
+#include <types/reaction_type_emoji.hpp>
+#include <types/reaction_type_paid.hpp>
 
 namespace tg {
 

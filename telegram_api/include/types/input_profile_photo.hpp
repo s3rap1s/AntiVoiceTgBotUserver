@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "input_profile_photo_animated.hpp"
-#include "input_profile_photo_static.hpp"
+#include <types/common.hpp>
+#include <types/input_profile_photo_animated.hpp>
+#include <types/input_profile_photo_static.hpp>
 
 namespace tg {
 

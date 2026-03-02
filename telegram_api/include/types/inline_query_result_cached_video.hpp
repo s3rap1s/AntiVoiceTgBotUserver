@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 #include "inline_keyboard_markup.hpp"
 #include "input_message_content.hpp"
 #include "message_entity.hpp"

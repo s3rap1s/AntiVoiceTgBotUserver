@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "shared_user.hpp"
+#include <types/common.hpp>
+#include <types/shared_user.hpp>
 
 namespace tg {
 

@@ -8,8 +8,8 @@
 #include <userver/clients/http/client.hpp>
 #include <userver/formats/json/value.hpp>
 
-#include "types/common.hpp"
-#include "types/update.hpp"
+#include <types/common.hpp>
+#include <types/update.hpp>
 
 namespace tg {
 

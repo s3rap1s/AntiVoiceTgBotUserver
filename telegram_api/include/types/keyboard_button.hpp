@@ -1,10 +1,10 @@
 #pragma once
 
-#include "common.hpp"
-#include "keyboard_button_poll_type.hpp"
-#include "keyboard_button_request_chat.hpp"
-#include "keyboard_button_request_users.hpp"
-#include "web_app_info.hpp"
+#include <types/common.hpp>
+#include <types/keyboard_button_poll_type.hpp>
+#include <types/keyboard_button_request_chat.hpp>
+#include <types/keyboard_button_request_users.hpp>
+#include <types/web_app_info.hpp>
 
 namespace tg {
 

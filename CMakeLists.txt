@@ -25,9 +25,15 @@ userver_setup_environment()
 # Common sources
 include_directories(src)
 
+file(GLOB TELEGRAM_API_SOURCES CONFIGURE_DEPENDS
+    telegram_api/src/parse/*.cpp
+    telegram_api/src/bot_api.cpp
+)
+
 add_library(
     ${PROJECT_NAME}_objs OBJECT
-    src/main.cpp
+    src/telegram/log_updates_component.cpp
+    ${TELEGRAM_API_SOURCES}
 )
 
 target_include_directories(
@@ -35,7 +41,6 @@ target_include_directories(
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/telegram_api/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/telegram_api/src
 )
 target_link_libraries(
     ${PROJECT_NAME}_objs

@@ -1,6 +1,8 @@
 #include <types/affiliate_info.hpp>
+#include <types/chat.hpp>
+#include <types/user.hpp>
 
-#include <parse/common.hpp>
+#include "common.hpp"
 
 namespace tg {
 
@@ -11,7 +13,8 @@ AffiliateInfo Parse(const Value& value, To<AffiliateInfo>) {
     obj.commission_per_mille =
         ParseComplex<Integer>(value["commission_per_mille"]);
     obj.amount = ParseComplex<Integer>(value["amount"]);
-    obj.nanostar_amount = ParseOptional<Integer>(value["nanostar_amount"]);
+    obj.nanostar_amount =
+        ParseComplex<Optional<Integer>>(value["nanostar_amount"]);
     return obj;
 }
 

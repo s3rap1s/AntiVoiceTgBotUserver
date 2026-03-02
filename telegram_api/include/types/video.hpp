@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "photo_size.hpp"
-#include "video_quality.hpp"
+#include <types/common.hpp>
+#include <types/photo_size.hpp>
+#include <types/video_quality.hpp>
 
 namespace tg {
 

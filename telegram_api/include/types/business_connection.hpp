@@ -1,8 +1,8 @@
 #pragma once
 
-#include "business_bot_rights.hpp"
-#include "common.hpp"
-#include "user.hpp"
+#include <types/business_bot_rights.hpp>
+#include <types/common.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "background_fill.hpp"
-#include "common.hpp"
-#include "document.hpp"
+#include <types/background_fill.hpp>
+#include <types/common.hpp>
+#include <types/document.hpp>
 
 namespace tg {
 

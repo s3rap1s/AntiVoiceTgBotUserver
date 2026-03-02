@@ -1,13 +1,13 @@
 #pragma once
 
-#include "common.hpp"
-#include "video.hpp"
+#include <types/common.hpp>
+#include <types/video.hpp>
 
 namespace tg {
 
 struct PaidMediaVideo {
     String type;
-    Array<Video> photo;
+    Video video;
 };
 
 PaidMediaVideo Parse(const Value& value, To<PaidMediaVideo>);

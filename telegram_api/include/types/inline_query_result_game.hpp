@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "inline_keyboard_markup.hpp"
+#include <types/common.hpp>
+#include <types/inline_keyboard_markup.hpp>
 
 namespace tg {
 

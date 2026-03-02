@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 
 namespace tg {
 
@@ -15,6 +15,7 @@ struct ChatPermissions {
     Optional<Boolean> can_send_polls;
     Optional<Boolean> can_send_other_messages;
     Optional<Boolean> can_add_web_page_previews;
+    Optional<Boolean> can_edit_tag;
     Optional<Boolean> can_change_info;
     Optional<Boolean> can_invite_users;
     Optional<Boolean> can_pin_messages;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "owned_gift.hpp"
+#include <types/common.hpp>
+#include <types/owned_gift.hpp>
 
 namespace tg {
 

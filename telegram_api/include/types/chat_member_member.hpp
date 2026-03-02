@@ -1,12 +1,13 @@
 #pragma once
 
-#include "common.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 
 struct ChatMemberMember {
     String status;
+    Optional<String> tag;
     User user;
     Optional<Integer> until_date;
 };

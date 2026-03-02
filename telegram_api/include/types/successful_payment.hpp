@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "order_info.hpp"
+#include <types/common.hpp>
+#include <types/order_info.hpp>
 
 namespace tg {
 

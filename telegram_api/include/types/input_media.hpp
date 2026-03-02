@@ -1,11 +1,11 @@
 #pragma once
 
-#include "common.hpp"
-#include "input_media_animation.hpp"
-#include "input_media_audio.hpp"
-#include "input_media_document.hpp"
-#include "input_media_photo.hpp"
-#include "input_media_video.hpp"
+#include <types/common.hpp>
+#include <types/input_media_animation.hpp>
+#include <types/input_media_audio.hpp>
+#include <types/input_media_document.hpp>
+#include <types/input_media_photo.hpp>
+#include <types/input_media_video.hpp>
 
 namespace tg {
 

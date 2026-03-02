@@ -10,7 +10,6 @@ struct ApiError final {
     int error_code{0};
     std::string description;
 
-    // ResponseParameters (часть)
     std::optional<int> retry_after;
     std::optional<long long> migrate_to_chat_id;
 };

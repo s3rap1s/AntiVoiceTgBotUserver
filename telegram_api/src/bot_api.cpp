@@ -1,9 +1,11 @@
-#include "../include/bot_api.hpp"
+#include "bot_api.hpp"
+
+#include <chrono>
+#include <stdexcept>
+#include <string>
 
 #include <userver/formats/json.hpp>
-#include <userver/logging/log.hpp>
-
-#include "../include/errors.hpp"
+#include <userver/formats/json/value_builder.hpp>
 
 namespace tg {
 
@@ -22,18 +24,17 @@ BotApi::Json BotApi::CallJson(std::string_view method, const Json& payload,
                               std::chrono::milliseconds http_timeout) {
     const auto body = userver::formats::json::ToString(payload);
 
-    auto req = http_.CreateRequest()
-                   .post(MakeUrl(method), body)
-                   .headers({{"Content-Type", "application/json"}})
-                   .timeout(http_timeout);
+    auto resp = http_.CreateRequest()
+                    .post(MakeUrl(method), body)
+                    .headers({{"Content-Type", "application/json"}})
+                    .timeout(http_timeout)
+                    .perform();
 
-    auto resp = req.perform();
     if (!resp) {
-        throw std::runtime_error(
-            "Telegram API: http perform() returned null response");
+        throw std::runtime_error("Telegram API: null HTTP response");
     }
     if (!resp->IsOk()) {
-        throw std::runtime_error("Telegram API: HTTP status not ok");
+        throw std::runtime_error("Telegram API: HTTP status not OK");
     }
 
     const auto root = userver::formats::json::FromString(resp->body_view());
@@ -41,22 +42,62 @@ BotApi::Json BotApi::CallJson(std::string_view method, const Json& payload,
     const bool ok = root["ok"].As<bool>(false);
     if (ok) return root;
 
-    ApiError err;
-    err.error_code = root["error_code"].As<int>(0);
-    err.description = root["description"].As<std::string>("unknown error");
+    const auto code = root["error_code"].As<int>(0);
+    const auto desc = root["description"].As<std::string>("unknown error");
 
-    const auto params = root["parameters"];
-    if (!params.IsMissing()) {
-        if (!params["retry_after"].IsMissing()) {
-            err.retry_after = params["retry_after"].As<int>();
-        }
-        if (!params["migrate_to_chat_id"].IsMissing()) {
-            err.migrate_to_chat_id =
-                params["migrate_to_chat_id"].As<long long>();
-        }
+    // Можно потом расширить parsing parameters.retry_after и т.д.
+    throw std::runtime_error("Telegram API ok=false, error_code=" +
+                             std::to_string(code) + " description=" + desc);
+}
+
+Array<Update> BotApi::GetUpdates(std::int64_t offset,
+                                 std::chrono::seconds long_poll_timeout,
+                                 int limit) {
+    userver::formats::json::ValueBuilder b;
+    if (offset > 0) b["offset"] = offset;
+    b["timeout"] = static_cast<int>(long_poll_timeout.count());
+    b["limit"] = limit;
+
+    // HTTP timeout должен быть > long_poll_timeout
+    const auto http_timeout =
+        std::chrono::duration_cast<std::chrono::milliseconds>(
+            long_poll_timeout) +
+        std::chrono::milliseconds{1500};
+
+    const auto root = CallJson("getUpdates", b.ExtractValue(), http_timeout);
+
+    Array<Update> out;
+    const auto result = root["result"];
+    out.reserve(result.GetSize());
+
+    for (const auto& item : result) {
+        // Требуется tg::Parse(Value, To<Update>) (твоя функция)
+        out.push_back(item.As<Update>());
     }
 
-    throw ApiException(std::move(err));
+    return out;
+}
+
+Integer BotApi::SendMessage(std::int64_t chat_id, std::string text) {
+    userver::formats::json::ValueBuilder b;
+    b["chat_id"] = chat_id;
+    b["text"] = std::move(text);
+
+    const auto root = CallJson("sendMessage", b.ExtractValue(),
+                               std::chrono::milliseconds{5000});
+
+    return root["result"]["message_id"].As<Integer>();
+}
+
+void BotApi::EditMessageText(std::int64_t chat_id, std::int64_t message_id,
+                             std::string text) {
+    userver::formats::json::ValueBuilder b;
+    b["chat_id"] = chat_id;
+    b["message_id"] = message_id;
+    b["text"] = std::move(text);
+
+    (void)CallJson("editMessageText", b.ExtractValue(),
+                   std::chrono::milliseconds{5000});
 }
 
 }  // namespace tg

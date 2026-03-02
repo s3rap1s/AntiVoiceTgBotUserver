@@ -1,10 +1,10 @@
 #pragma once
 
-#include "affiliate_info.hpp"
-#include "common.hpp"
-#include "gift.hpp"
-#include "paid_media.hpp"
-#include "user.hpp"
+#include <types/affiliate_info.hpp>
+#include <types/common.hpp>
+#include <types/gift.hpp>
+#include <types/paid_media.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

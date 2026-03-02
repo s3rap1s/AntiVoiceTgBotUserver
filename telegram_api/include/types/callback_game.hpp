@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "message_entity.hpp"
-#include "photo_size.hpp"
+#include <types/common.hpp>
+#include <types/message_entity.hpp>
+#include <types/photo_size.hpp>
 
 namespace tg {
 

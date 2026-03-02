@@ -1,8 +1,8 @@
 #pragma once
 
-#include "background_fill_freeform_gradient.hpp"
-#include "background_fill_gradient.hpp"
-#include "background_fill_solid.hpp"
+#include <types/background_fill_freeform_gradient.hpp>
+#include <types/background_fill_gradient.hpp>
+#include <types/background_fill_solid.hpp>
 
 namespace tg {
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "order_info.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/order_info.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "encrypted_credentials.hpp"
-#include "encrypted_passport_element.hpp"
+#include <types/common.hpp>
+#include <types/encrypted_credentials.hpp>
+#include <types/encrypted_passport_element.hpp>
 
 namespace tg {
 

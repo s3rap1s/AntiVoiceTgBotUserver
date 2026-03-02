@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "reaction_type.hpp"
+#include <types/common.hpp>
+#include <types/reaction_type.hpp>
 
 namespace tg {
 

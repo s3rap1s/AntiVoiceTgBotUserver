@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "suggested_post_price.hpp"
+#include <types/common.hpp>
+#include <types/suggested_post_price.hpp>
 
 namespace tg {
 

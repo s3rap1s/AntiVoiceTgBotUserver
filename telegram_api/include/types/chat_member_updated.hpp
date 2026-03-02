@@ -1,10 +1,10 @@
 #pragma once
 
-#include "chat.hpp"
-#include "chat_invite_link.hpp"
-#include "chat_member.hpp"
-#include "common.hpp"
-#include "user.hpp"
+#include <types/chat.hpp>
+#include <types/chat_invite_link.hpp>
+#include <types/chat_member.hpp>
+#include <types/common.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

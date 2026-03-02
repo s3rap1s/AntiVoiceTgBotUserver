@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "file.hpp"
-#include "mask_position.hpp"
-#include "photo_size.hpp"
+#include <types/common.hpp>
+#include <types/file.hpp>
+#include <types/mask_position.hpp>
+#include <types/photo_size.hpp>
 
 namespace tg {
 

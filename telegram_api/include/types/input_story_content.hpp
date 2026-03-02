@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "input_story_content_photo.hpp"
-#include "input_story_content_video.hpp"
+#include <types/common.hpp>
+#include <types/input_story_content_photo.hpp>
+#include <types/input_story_content_video.hpp>
 
 namespace tg {
 

@@ -1,47 +1,51 @@
 #pragma once
 
-#include "chat.hpp"
-#include "chat_background.hpp"
-#include "chat_boost_added.hpp"
-#include "chat_owner_changed.hpp"
-#include "chat_owner_left.hpp"
-#include "chat_shared.hpp"
-#include "checklist_tasks_added.hpp"
-#include "checklist_tasks_done.hpp"
-#include "common.hpp"
-#include "direct_message_price_changed.hpp"
-#include "direct_messages_topic.hpp"
-#include "external_reply_info.hpp"
-#include "forum_topc_created.hpp"
-#include "general_forum_topic_hidden.hpp"
-#include "general_forum_topic_unhidden.hpp"
-#include "gift_info.hpp"
-#include "giveaway_completed.hpp"
-#include "giveaway_created.hpp"
-#include "inline_keyboard_markup.hpp"
-#include "maybe_inaccessible_message.hpp"
-#include "message_auto_delete_timer_changed.hpp"
-#include "message_origin.hpp"
-#include "paid_message_price_changed.hpp"
-#include "passport_data.hpp"
-#include "proximity_alert_triggered.hpp"
-#include "refunded_payment.hpp"
-#include "successful_payment.hpp"
-#include "suggested_post_approval_failed.hpp"
-#include "suggested_post_approved.hpp"
-#include "suggested_post_declined.hpp"
-#include "suggested_post_info.hpp"
-#include "suggested_post_refunded.hpp"
-#include "text_quote.hpp"
-#include "unique_gift_info.hpp"
-#include "user.hpp"
-#include "users_shared.hpp"
-#include "video_chat_ended.hpp"
-#include "video_chat_participants_invited.hpp"
-#include "video_chat_scheduled.hpp"
-#include "video_chat_started.hpp"
-#include "web_app_data.hpp"
-#include "write_access_allowed.hpp"
+#include <types/chat.hpp>
+#include <types/chat_background.hpp>
+#include <types/chat_boost_added.hpp>
+#include <types/chat_owner_changed.hpp>
+#include <types/chat_owner_left.hpp>
+#include <types/chat_shared.hpp>
+#include <types/checklist_tasks_added.hpp>
+#include <types/checklist_tasks_done.hpp>
+#include <types/common.hpp>
+#include <types/direct_message_price_changed.hpp>
+#include <types/direct_messages_topic.hpp>
+#include <types/external_reply_info.hpp>
+#include <types/forum_topic_closed.hpp>
+#include <types/forum_topic_created.hpp>
+#include <types/forum_topic_edited.hpp>
+#include <types/forum_topic_reopened.hpp>
+#include <types/general_forum_topic_hidden.hpp>
+#include <types/general_forum_topic_unhidden.hpp>
+#include <types/gift_info.hpp>
+#include <types/giveaway_completed.hpp>
+#include <types/giveaway_created.hpp>
+#include <types/inline_keyboard_markup.hpp>
+#include <types/maybe_inaccessible_message.hpp>
+#include <types/message_auto_delete_timer_changed.hpp>
+#include <types/message_origin.hpp>
+#include <types/paid_message_price_changed.hpp>
+#include <types/passport_data.hpp>
+#include <types/proximity_alert_triggered.hpp>
+#include <types/refunded_payment.hpp>
+#include <types/successful_payment.hpp>
+#include <types/suggested_post_approval_failed.hpp>
+#include <types/suggested_post_approved.hpp>
+#include <types/suggested_post_declined.hpp>
+#include <types/suggested_post_info.hpp>
+#include <types/suggested_post_paid.hpp>
+#include <types/suggested_post_refunded.hpp>
+#include <types/text_quote.hpp>
+#include <types/unique_gift_info.hpp>
+#include <types/user.hpp>
+#include <types/users_shared.hpp>
+#include <types/video_chat_ended.hpp>
+#include <types/video_chat_participants_invited.hpp>
+#include <types/video_chat_scheduled.hpp>
+#include <types/video_chat_started.hpp>
+#include <types/web_app_data.hpp>
+#include <types/write_access_allowed.hpp>
 
 namespace tg {
 
@@ -53,6 +57,7 @@ struct Message {
     Optional<Chat> sender_chat;
     Optional<Integer> sender_boost_count;
     Optional<User> sender_business_bot;
+    Optional<String> sender_tag;
     Integer date;
     Optional<String> business_connection_id;
     Chat chat;
@@ -88,7 +93,7 @@ struct Message {
     Optional<VideoNote> video_note;
     Optional<Voice> voice;
     Optional<String> caption;
-    Optional<MessageEntity> caption_entities;
+    Optional<Array<MessageEntity>> caption_entities;
     OptionalTrue show_caption_above_media;
     OptionalTrue has_media_spoiler;
     Optional<Checklist> checklist;
@@ -130,9 +135,9 @@ struct Message {
     Optional<ChecklistTasksAdded> checklist_tasks_added;
     Optional<DirectMessagePriceChanged> direct_message_price_changed;
     Optional<ForumTopicCreated> forum_topic_created;
-    Optional<ForumTopicCreated> forum_topic_edited;
-    Optional<ForumTopicCreated> forum_topic_closed;
-    Optional<ForumTopicCreated> forum_topic_reopened;
+    Optional<ForumTopicEdited> forum_topic_edited;
+    Optional<ForumTopicClosed> forum_topic_closed;
+    Optional<ForumTopicReopened> forum_topic_reopened;
     Optional<GeneralForumTopicUnhidden> general_forum_topic_unhidden;
     Optional<GeneralForumTopicHidden> general_forum_topic_hidden;
     Optional<GiveawayCreated> giveaway_created;
@@ -143,6 +148,7 @@ struct Message {
     Optional<SuggestedPostApproved> suggested_post_approved;
     Optional<SuggestedPostApprovalFailed> suggested_post_approval_failed;
     Optional<SuggestedPostDeclined> suggested_post_declined;
+    Optional<SuggestedPostPaid> suggested_post_paid;
     Optional<SuggestedPostRefunded> suggested_post_refunded;
     Optional<VideoChatScheduled> video_chat_scheduled;
     Optional<VideoChatStarted> video_chat_started;

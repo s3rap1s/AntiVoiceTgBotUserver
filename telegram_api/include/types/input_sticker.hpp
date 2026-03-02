@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "mask_position.hpp"
+#include <types/common.hpp>
+#include <types/mask_position.hpp>
 
 namespace tg {
 

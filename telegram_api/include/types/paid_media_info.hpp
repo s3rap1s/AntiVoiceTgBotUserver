@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "paid_media.hpp"
+#include <types/common.hpp>
+#include <types/paid_media.hpp>
 
 namespace tg {
 

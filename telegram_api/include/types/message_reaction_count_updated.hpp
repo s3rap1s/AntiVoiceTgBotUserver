@@ -1,8 +1,8 @@
 #pragma once
 
-#include "chat.hpp"
-#include "common.hpp"
-#include "reaction_count.hpp"
+#include <types/chat.hpp>
+#include <types/common.hpp>
+#include <types/reaction_count.hpp>
 
 namespace tg {
 

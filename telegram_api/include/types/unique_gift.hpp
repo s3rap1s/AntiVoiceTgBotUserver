@@ -1,11 +1,11 @@
 #pragma once
 
-#include "chat.hpp"
-#include "common.hpp"
-#include "unique_gift_backdrop.hpp"
-#include "unique_gift_colors.hpp"
-#include "unique_gift_model.hpp"
-#include "unique_gift_symbol.hpp"
+#include <types/chat.hpp>
+#include <types/common.hpp>
+#include <types/unique_gift_backdrop.hpp>
+#include <types/unique_gift_colors.hpp>
+#include <types/unique_gift_model.hpp>
+#include <types/unique_gift_symbol.hpp>
 
 namespace tg {
 

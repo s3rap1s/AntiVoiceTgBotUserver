@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "gift.hpp"
-#include "message_entity.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/gift.hpp>
+#include <types/message_entity.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 
@@ -25,6 +25,7 @@ struct ChatMemberAdministrator {
     Optional<Boolean> can_pin_messages;
     Optional<Boolean> can_manage_topics;
     Optional<Boolean> can_manage_direct_messages;
+    Optional<Boolean> can_manage_tags;
     Optional<String> custom_title;
 };
 

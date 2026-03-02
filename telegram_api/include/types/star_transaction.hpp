@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "transaction_partner.hpp"
+#include <types/common.hpp>
+#include <types/transaction_partner.hpp>
 
 namespace tg {
 

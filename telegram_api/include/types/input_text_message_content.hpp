@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "link_preview_options.hpp"
-#include "message_entity.hpp"
+#include <types/common.hpp>
+#include <types/link_preview_options.hpp>
+#include <types/message_entity.hpp>
 
 namespace tg {
 

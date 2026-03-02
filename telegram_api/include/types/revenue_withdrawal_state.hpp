@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "revenue_withdrawal_state_failed.hpp"
-#include "revenue_withdrawal_state_pending.hpp"
-#include "revenue_withdrawal_state_succeeded.hpp"
+#include <types/common.hpp>
+#include <types/revenue_withdrawal_state_failed.hpp>
+#include <types/revenue_withdrawal_state_pending.hpp>
+#include <types/revenue_withdrawal_state_succeeded.hpp>
 
 namespace tg {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "keyboard_button.hpp"
+#include <types/common.hpp>
+#include <types/keyboard_button.hpp>
 
 namespace tg {
 

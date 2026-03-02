@@ -1,12 +1,12 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 
 namespace tg {
 
 struct InputProfilePhotoStatic {
     String type;
-    String string;
+    String photo;
 };
 
 InputProfilePhotoStatic Parse(const Value& value, To<InputProfilePhotoStatic>);

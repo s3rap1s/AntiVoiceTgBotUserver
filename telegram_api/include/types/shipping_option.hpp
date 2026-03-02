@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 #include "labeled_price.hpp"
 
 namespace tg {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "message_entity.hpp"
-#include "poll_option.hpp"
+#include <types/common.hpp>
+#include <types/message_entity.hpp>
+#include <types/poll_option.hpp>
 
 namespace tg {
 

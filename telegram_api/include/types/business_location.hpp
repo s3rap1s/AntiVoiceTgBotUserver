@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "location.hpp"
+#include <types/common.hpp>
+#include <types/location.hpp>
 
 namespace tg {
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "menu_button_commands.hpp"
-#include "menu_button_default.hpp"
-#include "menu_button_web_app.hpp"
+#include <types/common.hpp>
+#include <types/menu_button_commands.hpp>
+#include <types/menu_button_default.hpp>
+#include <types/menu_button_web_app.hpp>
 
 namespace tg {
 

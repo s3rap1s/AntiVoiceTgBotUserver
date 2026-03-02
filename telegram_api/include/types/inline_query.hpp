@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "location.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/location.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

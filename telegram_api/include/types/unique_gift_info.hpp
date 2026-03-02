@@ -1,15 +1,14 @@
 #pragma once
 
-#include "common.hpp"
-#include "unique_gift.hpp"
+#include <types/common.hpp>
+#include <types/unique_gift.hpp>
 
 namespace tg {
 
 struct UniqueGiftInfo {
     UniqueGift gift;
     String origin;
-    Optional<String> last_resale_currency;
-    Optional<Integer> last_resale_amount;
+    Optional<Integer> last_resale_star_count;
     Optional<String> owned_gift_id;
     Optional<Integer> transfer_star_count;
     Optional<Integer> next_transfer_date;

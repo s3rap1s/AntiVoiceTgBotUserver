@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "sticker.hpp"
+#include <types/common.hpp>
+#include <types/sticker.hpp>
 
 namespace tg {
 

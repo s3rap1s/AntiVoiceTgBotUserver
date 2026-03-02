@@ -1,14 +1,13 @@
 #pragma once
 
-#include "checklist_task.hpp"
-#include "common.hpp"
+#include <types/checklist_task.hpp>
+#include <types/common.hpp>
+#include <types/message_ptr.hpp>
 
 namespace tg {
 
-struct Message;
-
 struct ChecklistTasksAdded {
-    Ptr<Message> checklist_message;
+    MessagePtr checklist_message;
     Array<ChecklistTask> tasks;
 };
 

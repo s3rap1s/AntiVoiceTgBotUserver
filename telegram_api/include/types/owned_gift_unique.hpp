@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
-#include "unique_gift.hpp"
-#include "user.hpp"
+#include <types/common.hpp>
+#include <types/unique_gift.hpp>
+#include <types/user.hpp>
 
 namespace tg {
 

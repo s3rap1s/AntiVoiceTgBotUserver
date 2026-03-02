@@ -1,19 +1,19 @@
 #pragma once
 
-#include "accepted_gift_types.hpp"
-#include "birthdate.hpp"
-#include "business_intro.hpp"
-#include "business_location.hpp"
-#include "business_opening_hours.hpp"
-#include "chat.hpp"
-#include "chat_location.hpp"
-#include "chat_permissions.hpp"
-#include "chat_photo.hpp"
-#include "common.hpp"
-#include "message.hpp"
-#include "reaction_type.hpp"
-#include "unique_gift_colors.hpp"
-#include "user_rating.hpp"
+#include <types/accepted_gift_types.hpp>
+#include <types/birthdate.hpp>
+#include <types/business_intro.hpp>
+#include <types/business_location.hpp>
+#include <types/business_opening_hours.hpp>
+#include <types/chat.hpp>
+#include <types/chat_location.hpp>
+#include <types/chat_permissions.hpp>
+#include <types/chat_photo.hpp>
+#include <types/common.hpp>
+#include <types/message.hpp>
+#include <types/reaction_type.hpp>
+#include <types/unique_gift_colors.hpp>
+#include <types/user_rating.hpp>
 
 namespace tg {
 
@@ -50,7 +50,7 @@ struct ChatFullInfo {
     Optional<String> description;
     Optional<String> invite_link;
     Ptr<Message> pinned_message;
-    Optional<ChatPermissions> persmissions;
+    Optional<ChatPermissions> permissions;
     Optional<AcceptedGiftTypes> accepted_gift_types;
     OptionalTrue can_send_paid_media;
     Optional<Integer> slow_mode_delay;

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "common.hpp"
-#include "message.hpp"
-#include "star_amount.hpp"
+#include <types/common.hpp>
+#include <types/message_ptr.hpp>
+#include <types/star_amount.hpp>
 
 namespace tg {
 
 struct SuggestedPostPaid {
-    Ptr<Message> suggested_post_message;
+    MessagePtr suggested_post_message;
     String currency;
     Optional<Integer> amount;
     Optional<StarAmount> star_amount;

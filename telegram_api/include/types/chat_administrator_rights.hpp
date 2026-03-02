@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 
 namespace tg {
 
@@ -21,6 +21,7 @@ struct ChatAdministratorRights {
     Optional<Boolean> can_pin_messages;
     Optional<Boolean> can_manage_topics;
     Optional<Boolean> can_manage_direct_messages;
+    Optional<Boolean> can_manage_tags;
 };
 
 ChatAdministratorRights Parse(const Value& value, To<ChatAdministratorRights>);

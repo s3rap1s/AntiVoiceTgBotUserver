@@ -1,7 +1,7 @@
 #pragma once
 
-#include "common.hpp"
-#include "revenue_withdrawal_state.hpp"
+#include <types/common.hpp>
+#include <types/revenue_withdrawal_state.hpp>
 
 namespace tg {
 

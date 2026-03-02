@@ -1,9 +1,9 @@
 #pragma once
 
-#include "chat_boost_source_gift_code.hpp"
-#include "chat_boost_source_giveaway.hpp"
-#include "chat_boost_source_premium.hpp"
-#include "common.hpp"
+#include <types/chat_boost_source_gift_code.hpp>
+#include <types/chat_boost_source_giveaway.hpp>
+#include <types/chat_boost_source_premium.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

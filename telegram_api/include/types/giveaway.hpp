@@ -1,7 +1,7 @@
 #pragma once
 
-#include "chat.hpp"
-#include "common.hpp"
+#include <types/chat.hpp>
+#include <types/common.hpp>
 
 namespace tg {
 

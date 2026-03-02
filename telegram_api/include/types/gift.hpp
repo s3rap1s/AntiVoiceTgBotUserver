@@ -1,9 +1,9 @@
 #pragma once
 
-#include "chat.hpp"
-#include "common.hpp"
-#include "gift_background.hpp"
-#include "sticker.hpp"
+#include <types/chat.hpp>
+#include <types/common.hpp>
+#include <types/gift_background.hpp>
+#include <types/sticker.hpp>
 
 namespace tg {
 

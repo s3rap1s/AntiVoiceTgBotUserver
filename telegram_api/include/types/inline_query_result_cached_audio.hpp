@@ -1,9 +1,9 @@
 #pragma once
 
-#include "common.hpp"
-#include "inline_keyboard_markup.hpp"
-#include "input_message_content.hpp"
-#include "message_entity.hpp"
+#include <types/common.hpp>
+#include <types/inline_keyboard_markup.hpp>
+#include <types/input_message_content.hpp>
+#include <types/message_entity.hpp>
 
 namespace tg {
 

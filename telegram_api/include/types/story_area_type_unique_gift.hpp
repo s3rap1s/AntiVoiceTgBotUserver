@@ -1,12 +1,12 @@
 #pragma once
 
-#include "common.hpp"
+#include <types/common.hpp>
 
 namespace tg {
 
 struct StoryAreaTypeUniqueGift {
     String type;
-    Integer name;
+    String name;
 };
 
 StoryAreaTypeUniqueGift Parse(const Value& value, To<StoryAreaTypeUniqueGift>);

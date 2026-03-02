@@ -1,11 +1,11 @@
 #pragma once
 
-#include "callback_game.hpp"
-#include "common.hpp"
-#include "copy_text_button.hpp"
-#include "login_url.hpp"
-#include "switch_inline_query_chosen_chat.hpp"
-#include "web_app_info.hpp"
+#include <types/callback_game.hpp>
+#include <types/common.hpp>
+#include <types/copy_text_button.hpp>
+#include <types/login_url.hpp>
+#include <types/switch_inline_query_chosen_chat.hpp>
+#include <types/web_app_info.hpp>
 
 namespace tg {
 
@@ -21,7 +21,7 @@ struct InlineKeyboardButton {
     Optional<String> switch_inline_query_current_chat;
     Optional<SwitchInlineQueryChosenChat> switch_inline_query_chosen_chat;
     Optional<CopyTextButton> copy_text;
-    Optional<CallbackGame> callbac_game;
+    Optional<CallbackGame> callback_game;
     Optional<Boolean> pay;
 };
 
