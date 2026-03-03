@@ -15,7 +15,7 @@ BackgroundType Parse(const Value& value, To<BackgroundType>) {
     if (type == "wallpaper") return ParseComplex<BackgroundTypeWallpaper>(value);
     if (type == "pattern") return ParseComplex<BackgroundTypePattern>(value);
     if (type == "chat_theme") return ParseComplex<BackgroundTypeChatTheme>(value);
-    throw std::runtime_error("Unknown BackgroundType type: " + type);
+    throw ParseException("Unknown BackgroundType type: " + type);
 }
 
 void Serialize(const BackgroundType& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

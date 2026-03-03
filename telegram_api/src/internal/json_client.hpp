@@ -7,6 +7,8 @@
 #include <userver/clients/http/client.hpp>
 #include <userver/formats/json/value.hpp>
 
+#include <tg/errors.hpp>
+
 namespace tg::internal {
 
 class JsonClient final {

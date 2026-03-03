@@ -54,7 +54,7 @@ ChatFullInfo Parse(const Value& value, To<ChatFullInfo>) {
     obj.join_by_request = ParseComplex<OptionalTrue>(value["join_by_request"]);
     obj.description = ParseComplex<Optional<String>>(value["description"]);
     obj.invite_link = ParseComplex<Optional<String>>(value["invite_link"]);
-    obj.pinned_message = ParseComplex<Ptr<Message>>(value["pinned_message"]);
+    obj.pinned_message = ParseComplex<MessagePtr>(value["pinned_message"]);
     obj.permissions = ParseComplex<Optional<ChatPermissions>>(value["permissions"]);
     obj.accepted_gift_types = ParseComplex<Optional<AcceptedGiftTypes>>(value["accepted_gift_types"]);
     obj.can_send_paid_media = ParseComplex<OptionalTrue>(value["can_send_paid_media"]);

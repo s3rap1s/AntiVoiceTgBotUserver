@@ -7,6 +7,7 @@
 #include <userver/clients/http/client.hpp>
 #include <userver/formats/json/value.hpp>
 
+#include <tg/errors.hpp>
 #include <tg/types/accepted_gift_types.hpp>
 #include <tg/types/bot_command.hpp>
 #include <tg/types/bot_command_scope.hpp>

@@ -17,7 +17,7 @@ InputMedia Parse(const Value& value, To<InputMedia>) {
     if (type == "audio") return ParseComplex<InputMediaAudio>(value);
     if (type == "photo") return ParseComplex<InputMediaPhoto>(value);
     if (type == "video") return ParseComplex<InputMediaVideo>(value);
-    throw std::runtime_error("Unknown InputMedia type: " + type);
+    throw ParseException("Unknown InputMedia type: " + type);
 }
 
 void Serialize(const InputMedia& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

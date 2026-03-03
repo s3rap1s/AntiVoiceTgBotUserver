@@ -13,7 +13,7 @@ RevenueWithdrawalState Parse(const Value& value, To<RevenueWithdrawalState>) {
     if (type == "pending") return ParseComplex<RevenueWithdrawalStatePending>(value);
     if (type == "succeeded") return ParseComplex<RevenueWithdrawalStateSucceeded>(value);
     if (type == "failed") return ParseComplex<RevenueWithdrawalStateFailed>(value);
-    throw std::runtime_error("Unknown RevenueWithdrawalState type: " + type);
+    throw ParseException("Unknown RevenueWithdrawalState type: " + type);
 }
 
 void Serialize(const RevenueWithdrawalState& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

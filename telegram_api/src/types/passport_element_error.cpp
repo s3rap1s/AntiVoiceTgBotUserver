@@ -25,7 +25,7 @@ PassportElementError Parse(const Value& value, To<PassportElementError>) {
     if (source == "translation_file") return ParseComplex<PassportElementErrorTranslationFile>(value);
     if (source == "translation_files") return ParseComplex<PassportElementErrorTranslationFiles>(value);
     if (source == "unspecified") return ParseComplex<PassportElementErrorUnspecified>(value);
-    throw std::runtime_error("Unknown PassportElementError source: " + source);
+    throw ParseException("Unknown PassportElementError source: " + source);
 }
 
 void Serialize(const PassportElementError& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

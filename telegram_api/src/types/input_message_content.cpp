@@ -20,7 +20,7 @@ InputMessageContent Parse(const Value& value, To<InputMessageContent>) {
         return ParseComplex<InputVenueMessageContent>(value);
     if (internal::IsPresent(value["latitude"]) || internal::IsPresent(value["longitude"]))
         return ParseComplex<InputLocationMessageContent>(value);
-    throw std::runtime_error("Unknown InputMessageContent payload");
+    throw ParseException("Unknown InputMessageContent payload");
 }
 
 void Serialize(const InputMessageContent& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

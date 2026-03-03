@@ -39,7 +39,7 @@ inline void Set(ValueBuilder& builder, Integer value) { builder = value; }
 
 template <typename T>
 inline void Set(ValueBuilder& builder, const T& value) {
-    using U = tg::internal::remove_cvref_t<T>;
+    using U = tg::internal::normalized_t<T>;
 
     if constexpr (tg::internal::is_optional_true_v<U>) {
         if (value)
@@ -47,7 +47,7 @@ inline void Set(ValueBuilder& builder, const T& value) {
         else
             builder = ValueBuilder();  // null
 
-    } else if constexpr (tg::internal::is_optional_v<U>) {
+    } else if constexpr (tg::internal::OptionalLike<U>) {
         if (!value) {
             builder = ValueBuilder();  // null
             return;
@@ -55,7 +55,7 @@ inline void Set(ValueBuilder& builder, const T& value) {
         using Inner = tg::internal::optional_inner_t<U>;
         Set(builder, static_cast<const Inner&>(*value));
 
-    } else if constexpr (tg::internal::is_unique_ptr_v<U>) {
+    } else if constexpr (tg::internal::UniquePtrLike<U>) {
         if (!value) {
             builder = ValueBuilder();  // null
             return;
@@ -63,7 +63,7 @@ inline void Set(ValueBuilder& builder, const T& value) {
         using Inner = tg::internal::unique_ptr_inner_t<U>;
         Set(builder, static_cast<const Inner&>(*value));
 
-    } else if constexpr (tg::internal::is_vector_v<U>) {
+    } else if constexpr (tg::internal::VectorLike<U>) {
         using Item = tg::internal::vector_inner_t<U>;
         ValueBuilder array_builder(Type::kArray);
         for (const auto& item : value) {
@@ -73,58 +73,49 @@ inline void Set(ValueBuilder& builder, const T& value) {
         }
         builder = array_builder.ExtractValue();
 
-    } else if constexpr (tg::internal::is_variant_v<U>) {
+    } else if constexpr (tg::internal::VariantLike<U>) {
         std::visit([&](const auto& x) { Set(builder, x); }, value);
 
     } else if constexpr (HasSerialize<U>) {
         ValueBuilder object_builder(Type::kObject);
         Serialize(value, object_builder);
         builder = object_builder.ExtractValue();
+    } else {
+        static_assert(tg::internal::always_false_v<U>, "Unsupported type for tg::internal::Set");
     }
 }
 
 template <typename T>
+inline Json ToJsonValue(const T& value) {
+    ValueBuilder builder;
+    Set(builder, value);
+    return builder.ExtractValue();
+}
+
+template <typename T>
 inline void Push(ValueBuilder& array_builder, const T& value) {
-    ValueBuilder element_builder;
-    Set(element_builder, value);
-    array_builder.PushBack(element_builder.ExtractValue());
+    array_builder.PushBack(ToJsonValue(value));
 }
 
 template <typename T>
 inline void Put(ValueBuilder& builder, std::string_view key, const T& value) {
-    using U = tg::internal::remove_cvref_t<T>;
+    using U = tg::internal::normalized_t<T>;
+    const auto key_string = tg::internal::to_string(key);
 
     if constexpr (tg::internal::is_optional_true_v<U>) {
         if (!value) return;
-        builder[tg::internal::to_string(key)] = true;
+        builder[key_string] = true;
 
-    } else if constexpr (tg::internal::is_optional_v<U>) {
+    } else if constexpr (tg::internal::OptionalLike<U>) {
         if (!value) return;
         Put(builder, key, *value);
 
-    } else if constexpr (tg::internal::is_unique_ptr_v<U>) {
+    } else if constexpr (tg::internal::UniquePtrLike<U>) {
         if (!value) return;
         Put(builder, key, *value);
-
-    } else if constexpr (tg::internal::is_json_v<U>) {
-        builder[tg::internal::to_string(key)] = value;
-
-    } else if constexpr (std::is_same_v<U, String>) {
-        builder[tg::internal::to_string(key)] = value;
-
-    } else if constexpr (std::is_same_v<U, Boolean>) {
-        builder[tg::internal::to_string(key)] = value;
-
-    } else if constexpr (std::is_same_v<U, Float>) {
-        builder[tg::internal::to_string(key)] = value;
-
-    } else if constexpr (std::is_same_v<U, Integer>) {
-        builder[tg::internal::to_string(key)] = value;
 
     } else {
-        ValueBuilder tmp;
-        Set(tmp, value);
-        builder[tg::internal::to_string(key)] = tmp.ExtractValue();
+        builder[key_string] = ToJsonValue(value);
     }
 }
 

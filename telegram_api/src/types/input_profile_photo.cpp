@@ -10,7 +10,7 @@ namespace tg {
 InputProfilePhoto Parse(const Value& value, To<InputProfilePhoto>) {
     if (internal::IsPresent(value["photo"])) return ParseComplex<InputProfilePhotoStatic>(value);
     if (internal::IsPresent(value["animation"])) return ParseComplex<InputProfilePhotoAnimated>(value);
-    throw std::runtime_error("Unknown InputProfilePhoto payload");
+    throw ParseException("Unknown InputProfilePhoto payload");
 }
 
 void Serialize(const InputProfilePhoto& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

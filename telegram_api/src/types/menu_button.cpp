@@ -13,7 +13,7 @@ MenuButton Parse(const Value& value, To<MenuButton>) {
     if (type == "commands") return ParseComplex<MenuButtonCommands>(value);
     if (type == "web_app") return ParseComplex<MenuButtonWebApp>(value);
     if (type == "default") return ParseComplex<MenuButtonDefault>(value);
-    throw std::runtime_error("Unknown MenuButton type: " + type);
+    throw ParseException("Unknown MenuButton type: " + type);
 }
 
 void Serialize(const MenuButton& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

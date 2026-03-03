@@ -13,7 +13,7 @@ ReactionType Parse(const Value& value, To<ReactionType>) {
     if (type == "emoji") return ParseComplex<ReactionTypeEmoji>(value);
     if (type == "custom_emoji") return ParseComplex<ReactionTypeCustomEmoji>(value);
     if (type == "paid") return ParseComplex<ReactionTypePaid>(value);
-    throw std::runtime_error("Unknown ReactionType type: " + type);
+    throw ParseException("Unknown ReactionType type: " + type);
 }
 
 void Serialize(const ReactionType& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

@@ -19,7 +19,7 @@ ChatMember Parse(const Value& value, To<ChatMember>) {
     if (status == "restricted") return ParseComplex<ChatMemberRestricted>(value);
     if (status == "left") return ParseComplex<ChatMemberLeft>(value);
     if (status == "kicked") return ParseComplex<ChatMemberBanned>(value);
-    throw std::runtime_error("Unknown ChatMember status: " + status);
+    throw ParseException("Unknown ChatMember status: " + status);
 }
 
 void Serialize(const ChatMember& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

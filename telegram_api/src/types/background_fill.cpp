@@ -13,7 +13,7 @@ BackgroundFill Parse(const Value& value, To<BackgroundFill>) {
     if (type == "solid") return ParseComplex<BackgroundFillSolid>(value);
     if (type == "gradient") return ParseComplex<BackgroundFillGradient>(value);
     if (type == "freeform_gradient") return ParseComplex<BackgroundFillFreeformGradient>(value);
-    throw std::runtime_error("Unknown BackgroundFill type: " + type);
+    throw ParseException("Unknown BackgroundFill type: " + type);
 }
 
 void Serialize(const BackgroundFill& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

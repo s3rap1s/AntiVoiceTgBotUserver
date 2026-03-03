@@ -21,7 +21,7 @@ BotCommandScope Parse(const Value& value, To<BotCommandScope>) {
     if (type == "chat") return ParseComplex<BotCommandScopeChat>(value);
     if (type == "chat_administrators") return ParseComplex<BotCommandScopeChatAdministrators>(value);
     if (type == "chat_member") return ParseComplex<BotCommandScopeChatMember>(value);
-    throw std::runtime_error("Unknown BotCommandScope type: " + type);
+    throw ParseException("Unknown BotCommandScope type: " + type);
 }
 
 void Serialize(const BotCommandScope& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

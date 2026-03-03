@@ -10,7 +10,7 @@ namespace tg {
 InputStoryContent Parse(const Value& value, To<InputStoryContent>) {
     if (internal::IsPresent(value["photo"])) return ParseComplex<InputStoryContentPhoto>(value);
     if (internal::IsPresent(value["video"])) return ParseComplex<InputStoryContentVideo>(value);
-    throw std::runtime_error("Unknown InputStoryContent payload");
+    throw ParseException("Unknown InputStoryContent payload");
 }
 
 void Serialize(const InputStoryContent& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

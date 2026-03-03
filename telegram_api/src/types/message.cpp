@@ -88,7 +88,7 @@ Message Parse(const Value& value, To<Message>) {
     obj.forward_origin = ParseComplex<Optional<MessageOrigin>>(value["forward_origin"]);
     obj.is_topic_message = ParseComplex<OptionalTrue>(value["is_topic_message"]);
     obj.is_automatic_forward = ParseComplex<OptionalTrue>(value["is_automatic_forward"]);
-    obj.reply_to_message = ParseComplex<Ptr<Message>>(value["reply_to_message"]);
+    obj.reply_to_message = ParseComplex<MessagePtr>(value["reply_to_message"]);
     obj.external_reply = ParseComplex<Optional<ExternalReplyInfo>>(value["external_reply"]);
     obj.quote = ParseComplex<Optional<TextQuote>>(value["quote"]);
     obj.reply_to_story = ParseComplex<Optional<Story>>(value["reply_to_story"]);

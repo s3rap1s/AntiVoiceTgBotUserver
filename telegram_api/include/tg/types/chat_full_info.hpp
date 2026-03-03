@@ -51,7 +51,7 @@ struct ChatFullInfo {
     OptionalTrue join_by_request;
     Optional<String> description;
     Optional<String> invite_link;
-    Ptr<Message> pinned_message;
+    MessagePtr pinned_message;
     Optional<ChatPermissions> permissions;
     Optional<AcceptedGiftTypes> accepted_gift_types;
     OptionalTrue can_send_paid_media;

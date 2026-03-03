@@ -66,7 +66,7 @@ struct Message {
     Optional<MessageOrigin> forward_origin;
     OptionalTrue is_topic_message;
     OptionalTrue is_automatic_forward;
-    Ptr<Message> reply_to_message;
+    MessagePtr reply_to_message;
     Optional<ExternalReplyInfo> external_reply;
     Optional<TextQuote> quote;
     Optional<Story> reply_to_story;

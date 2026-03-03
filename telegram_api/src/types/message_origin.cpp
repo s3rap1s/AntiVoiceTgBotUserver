@@ -15,7 +15,7 @@ MessageOrigin Parse(const Value& value, To<MessageOrigin>) {
     if (type == "hidden_user") return ParseComplex<MessageOriginHiddenUser>(value);
     if (type == "chat") return ParseComplex<MessageOriginChat>(value);
     if (type == "channel") return ParseComplex<MessageOriginChannel>(value);
-    throw std::runtime_error("Unknown MessageOrigin type: " + type);
+    throw ParseException("Unknown MessageOrigin type: " + type);
 }
 
 void Serialize(const MessageOrigin& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

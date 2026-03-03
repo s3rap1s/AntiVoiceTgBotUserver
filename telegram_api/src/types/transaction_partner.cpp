@@ -21,7 +21,7 @@ TransactionPartner Parse(const Value& value, To<TransactionPartner>) {
     if (type == "telegram_ads") return ParseComplex<TransactionPartnerTelegramAds>(value);
     if (type == "telegram_api") return ParseComplex<TransactionPartnerTelegramApi>(value);
     if (type == "other") return ParseComplex<TransactionPartnerOther>(value);
-    throw std::runtime_error("Unknown TransactionPartner type: " + type);
+    throw ParseException("Unknown TransactionPartner type: " + type);
 }
 
 void Serialize(const TransactionPartner& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

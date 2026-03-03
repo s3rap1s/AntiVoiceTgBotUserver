@@ -13,7 +13,7 @@ ChatBoostSource Parse(const Value& value, To<ChatBoostSource>) {
     if (source == "premium") return ParseComplex<ChatBoostSourcePremium>(value);
     if (source == "gift_code") return ParseComplex<ChatBoostSourceGiftCode>(value);
     if (source == "giveaway") return ParseComplex<ChatBoostSourceGiveaway>(value);
-    throw std::runtime_error("Unknown ChatBoostSource source: " + source);
+    throw ParseException("Unknown ChatBoostSource source: " + source);
 }
 
 void Serialize(const ChatBoostSource& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

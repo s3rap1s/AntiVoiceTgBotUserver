@@ -10,7 +10,7 @@ Array<Update> BotApi::GetUpdates(Optional<Integer> offset, Optional<Integer> lim
     auto builder = internal::MakeObject();
     internal::Put(builder, "offset", offset);
     internal::Put(builder, "limit", limit);
-    internal::Put(builder, "timeout", timeout);
+    if (timeout && *timeout > 0) internal::Put(builder, "timeout", timeout);
     internal::Put(builder, "allowed_updates", allowed_updates);
 
     const auto http_timeout =

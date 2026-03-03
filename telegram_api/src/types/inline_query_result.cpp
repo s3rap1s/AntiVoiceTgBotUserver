@@ -61,7 +61,7 @@ InlineQueryResult Parse(const Value& value, To<InlineQueryResult>) {
     if (type == "game") return ParseComplex<InlineQueryResultGame>(value);
     if (type == "location") return ParseComplex<InlineQueryResultLocation>(value);
     if (type == "venue") return ParseComplex<InlineQueryResultVenue>(value);
-    throw std::runtime_error("Unknown InlineQueryResult type: " + type);
+    throw ParseException("Unknown InlineQueryResult type: " + type);
 }
 
 void Serialize(const InlineQueryResult& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

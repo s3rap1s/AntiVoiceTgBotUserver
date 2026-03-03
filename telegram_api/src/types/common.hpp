@@ -9,6 +9,7 @@
 #include <userver/formats/parse/to.hpp>
 #include <variant>
 
+#include <tg/errors.hpp>
 #include <tg/types/common.hpp>
 
 #include "../internal/type_traits.hpp"
@@ -29,7 +30,7 @@ inline bool IsPresent(const Value& value) { return !value.IsMissing() && !value.
 
 template <typename T>
 bool MatchesJsonType(const Value& value) {
-    using U = std::remove_cv_t<T>;
+    using U = std::remove_cvref_t<T>;
 
     if constexpr (std::is_same_v<U, std::string>) {
         return value.IsString();
@@ -47,7 +48,7 @@ bool MatchesJsonType(const Value& value) {
 template <typename Variant, std::size_t I = 0>
 Variant ParseTrivialVariant(const Value& value) {
     if constexpr (I >= std::variant_size_v<Variant>) {
-        throw std::runtime_error("No matching trivial variant alternative for JSON value");
+        throw ParseException("No matching trivial variant alternative for JSON value");
     } else {
         using Alt = std::variant_alternative_t<I, Variant>;
         if (MatchesJsonType<Alt>(value)) {
@@ -71,8 +72,8 @@ template <typename T>
 Optional<T> ParseOptional(const Value& value) {
     if (!internal::IsPresent(value)) return std::nullopt;
 
-    if constexpr (internal::is_vector_v<T>) {
-        using Item = typename T::value_type;
+    if constexpr (internal::VectorLike<T>) {
+        using Item = internal::vector_inner_t<T>;
         return ParseArray<Item>(value);
     } else {
         return ParseComplex<T>(value);
@@ -90,7 +91,7 @@ UPtr ParseUniquePtr(const Value& value) {
 inline OptionalTrue ParseOptionalTrue(const Value& value) {
     if (!internal::IsPresent(value)) return std::nullopt;
     const bool b = value.As<bool>();
-    if (!b) throw std::runtime_error("OptionalTrue present but false");
+    if (!b) throw ParseException("OptionalTrue present but false");
     return std::monostate{};
 }
 
@@ -99,18 +100,18 @@ T ParseComplex(const Value& value) {
     if constexpr (internal::is_optional_true_v<T>) {
         return ParseOptionalTrue(value);
 
-    } else if constexpr (internal::is_optional_v<T>) {
+    } else if constexpr (internal::OptionalLike<T>) {
         using U = internal::optional_inner_t<T>;
         return ParseOptional<U>(value);
 
-    } else if constexpr (internal::is_unique_ptr_v<T>) {
+    } else if constexpr (internal::UniquePtrLike<T>) {
         return ParseUniquePtr<T>(value);
 
-    } else if constexpr (internal::is_vector_v<T>) {
-        using U = typename T::value_type;
+    } else if constexpr (internal::VectorLike<T>) {
+        using U = internal::vector_inner_t<T>;
         return ParseArray<U>(value);
 
-    } else if constexpr (internal::is_variant_v<T>) {
+    } else if constexpr (internal::VariantLike<T>) {
         if constexpr (internal::is_trivial_variant_v<T>) {
             return internal::ParseTrivialVariant<T>(value);
         } else {

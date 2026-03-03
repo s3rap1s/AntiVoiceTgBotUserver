@@ -13,7 +13,7 @@ PaidMedia Parse(const Value& value, To<PaidMedia>) {
     if (type == "preview") return ParseComplex<PaidMediaPreview>(value);
     if (type == "photo") return ParseComplex<PaidMediaPhoto>(value);
     if (type == "video") return ParseComplex<PaidMediaVideo>(value);
-    throw std::runtime_error("Unknown PaidMedia type: " + type);
+    throw ParseException("Unknown PaidMedia type: " + type);
 }
 
 void Serialize(const PaidMedia& obj, ValueBuilder& builder) { internal::Set(builder, obj); }

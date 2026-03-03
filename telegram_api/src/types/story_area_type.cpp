@@ -17,7 +17,7 @@ StoryAreaType Parse(const Value& value, To<StoryAreaType>) {
     if (type == "link") return ParseComplex<StoryAreaTypeLink>(value);
     if (type == "weather") return ParseComplex<StoryAreaTypeWeather>(value);
     if (type == "unique_gift") return ParseComplex<StoryAreaTypeUniqueGift>(value);
-    throw std::runtime_error("Unknown StoryAreaType type: " + type);
+    throw ParseException("Unknown StoryAreaType type: " + type);
 }
 
 void Serialize(const StoryAreaType& obj, ValueBuilder& builder) { internal::Set(builder, obj); }
