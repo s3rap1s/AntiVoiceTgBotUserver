@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/mask_position.hpp>
 
@@ -14,5 +16,7 @@ struct InputSticker {
 };
 
 InputSticker Parse(const Value& value, To<InputSticker>);
+
+void Serialize(const InputSticker& obj, ValueBuilder& builder);
 
 }  // namespace tg

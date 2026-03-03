@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -11,5 +13,7 @@ struct GiftBackground {
 };
 
 GiftBackground Parse(const Value& value, To<GiftBackground>);
+
+void Serialize(const GiftBackground& obj, ValueBuilder& builder);
 
 }  // namespace tg

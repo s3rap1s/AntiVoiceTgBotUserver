@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/input_checklist_task.hpp>
 #include <tg/types/message_entity.hpp>
@@ -16,5 +18,7 @@ struct InputChecklist {
 };
 
 InputChecklist Parse(const Value& value, To<InputChecklist>);
+
+void Serialize(const InputChecklist& obj, ValueBuilder& builder);
 
 }  // namespace tg

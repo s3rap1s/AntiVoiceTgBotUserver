@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/sticker.hpp>
 
@@ -12,5 +14,7 @@ struct BusinessIntro {
 };
 
 BusinessIntro Parse(const Value& value, To<BusinessIntro>);
+
+void Serialize(const BusinessIntro& obj, ValueBuilder& builder);
 
 }  // namespace tg

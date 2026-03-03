@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/location.hpp>
 #include <tg/types/user.hpp>
@@ -15,5 +17,7 @@ struct ChosenInlineResult {
 };
 
 ChosenInlineResult Parse(const Value& value, To<ChosenInlineResult>);
+
+void Serialize(const ChosenInlineResult& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/message_entity.hpp>
 
@@ -16,5 +18,7 @@ struct InputMediaDocument {
 };
 
 InputMediaDocument Parse(const Value& value, To<InputMediaDocument>);
+
+void Serialize(const InputMediaDocument& obj, ValueBuilder& builder);
 
 }  // namespace tg

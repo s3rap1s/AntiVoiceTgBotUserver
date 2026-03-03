@@ -5,15 +5,14 @@
 #include <userver/server/handlers/ping.hpp>
 #include <userver/utils/daemon_run.hpp>
 
-#include "telegram/log_updates_component.hpp"
+#include "telegram/bot.hpp"
 
 int main(int argc, char* argv[]) {
-    auto components =
-        userver::components::MinimalServerComponentList()
-            .Append<userver::server::handlers::Ping>()
-            .AppendComponentList(userver::clients::http::ComponentList())
-            .Append<userver::clients::dns::Component>()
-            .Append<tg_bot::TelegramBotComponent>();
+    auto components = userver::components::MinimalServerComponentList()
+                          .Append<userver::server::handlers::Ping>()
+                          .AppendComponentList(userver::clients::http::ComponentList())
+                          .Append<userver::clients::dns::Component>()
+                          .Append<tg_bot::TelegramBotComponent>();
 
     return userver::utils::DaemonMain(argc, argv, components);
 }

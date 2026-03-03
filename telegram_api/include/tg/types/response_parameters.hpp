@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -10,5 +12,7 @@ struct ResponseParameters {
 };
 
 ResponseParameters Parse(const Value& value, To<ResponseParameters>);
+
+void Serialize(const ResponseParameters& obj, ValueBuilder& builder);
 
 }  // namespace tg

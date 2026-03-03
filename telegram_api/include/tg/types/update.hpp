@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/business_connection.hpp>
 #include <tg/types/business_messages_deleted.hpp>
 #include <tg/types/chat_boost_removed.hpp>
@@ -22,7 +24,7 @@ namespace tg {
 
 struct Update {
     Integer update_id;
-    Optional<Message> message;
+    MessagePtr message;
     Optional<Message> edited_message;
     Optional<Message> channel_post;
     Optional<Message> edited_channel_post;
@@ -47,5 +49,7 @@ struct Update {
 };
 
 Update Parse(const Value& value, To<Update>);
+
+void Serialize(const Update& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -14,5 +16,7 @@ struct UniqueGiftColors {
 };
 
 UniqueGiftColors Parse(const Value& value, To<UniqueGiftColors>);
+
+void Serialize(const UniqueGiftColors& obj, ValueBuilder& builder);
 
 }  // namespace tg

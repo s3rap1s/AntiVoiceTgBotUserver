@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/keyboard_button_poll_type.hpp>
 #include <tg/types/keyboard_button_request_chat.hpp>
@@ -21,5 +23,7 @@ struct KeyboardButton {
 };
 
 KeyboardButton Parse(const Value& value, To<KeyboardButton>);
+
+void Serialize(const KeyboardButton& obj, ValueBuilder& builder);
 
 }  // namespace tg

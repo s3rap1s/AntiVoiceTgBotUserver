@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/photo_size.hpp>
 
@@ -18,5 +20,7 @@ struct Animation {
 };
 
 Animation Parse(const Value& value, To<Animation>);
+
+void Serialize(const Animation& obj, ValueBuilder& builder);
 
 }  // namespace tg

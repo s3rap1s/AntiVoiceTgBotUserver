@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/inline_query_result_article.hpp>
 #include <tg/types/inline_query_result_audio.hpp>
@@ -25,17 +27,15 @@
 namespace tg {
 
 using InlineQueryResult =
-    OneOf<InlineQueryResultCachedAudio, InlineQueryResultCachedDocument,
-          InlineQueryResultCachedGif, InlineQueryResultCachedMpeg4Gif,
-          InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker,
-          InlineQueryResultCachedVideo, InlineQueryResultCachedVoice,
-          InlineQueryResultArticle, InlineQueryResultAudio,
-          InlineQueryResultContact, InlineQueryResultGame,
-          InlineQueryResultDocument, InlineQueryResultGif,
-          InlineQueryResultLocation, InlineQueryResultMpeg4Gif,
-          InlineQueryResultPhoto, InlineQueryResultVenue,
+    OneOf<InlineQueryResultCachedAudio, InlineQueryResultCachedDocument, InlineQueryResultCachedGif,
+          InlineQueryResultCachedMpeg4Gif, InlineQueryResultCachedPhoto, InlineQueryResultCachedSticker,
+          InlineQueryResultCachedVideo, InlineQueryResultCachedVoice, InlineQueryResultArticle, InlineQueryResultAudio,
+          InlineQueryResultContact, InlineQueryResultGame, InlineQueryResultDocument, InlineQueryResultGif,
+          InlineQueryResultLocation, InlineQueryResultMpeg4Gif, InlineQueryResultPhoto, InlineQueryResultVenue,
           InlineQueryResultVideo, InlineQueryResultVoice>;
 
 InlineQueryResult Parse(const Value& value, To<InlineQueryResult>);
+
+void Serialize(const InlineQueryResult& obj, ValueBuilder& builder);
 
 }  // namespace tg

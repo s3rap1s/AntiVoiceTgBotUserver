@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/user.hpp>
 
@@ -16,5 +18,7 @@ struct MessageEntity {
 };
 
 MessageEntity Parse(const Value& value, To<MessageEntity>);
+
+void Serialize(const MessageEntity& obj, ValueBuilder& builder);
 
 }  // namespace tg

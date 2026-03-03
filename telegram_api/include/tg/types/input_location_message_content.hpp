@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -13,7 +15,8 @@ struct InputLocationMessageContent {
     Optional<Integer> proximity_alert_radius;
 };
 
-InputLocationMessageContent Parse(const Value& value,
-                                  To<InputLocationMessageContent>);
+InputLocationMessageContent Parse(const Value& value, To<InputLocationMessageContent>);
+
+void Serialize(const InputLocationMessageContent& obj, ValueBuilder& builder);
 
 }  // namespace tg

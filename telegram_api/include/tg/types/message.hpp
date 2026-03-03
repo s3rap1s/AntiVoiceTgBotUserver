@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/chat.hpp>
 #include <tg/types/chat_background.hpp>
 #include <tg/types/chat_boost_added.hpp>
@@ -159,5 +161,7 @@ struct Message {
 };
 
 Message Parse(const Value& value, To<Message>);
+
+void Serialize(const Message& obj, ValueBuilder& builder);
 
 }  // namespace tg

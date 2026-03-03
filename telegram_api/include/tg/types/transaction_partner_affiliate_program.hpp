@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/user.hpp>
 
@@ -11,7 +13,8 @@ struct TransactionPartnerAffiliateProgram {
     Integer commission_per_mille;
 };
 
-TransactionPartnerAffiliateProgram Parse(
-    const Value& value, To<TransactionPartnerAffiliateProgram>);
+TransactionPartnerAffiliateProgram Parse(const Value& value, To<TransactionPartnerAffiliateProgram>);
+
+void Serialize(const TransactionPartnerAffiliateProgram& obj, ValueBuilder& builder);
 
 }  // namespace tg

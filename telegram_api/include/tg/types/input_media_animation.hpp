@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/message_entity.hpp>
 
@@ -20,5 +22,7 @@ struct InputMediaAnimation {
 };
 
 InputMediaAnimation Parse(const Value& value, To<InputMediaAnimation>);
+
+void Serialize(const InputMediaAnimation& obj, ValueBuilder& builder);
 
 }  // namespace tg

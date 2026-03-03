@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/passport_element_error_data_field.hpp>
 #include <tg/types/passport_element_error_file.hpp>
@@ -14,13 +16,12 @@
 namespace tg {
 
 using PassportElementError =
-    OneOf<PassportElementErrorDataField, PassportElementErrorFrontSide,
-          PassportElementErrorReverseSide, PassportElementErrorSelfie,
-          PassportElementErrorFile, PassportElementErrorFiles,
-          PassportElementErrorTranslationFile,
-          PassportElementErrorTranslationFiles,
-          PassportElementErrorUnspecified>;
+    OneOf<PassportElementErrorDataField, PassportElementErrorFrontSide, PassportElementErrorReverseSide,
+          PassportElementErrorSelfie, PassportElementErrorFile, PassportElementErrorFiles,
+          PassportElementErrorTranslationFile, PassportElementErrorTranslationFiles, PassportElementErrorUnspecified>;
 
 PassportElementError Parse(const Value& value, To<PassportElementError>);
+
+void Serialize(const PassportElementError& obj, ValueBuilder& builder);
 
 }  // namespace tg

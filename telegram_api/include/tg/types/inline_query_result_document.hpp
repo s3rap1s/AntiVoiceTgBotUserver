@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/inline_keyboard_markup.hpp>
 #include <tg/types/input_message_content.hpp>
@@ -23,7 +25,8 @@ struct InlineQueryResultDocument {
     Optional<Integer> thumbnail_height;
 };
 
-InlineQueryResultDocument Parse(const Value& value,
-                                To<InlineQueryResultDocument>);
+InlineQueryResultDocument Parse(const Value& value, To<InlineQueryResultDocument>);
+
+void Serialize(const InlineQueryResultDocument& obj, ValueBuilder& builder);
 
 }  // namespace tg

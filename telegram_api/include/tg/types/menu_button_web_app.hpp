@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/web_app_info.hpp>
 
@@ -12,5 +14,7 @@ struct MenuButtonWebApp {
 };
 
 MenuButtonWebApp Parse(const Value& value, To<MenuButtonWebApp>);
+
+void Serialize(const MenuButtonWebApp& obj, ValueBuilder& builder);
 
 }  // namespace tg

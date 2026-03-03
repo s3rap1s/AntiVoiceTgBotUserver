@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include "labeled_price.hpp"
 
@@ -12,5 +14,7 @@ struct ShippingOption {
 };
 
 ShippingOption Parse(const Value& value, To<ShippingOption>);
+
+void Serialize(const ShippingOption& obj, ValueBuilder& builder);
 
 }  // namespace tg

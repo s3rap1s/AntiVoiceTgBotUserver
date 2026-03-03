@@ -16,8 +16,7 @@ struct ApiError final {
 
 class ApiException final : public std::runtime_error {
    public:
-    explicit ApiException(ApiError err)
-        : std::runtime_error(MakeMessage(err)), error(std::move(err)) {}
+    explicit ApiException(ApiError err) : std::runtime_error(MakeMessage(err)), error(std::move(err)) {}
 
     ApiError error;
 

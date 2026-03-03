@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/menu_button_commands.hpp>
 #include <tg/types/menu_button_default.hpp>
@@ -7,9 +9,10 @@
 
 namespace tg {
 
-using MenuButton =
-    OneOf<MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault>;
+using MenuButton = OneOf<MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault>;
 
 MenuButton Parse(const Value& value, To<MenuButton>);
+
+void Serialize(const MenuButton& obj, ValueBuilder& builder);
 
 }  // namespace tg

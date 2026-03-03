@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/business_opening_hours_interval.hpp>
 #include <tg/types/common.hpp>
 
@@ -11,5 +13,7 @@ struct BusinessOpeningHours {
 };
 
 BusinessOpeningHours Parse(const Value& value, To<BusinessOpeningHours>);
+
+void Serialize(const BusinessOpeningHours& obj, ValueBuilder& builder);
 
 }  // namespace tg

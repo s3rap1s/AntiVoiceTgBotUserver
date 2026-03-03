@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/maybe_inaccessible_message.hpp>
 #include <tg/types/user.hpp>
@@ -17,5 +19,7 @@ struct CallbackQuery {
 };
 
 CallbackQuery Parse(const Value& value, To<CallbackQuery>);
+
+void Serialize(const CallbackQuery& obj, ValueBuilder& builder);
 
 }  // namespace tg

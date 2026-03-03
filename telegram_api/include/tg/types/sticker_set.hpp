@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/photo_size.hpp>
 #include <tg/types/sticker.hpp>
@@ -15,5 +17,7 @@ struct StickerSet {
 };
 
 StickerSet Parse(const Value& value, To<StickerSet>);
+
+void Serialize(const StickerSet& obj, ValueBuilder& builder);
 
 }  // namespace tg

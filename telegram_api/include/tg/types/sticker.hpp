@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/file.hpp>
 #include <tg/types/mask_position.hpp>
@@ -26,5 +28,7 @@ struct Sticker {
 };
 
 Sticker Parse(const Value& value, To<Sticker>);
+
+void Serialize(const Sticker& obj, ValueBuilder& builder);
 
 }  // namespace tg

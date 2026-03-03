@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/keyboard_button.hpp>
 
@@ -15,5 +17,7 @@ struct ReplyKeyboardMarkup {
 };
 
 ReplyKeyboardMarkup Parse(const Value& value, To<ReplyKeyboardMarkup>);
+
+void Serialize(const ReplyKeyboardMarkup& obj, ValueBuilder& builder);
 
 }  // namespace tg

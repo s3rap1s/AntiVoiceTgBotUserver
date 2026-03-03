@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/business_bot_rights.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/user.hpp>
@@ -16,5 +18,7 @@ struct BusinessConnection {
 };
 
 BusinessConnection Parse(const Value& value, To<BusinessConnection>);
+
+void Serialize(const BusinessConnection& obj, ValueBuilder& builder);
 
 }  // namespace tg

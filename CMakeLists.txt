@@ -26,13 +26,15 @@ userver_setup_environment()
 include_directories(src)
 
 file(GLOB TELEGRAM_API_SOURCES CONFIGURE_DEPENDS
-    telegram_api/src/parse/*.cpp
+    telegram_api/src/internal/json_client.cpp
     telegram_api/src/bot_api.cpp
+    telegram_api/src/types/*.cpp
+    telegram_api/src/methods/*.cpp
 )
 
 add_library(
     ${PROJECT_NAME}_objs OBJECT
-    src/telegram/log_updates_component.cpp
+    src/telegram/bot.cpp
     ${TELEGRAM_API_SOURCES}
 )
 

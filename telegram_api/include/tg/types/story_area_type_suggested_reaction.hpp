@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include "reaction_type.hpp"
 
@@ -12,7 +14,8 @@ struct StoryAreaTypeSuggestedReaction {
     Optional<Boolean> is_flipped;
 };
 
-StoryAreaTypeSuggestedReaction Parse(const Value& value,
-                                     To<StoryAreaTypeSuggestedReaction>);
+StoryAreaTypeSuggestedReaction Parse(const Value& value, To<StoryAreaTypeSuggestedReaction>);
+
+void Serialize(const StoryAreaTypeSuggestedReaction& obj, ValueBuilder& builder);
 
 }  // namespace tg

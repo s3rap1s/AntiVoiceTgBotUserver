@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/chat_administrator_rights.hpp>
 #include <tg/types/common.hpp>
 
@@ -19,7 +21,8 @@ struct KeyboardButtonRequestChat {
     Optional<Boolean> request_photo;
 };
 
-KeyboardButtonRequestChat Parse(const Value& value,
-                                To<KeyboardButtonRequestChat>);
+KeyboardButtonRequestChat Parse(const Value& value, To<KeyboardButtonRequestChat>);
+
+void Serialize(const KeyboardButtonRequestChat& obj, ValueBuilder& builder);
 
 }  // namespace tg

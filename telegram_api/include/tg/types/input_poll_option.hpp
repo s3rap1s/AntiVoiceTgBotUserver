@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/message_entity.hpp>
 
@@ -12,5 +14,7 @@ struct InputPollOption {
 };
 
 InputPollOption Parse(const Value& value, To<InputPollOption>);
+
+void Serialize(const InputPollOption& obj, ValueBuilder& builder);
 
 }  // namespace tg

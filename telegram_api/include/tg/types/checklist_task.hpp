@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/chat.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/message_entity.hpp>
@@ -17,5 +19,7 @@ struct ChecklistTask {
 };
 
 ChecklistTask Parse(const Value& value, To<ChecklistTask>);
+
+void Serialize(const ChecklistTask& obj, ValueBuilder& builder);
 
 }  // namespace tg

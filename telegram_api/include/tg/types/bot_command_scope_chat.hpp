@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -10,5 +12,7 @@ struct BotCommandScopeChat {
 };
 
 BotCommandScopeChat Parse(const Value& value, To<BotCommandScopeChat>);
+
+void Serialize(const BotCommandScopeChat& obj, ValueBuilder& builder);
 
 }  // namespace tg

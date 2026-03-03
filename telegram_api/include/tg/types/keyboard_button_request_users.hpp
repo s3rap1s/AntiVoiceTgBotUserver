@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -14,7 +16,8 @@ struct KeyboardButtonRequestUsers {
     Optional<Boolean> request_photo;
 };
 
-KeyboardButtonRequestUsers Parse(const Value& value,
-                                 To<KeyboardButtonRequestUsers>);
+KeyboardButtonRequestUsers Parse(const Value& value, To<KeyboardButtonRequestUsers>);
+
+void Serialize(const KeyboardButtonRequestUsers& obj, ValueBuilder& builder);
 
 }  // namespace tg

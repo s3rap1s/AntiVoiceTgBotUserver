@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/inline_keyboard_markup.hpp>
 #include <tg/types/input_message_content.hpp>
@@ -20,5 +22,7 @@ struct InlineQueryResultVoice {
 };
 
 InlineQueryResultVoice Parse(const Value& value, To<InlineQueryResultVoice>);
+
+void Serialize(const InlineQueryResultVoice& obj, ValueBuilder& builder);
 
 }  // namespace tg

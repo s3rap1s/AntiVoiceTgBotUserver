@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/callback_game.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/copy_text_button.hpp>
@@ -26,5 +28,7 @@ struct InlineKeyboardButton {
 };
 
 InlineKeyboardButton Parse(const Value& value, To<InlineKeyboardButton>);
+
+void Serialize(const InlineKeyboardButton& obj, ValueBuilder& builder);
 
 }  // namespace tg

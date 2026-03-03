@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -11,5 +13,7 @@ struct WriteAccessAllowed {
 };
 
 WriteAccessAllowed Parse(const Value& value, To<WriteAccessAllowed>);
+
+void Serialize(const WriteAccessAllowed& obj, ValueBuilder& builder);
 
 }  // namespace tg

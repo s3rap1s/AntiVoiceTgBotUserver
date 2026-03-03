@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -11,7 +13,8 @@ struct PassportElementErrorFrontSide {
     String message;
 };
 
-PassportElementErrorFrontSide Parse(const Value& value,
-                                    To<PassportElementErrorFrontSide>);
+PassportElementErrorFrontSide Parse(const Value& value, To<PassportElementErrorFrontSide>);
+
+void Serialize(const PassportElementErrorFrontSide& obj, ValueBuilder& builder);
 
 }  // namespace tg

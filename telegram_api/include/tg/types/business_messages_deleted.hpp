@@ -1,7 +1,9 @@
 #pragma once
 
-#include <tg/types/common.hpp>
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/chat.hpp>
+#include <tg/types/common.hpp>
 
 namespace tg {
 
@@ -12,5 +14,7 @@ struct BusinessMessagesDeleted {
 };
 
 BusinessMessagesDeleted Parse(const Value& value, To<BusinessMessagesDeleted>);
+
+void Serialize(const BusinessMessagesDeleted& obj, ValueBuilder& builder);
 
 }  // namespace tg

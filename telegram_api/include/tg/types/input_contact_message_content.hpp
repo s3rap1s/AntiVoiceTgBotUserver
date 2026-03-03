@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -11,7 +13,8 @@ struct InputContactMessageContent {
     Optional<String> vcard;
 };
 
-InputContactMessageContent Parse(const Value& value,
-                                 To<InputContactMessageContent>);
+InputContactMessageContent Parse(const Value& value, To<InputContactMessageContent>);
+
+void Serialize(const InputContactMessageContent& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/accepted_gift_types.hpp>
 #include <tg/types/birthdate.hpp>
 #include <tg/types/business_intro.hpp>
@@ -72,4 +74,6 @@ struct ChatFullInfo {
 };
 
 ChatFullInfo Parse(const Value& value, To<ChatFullInfo>);
+void Serialize(const ChatFullInfo& obj, ValueBuilder& builder);
+
 }  // namespace tg

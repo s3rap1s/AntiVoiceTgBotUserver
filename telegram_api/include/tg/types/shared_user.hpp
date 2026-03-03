@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/photo_size.hpp>
 
@@ -14,5 +16,7 @@ struct SharedUser {
 };
 
 SharedUser Parse(const Value& value, To<SharedUser>);
+
+void Serialize(const SharedUser& obj, ValueBuilder& builder);
 
 }  // namespace tg

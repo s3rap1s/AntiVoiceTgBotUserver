@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/order_info.hpp>
 
@@ -19,5 +21,7 @@ struct SuccessfulPayment {
 };
 
 SuccessfulPayment Parse(const Value& value, To<SuccessfulPayment>);
+
+void Serialize(const SuccessfulPayment& obj, ValueBuilder& builder);
 
 }  // namespace tg

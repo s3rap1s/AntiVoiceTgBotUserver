@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/labeled_price.hpp>
 
@@ -28,7 +30,8 @@ struct InputInvoiceMessageContent {
     Optional<Boolean> is_flexible;
 };
 
-InputInvoiceMessageContent Parse(const Value& value,
-                                 To<InputInvoiceMessageContent>);
+InputInvoiceMessageContent Parse(const Value& value, To<InputInvoiceMessageContent>);
+
+void Serialize(const InputInvoiceMessageContent& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -13,5 +15,7 @@ struct Voice {
 };
 
 Voice Parse(const Value& value, To<Voice>);
+
+void Serialize(const Voice& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/unique_gift.hpp>
 
@@ -15,5 +17,7 @@ struct UniqueGiftInfo {
 };
 
 UniqueGiftInfo Parse(const Value& value, To<UniqueGiftInfo>);
+
+void Serialize(const UniqueGiftInfo& obj, ValueBuilder& builder);
 
 }  // namespace tg

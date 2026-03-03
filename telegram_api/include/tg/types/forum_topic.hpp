@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -13,5 +15,7 @@ struct ForumTopic {
 };
 
 ForumTopic Parse(const Value& value, To<ForumTopic>);
+
+void Serialize(const ForumTopic& obj, ValueBuilder& builder);
 
 }  // namespace tg

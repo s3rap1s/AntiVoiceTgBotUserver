@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/animation.hpp>
 #include <tg/types/audio.hpp>
 #include <tg/types/chat.hpp>
@@ -55,5 +57,7 @@ struct ExternalReplyInfo {
 };
 
 ExternalReplyInfo Parse(const Value& value, To<ExternalReplyInfo>);
+
+void Serialize(const ExternalReplyInfo& obj, ValueBuilder& builder);
 
 }  // namespace tg

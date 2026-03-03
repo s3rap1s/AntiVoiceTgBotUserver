@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/inline_keyboard_markup.hpp>
 #include <tg/types/input_message_content.hpp>
@@ -18,7 +20,8 @@ struct InlineQueryResultCachedAudio {
     Optional<InputMessageContent> input_message_content;
 };
 
-InlineQueryResultCachedAudio Parse(const Value& value,
-                                   To<InlineQueryResultCachedAudio>);
+InlineQueryResultCachedAudio Parse(const Value& value, To<InlineQueryResultCachedAudio>);
+
+void Serialize(const InlineQueryResultCachedAudio& obj, ValueBuilder& builder);
 
 }  // namespace tg

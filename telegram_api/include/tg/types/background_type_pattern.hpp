@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/background_fill.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/document.hpp>
@@ -16,5 +18,7 @@ struct BackgroundTypePattern {
 };
 
 BackgroundTypePattern Parse(const Value& value, To<BackgroundTypePattern>);
+
+void Serialize(const BackgroundTypePattern& obj, ValueBuilder& builder);
 
 }  // namespace tg

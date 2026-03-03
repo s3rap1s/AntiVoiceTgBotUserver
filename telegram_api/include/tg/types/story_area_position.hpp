@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -14,5 +16,7 @@ struct StoryAreaPosition {
 };
 
 StoryAreaPosition Parse(const Value& value, To<StoryAreaPosition>);
+
+void Serialize(const StoryAreaPosition& obj, ValueBuilder& builder);
 
 }  // namespace tg

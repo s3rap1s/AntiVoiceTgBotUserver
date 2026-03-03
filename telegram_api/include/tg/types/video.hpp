@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/photo_size.hpp>
 #include <tg/types/video_quality.hpp>
@@ -22,5 +24,7 @@ struct Video {
 };
 
 Video Parse(const Value& value, To<Video>);
+
+void Serialize(const Video& obj, ValueBuilder& builder);
 
 }  // namespace tg

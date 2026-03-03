@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include "user.hpp"
 
@@ -11,5 +13,7 @@ struct ChatBoostSourcePremium {
 };
 
 ChatBoostSourcePremium Parse(const Value& value, To<ChatBoostSourcePremium>);
+
+void Serialize(const ChatBoostSourcePremium& obj, ValueBuilder& builder);
 
 }  // namespace tg

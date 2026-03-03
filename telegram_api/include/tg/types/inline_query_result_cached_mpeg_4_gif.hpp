@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/inline_keyboard_markup.hpp>
 #include <tg/types/input_message_content.hpp>
@@ -20,7 +22,8 @@ struct InlineQueryResultCachedMpeg4Gif {
     Optional<InputMessageContent> input_message_content;
 };
 
-InlineQueryResultCachedMpeg4Gif Parse(const Value& value,
-                                      To<InlineQueryResultCachedMpeg4Gif>);
+InlineQueryResultCachedMpeg4Gif Parse(const Value& value, To<InlineQueryResultCachedMpeg4Gif>);
+
+void Serialize(const InlineQueryResultCachedMpeg4Gif& obj, ValueBuilder& builder);
 
 }  // namespace tg

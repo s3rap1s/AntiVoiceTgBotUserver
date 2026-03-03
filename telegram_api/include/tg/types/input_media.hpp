@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/input_media_animation.hpp>
 #include <tg/types/input_media_audio.hpp>
@@ -9,9 +11,10 @@
 
 namespace tg {
 
-using InputMedia = OneOf<InputMediaAnimation, InputMediaDocument,
-                         InputMediaAudio, InputMediaPhoto, InputMediaVideo>;
+using InputMedia = OneOf<InputMediaAnimation, InputMediaDocument, InputMediaAudio, InputMediaPhoto, InputMediaVideo>;
 
 InputMedia Parse(const Value& value, To<InputMedia>);
+
+void Serialize(const InputMedia& obj, ValueBuilder& builder);
 
 }  // namespace tg

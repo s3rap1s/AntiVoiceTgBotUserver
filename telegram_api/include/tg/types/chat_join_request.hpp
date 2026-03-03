@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/chat.hpp>
 #include <tg/types/chat_invite_link.hpp>
 #include <tg/types/common.hpp>
@@ -17,5 +19,7 @@ struct ChatJoinRequest {
 };
 
 ChatJoinRequest Parse(const Value& value, To<ChatJoinRequest>);
+
+void Serialize(const ChatJoinRequest& obj, ValueBuilder& builder);
 
 }  // namespace tg

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/message_ptr.hpp>
 #include <tg/types/star_amount.hpp>
@@ -14,5 +16,7 @@ struct SuggestedPostPaid {
 };
 
 SuggestedPostPaid Parse(const Value& value, To<SuggestedPostPaid>);
+
+void Serialize(const SuggestedPostPaid& obj, ValueBuilder& builder);
 
 }  // namespace tg

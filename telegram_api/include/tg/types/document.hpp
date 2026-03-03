@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/photo_size.hpp>
 
@@ -15,5 +17,7 @@ struct Document {
 };
 
 Document Parse(const Value& value, To<Document>);
+
+void Serialize(const Document& obj, ValueBuilder& builder);
 
 }  // namespace tg

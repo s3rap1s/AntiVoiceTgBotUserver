@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/order_info.hpp>
 #include <tg/types/user.hpp>
@@ -17,5 +19,7 @@ struct PreCheckoutQuery {
 };
 
 PreCheckoutQuery Parse(const Value& value, To<PreCheckoutQuery>);
+
+void Serialize(const PreCheckoutQuery& obj, ValueBuilder& builder);
 
 }  // namespace tg

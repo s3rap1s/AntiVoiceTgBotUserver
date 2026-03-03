@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 
 namespace tg {
@@ -17,5 +19,7 @@ struct InputPaidMediaVideo {
 };
 
 InputPaidMediaVideo Parse(const Value& value, To<InputPaidMediaVideo>);
+
+void Serialize(const InputPaidMediaVideo& obj, ValueBuilder& builder);
 
 }  // namespace tg

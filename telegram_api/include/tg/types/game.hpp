@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/animation.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/message_entity.hpp>
@@ -16,5 +18,7 @@ struct Game {
 };
 
 Game Parse(const Value& value, To<Game>);
+
+void Serialize(const Game& obj, ValueBuilder& builder);
 
 }  // namespace tg

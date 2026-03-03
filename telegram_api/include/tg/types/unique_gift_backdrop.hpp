@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/unique_gift_backdrop_colors.hpp>
 
@@ -12,5 +14,7 @@ struct UniqueGiftBackdrop {
 };
 
 UniqueGiftBackdrop Parse(const Value& value, To<UniqueGiftBackdrop>);
+
+void Serialize(const UniqueGiftBackdrop& obj, ValueBuilder& builder);
 
 }  // namespace tg

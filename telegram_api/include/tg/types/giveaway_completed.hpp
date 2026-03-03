@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/message_ptr.hpp>
 
@@ -13,5 +15,7 @@ struct GiveawayCompleted {
 };
 
 GiveawayCompleted Parse(const Value& value, To<GiveawayCompleted>);
+
+void Serialize(const GiveawayCompleted& obj, ValueBuilder& builder);
 
 }  // namespace tg

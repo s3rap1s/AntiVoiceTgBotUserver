@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/passport_file.hpp>
 
@@ -18,7 +20,8 @@ struct EncryptedPassportElement {
     String hash;
 };
 
-EncryptedPassportElement Parse(const Value& value,
-                               To<EncryptedPassportElement>);
+EncryptedPassportElement Parse(const Value& value, To<EncryptedPassportElement>);
+
+void Serialize(const EncryptedPassportElement& obj, ValueBuilder& builder);
 
 }  // namespace tg

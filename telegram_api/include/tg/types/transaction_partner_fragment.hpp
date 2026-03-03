@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/revenue_withdrawal_state.hpp>
 
@@ -10,7 +12,8 @@ struct TransactionPartnerFragment {
     Optional<RevenueWithdrawalState> withdrawal_state;
 };
 
-TransactionPartnerFragment Parse(const Value& value,
-                                 To<TransactionPartnerFragment>);
+TransactionPartnerFragment Parse(const Value& value, To<TransactionPartnerFragment>);
+
+void Serialize(const TransactionPartnerFragment& obj, ValueBuilder& builder);
 
 }  // namespace tg

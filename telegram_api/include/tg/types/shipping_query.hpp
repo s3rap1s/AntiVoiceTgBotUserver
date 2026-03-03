@@ -1,5 +1,7 @@
 #pragma once
 
+#include <userver/formats/json/value_builder.hpp>
+
 #include <tg/types/common.hpp>
 #include <tg/types/shipping_address.hpp>
 #include <tg/types/user.hpp>
@@ -14,5 +16,7 @@ struct ShippingQuery {
 };
 
 ShippingQuery Parse(const Value& value, To<ShippingQuery>);
+
+void Serialize(const ShippingQuery& obj, ValueBuilder& builder);
 
 }  // namespace tg
