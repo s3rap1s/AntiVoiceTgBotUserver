@@ -8,6 +8,7 @@
 #include <tg/types/chat_boost_updated.hpp>
 #include <tg/types/chat_join_request.hpp>
 #include <tg/types/chat_member_updated.hpp>
+#include <tg/types/callback_query.hpp>
 #include <tg/types/chosen_inline_result.hpp>
 #include <tg/types/common.hpp>
 #include <tg/types/inline_query.hpp>
@@ -36,6 +37,7 @@ struct Update {
     Optional<MessageReactionCountUpdated> message_reaction_count;
     Optional<InlineQuery> inline_query;
     Optional<ChosenInlineResult> chosen_inline_result;
+    Optional<CallbackQuery> callback_query;
     Optional<ShippingQuery> shipping_query;
     Optional<PreCheckoutQuery> pre_checkout_query;
     Optional<PaidMediaPurchased> purchased_paid_media;

@@ -4,6 +4,7 @@
 #include <tg/types/chat_boost_updated.hpp>
 #include <tg/types/chat_join_request.hpp>
 #include <tg/types/chat_member_updated.hpp>
+#include <tg/types/callback_query.hpp>
 #include <tg/types/chosen_inline_result.hpp>
 #include <tg/types/inline_query.hpp>
 #include <tg/types/message.hpp>
@@ -36,6 +37,7 @@ Update Parse(const Value& value, To<Update>) {
     obj.message_reaction_count = ParseComplex<Optional<MessageReactionCountUpdated>>(value["message_reaction_count"]);
     obj.inline_query = ParseComplex<Optional<InlineQuery>>(value["inline_query"]);
     obj.chosen_inline_result = ParseComplex<Optional<ChosenInlineResult>>(value["chosen_inline_result"]);
+    obj.callback_query = ParseComplex<Optional<CallbackQuery>>(value["callback_query"]);
     obj.shipping_query = ParseComplex<Optional<ShippingQuery>>(value["shipping_query"]);
     obj.pre_checkout_query = ParseComplex<Optional<PreCheckoutQuery>>(value["pre_checkout_query"]);
     obj.purchased_paid_media = ParseComplex<Optional<PaidMediaPurchased>>(value["purchased_paid_media"]);
@@ -63,6 +65,7 @@ void Serialize(const Update& obj, ValueBuilder& builder) {
     internal::Put(builder, "message_reaction_count", obj.message_reaction_count);
     internal::Put(builder, "inline_query", obj.inline_query);
     internal::Put(builder, "chosen_inline_result", obj.chosen_inline_result);
+    internal::Put(builder, "callback_query", obj.callback_query);
     internal::Put(builder, "shipping_query", obj.shipping_query);
     internal::Put(builder, "pre_checkout_query", obj.pre_checkout_query);
     internal::Put(builder, "purchased_paid_media", obj.purchased_paid_media);
