@@ -25,7 +25,7 @@ namespace tg {
 Update Parse(const Value& value, To<Update>) {
     Update obj{};
     obj.update_id = ParseComplex<Integer>(value["update_id"]);
-    obj.message = ParseComplex<MessagePtr>(value["message"]);
+    obj.message = ParseComplex<Optional<Message>>(value["message"]);
     obj.edited_message = ParseComplex<Optional<Message>>(value["edited_message"]);
     obj.channel_post = ParseComplex<Optional<Message>>(value["channel_post"]);
     obj.edited_channel_post = ParseComplex<Optional<Message>>(value["edited_channel_post"]);

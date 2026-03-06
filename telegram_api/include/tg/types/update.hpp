@@ -25,7 +25,7 @@ namespace tg {
 
 struct Update {
     Integer update_id;
-    MessagePtr message;
+    Optional<Message> message;
     Optional<Message> edited_message;
     Optional<Message> channel_post;
     Optional<Message> edited_channel_post;
