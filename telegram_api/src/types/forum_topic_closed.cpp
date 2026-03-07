@@ -1,6 +1,5 @@
 #include <tg/types/forum_topic_closed.hpp>
 
-#include "../internal/json_builder.hpp"
 #include "common.hpp"
 
 namespace tg {

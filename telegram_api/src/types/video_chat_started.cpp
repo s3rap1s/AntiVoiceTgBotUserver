@@ -1,6 +1,5 @@
 #include <tg/types/video_chat_started.hpp>
 
-#include "../internal/json_builder.hpp"
 #include "common.hpp"
 
 namespace tg {

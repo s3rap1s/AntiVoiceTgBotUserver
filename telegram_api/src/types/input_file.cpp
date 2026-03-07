@@ -1,6 +1,5 @@
 #include <tg/types/input_file.hpp>
 
-#include "../internal/json_builder.hpp"
 #include "common.hpp"
 
 namespace tg {

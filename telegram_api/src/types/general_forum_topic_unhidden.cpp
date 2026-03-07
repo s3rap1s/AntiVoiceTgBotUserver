@@ -1,6 +1,5 @@
 #include <tg/types/general_forum_topic_unhidden.hpp>
 
-#include "../internal/json_builder.hpp"
 #include "common.hpp"
 
 namespace tg {
