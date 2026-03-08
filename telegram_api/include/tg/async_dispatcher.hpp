@@ -1,17 +1,14 @@
 #pragma once
 
-#include <algorithm>
 #include <atomic>
-#include <cstddef>
-#include <cstdint>
 #include <functional>
+#include <memory>
+#include <mutex>
 #include <utility>
 #include <vector>
 
-#include <userver/engine/async.hpp>
+#include <userver/concurrent/background_task_storage.hpp>
 #include <userver/engine/mutex.hpp>
-#include <userver/engine/semaphore.hpp>
-#include <userver/engine/task/task.hpp>
 #include <userver/engine/task/task_processor_fwd.hpp>
 #include <userver/logging/log.hpp>
 
@@ -29,38 +26,20 @@ class AsyncDispatcherContext final {
 
 class AsyncDispatcher final {
    public:
-    struct Options final {
-        std::size_t max_in_flight{1024};
-        bool drop_on_overload{true};
-        std::size_t collect_finished_every{64};
-    };
-
-    struct Stats final {
-        std::uint64_t accepted{0};
-        std::uint64_t dropped{0};
-        std::uint64_t completed{0};
-        std::uint64_t failed{0};
-        std::uint64_t in_flight{0};
-    };
-
     using UpdateHandler = std::function<void(AsyncDispatcherContext&)>;
 
     template <typename T>
     using EventHandler = std::function<void(AsyncDispatcherContext&, const T&)>;
 
     AsyncDispatcher(BotApi& api_ref, userver::engine::TaskProcessor& task_processor_ref)
-        : AsyncDispatcher(api_ref, task_processor_ref, Options{}) {}
+        : state(std::make_shared<State>(api_ref, task_processor_ref)) {}
 
-    AsyncDispatcher(BotApi& api_ref, userver::engine::TaskProcessor& task_processor_ref, Options options)
-        : api(api_ref),
-          task_processor(task_processor_ref),
-          options(std::move(options)),
-          in_flight_semaphore(this->options.max_in_flight == 0 ? 1 : this->options.max_in_flight) {
-        if (this->options.max_in_flight == 0) this->options.max_in_flight = 1;
-        if (this->options.collect_finished_every == 0) this->options.collect_finished_every = 1;
-    }
+    ~AsyncDispatcher() { Stop(); }
 
-    ~AsyncDispatcher() { CancelAll(); }
+    AsyncDispatcher(const AsyncDispatcher&) = delete;
+    AsyncDispatcher& operator=(const AsyncDispatcher&) = delete;
+    AsyncDispatcher(AsyncDispatcher&&) noexcept = default;
+    AsyncDispatcher& operator=(AsyncDispatcher&&) noexcept = default;
 
     void OnUpdate(UpdateHandler handler) {
         AddRoute(Route{
@@ -110,9 +89,7 @@ class AsyncDispatcher final {
 
     void OnDeletedBusinessMessages(EventHandler<BusinessMessagesDeleted> handler) {
         AddOptionalRoute<BusinessMessagesDeleted>(
-            [](const Update& update) -> const Optional<BusinessMessagesDeleted>& {
-                return update.deleted_business_messages;
-            },
+            [](const Update& update) -> const Optional<BusinessMessagesDeleted>& { return update.deleted_business_messages; },
             std::move(handler));
     }
 
@@ -124,9 +101,7 @@ class AsyncDispatcher final {
 
     void OnMessageReactionCount(EventHandler<MessageReactionCountUpdated> handler) {
         AddOptionalRoute<MessageReactionCountUpdated>(
-            [](const Update& update) -> const Optional<MessageReactionCountUpdated>& {
-                return update.message_reaction_count;
-            },
+            [](const Update& update) -> const Optional<MessageReactionCountUpdated>& { return update.message_reaction_count; },
             std::move(handler));
     }
 
@@ -206,65 +181,51 @@ class AsyncDispatcher final {
             std::move(handler));
     }
 
-    [[nodiscard]] bool Dispatch(Update update) {
-        const auto n = dispatch_counter.fetch_add(1, std::memory_order_relaxed) + 1;
-        if (n % options.collect_finished_every == 0) CollectFinished();
+    bool Dispatch(Update update) {
+        const auto st = state;
+        if (!st || !st->is_running.load(std::memory_order_acquire)) return false;
 
-        if (!AcquireSlot()) return false;
+        std::vector<Route> routes_snapshot;
+        {
+            std::lock_guard lock(st->routes_mutex);
+            routes_snapshot = st->routes;
+        }
 
-        accepted.fetch_add(1, std::memory_order_relaxed);
-        in_flight.fetch_add(1, std::memory_order_relaxed);
-
-        userver::engine::Task task;
-        try {
-            task = userver::engine::AsyncNoSpan(task_processor, [this, update = std::move(update)]() mutable {
-            struct SlotGuard final {
-                userver::engine::CancellableSemaphore& semaphore;
-                std::atomic<std::uint64_t>& in_flight;
-                ~SlotGuard() {
-                    in_flight.fetch_sub(1, std::memory_order_relaxed);
-                    semaphore.unlock_shared();
-                }
-            } slot_guard{in_flight_semaphore, in_flight};
-
+        st->tasks.AsyncDetach("tg-update-dispatch",
+                              [st, update = std::move(update), routes = std::move(routes_snapshot)]() mutable {
                 try {
-                    AsyncDispatcherContext context{api, update};
+                    AsyncDispatcherContext context{st->api, update};
                     for (const auto& route : routes) {
                         if (!route.match(update)) continue;
                         route.invoke(context);
                     }
-                    completed.fetch_add(1, std::memory_order_relaxed);
                 } catch (const std::exception& e) {
-                    failed.fetch_add(1, std::memory_order_relaxed);
-                    LOG_WARNING() << "Async dispatcher update failed: " << e.what();
+                    LOG_ERROR() << "Async dispatcher update failed: " << e.what();
                 } catch (...) {
-                    failed.fetch_add(1, std::memory_order_relaxed);
-                    LOG_WARNING() << "Async dispatcher update failed: unknown exception";
+                    LOG_ERROR() << "Async dispatcher update failed: unknown exception";
                 }
-            });
-        } catch (...) {
-            in_flight.fetch_sub(1, std::memory_order_relaxed);
-            in_flight_semaphore.unlock_shared();
-            throw;
-        }
+                              });
 
-        std::lock_guard lock(mutex);
-        tasks.push_back(std::move(task));
         return true;
     }
 
-    [[nodiscard]] Stats GetStats() const noexcept {
-        return Stats{
-            .accepted = accepted.load(std::memory_order_relaxed),
-            .dropped = dropped.load(std::memory_order_relaxed),
-            .completed = completed.load(std::memory_order_relaxed),
-            .failed = failed.load(std::memory_order_relaxed),
-            .in_flight = in_flight.load(std::memory_order_relaxed),
-        };
+    void Start() {
+        const auto st = state;
+        if (!st) return;
+        st->is_running.store(true, std::memory_order_release);
+    }
+
+    void Stop() noexcept {
+        const auto st = state;
+        if (!st) return;
+
+        if (st->stop_started.exchange(true, std::memory_order_acq_rel)) return;
+        st->is_running.store(false, std::memory_order_release);
+        st->tasks.CancelAndWait();
     }
 
    private:
-    struct Route {
+    struct Route final {
         std::function<bool(const Update&)> match;
         UpdateHandler invoke;
     };
@@ -272,8 +233,27 @@ class AsyncDispatcher final {
     template <typename T>
     using OptionalAccessor = std::function<const Optional<T>&(const Update&)>;
 
-    template <typename T>
-    using PointerAccessor = std::function<const std::unique_ptr<T, MessageDeleter>&(const Update&)>;
+    struct State final {
+        State(BotApi& api_ref, userver::engine::TaskProcessor& task_processor_ref)
+            : api(api_ref), tasks(task_processor_ref) {}
+
+        BotApi& api;
+        userver::concurrent::BackgroundTaskStorage tasks;
+
+        mutable userver::engine::Mutex routes_mutex;
+        std::vector<Route> routes;
+
+        std::atomic<bool> is_running{true};
+        std::atomic<bool> stop_started{false};
+    };
+
+    void AddRoute(Route route) {
+        const auto st = state;
+        if (!st) return;
+
+        std::lock_guard lock(st->routes_mutex);
+        st->routes.push_back(std::move(route));
+    }
 
     template <typename T>
     void AddOptionalRoute(OptionalAccessor<T> accessor, EventHandler<T> handler) {
@@ -283,72 +263,13 @@ class AsyncDispatcher final {
                     const auto& value = accessor(update);
                     return value.has_value();
                 },
-            .invoke = [accessor, handler = std::move(handler)](
-                          AsyncDispatcherContext& context) { handler(context, *accessor(context.update)); },
-        });
-    }
-
-    template <typename T>
-    void AddPointerRoute(PointerAccessor<T> accessor, EventHandler<T> handler) {
-        AddRoute(Route{
-            .match = [accessor](const Update& update) {
-                const auto& value = accessor(update);
-                return static_cast<bool>(value);
-            },
             .invoke = [accessor, handler = std::move(handler)](AsyncDispatcherContext& context) {
                 handler(context, *accessor(context.update));
             },
         });
     }
 
-    void AddRoute(Route route) { routes.push_back(std::move(route)); }
-
-    [[nodiscard]] bool AcquireSlot() {
-        if (options.drop_on_overload) {
-            if (!in_flight_semaphore.try_lock_shared()) {
-                dropped.fetch_add(1, std::memory_order_relaxed);
-                return false;
-            }
-            return true;
-        }
-
-        try {
-            in_flight_semaphore.lock_shared();
-            return true;
-        } catch (const userver::engine::SemaphoreLockCancelledError&) {
-            dropped.fetch_add(1, std::memory_order_relaxed);
-            return false;
-        }
-    }
-
-    void CollectFinished() {
-        std::lock_guard lock(mutex);
-        tasks.erase(std::remove_if(tasks.begin(), tasks.end(), [](auto& task) { return task.IsFinished(); }),
-                    tasks.end());
-    }
-
-    void CancelAll() noexcept {
-        std::vector<userver::engine::Task> local_tasks;
-        {
-            std::lock_guard lock(mutex);
-            std::swap(local_tasks, tasks);
-        }
-        for (auto& task : local_tasks) task.RequestCancel();
-    }
-
-    BotApi& api;
-    userver::engine::TaskProcessor& task_processor;
-    Options options;
-    userver::engine::CancellableSemaphore in_flight_semaphore;
-    std::vector<Route> routes;
-    mutable userver::engine::Mutex mutex;
-    std::vector<userver::engine::Task> tasks;
-    std::atomic<std::uint64_t> dispatch_counter{0};
-    std::atomic<std::uint64_t> accepted{0};
-    std::atomic<std::uint64_t> dropped{0};
-    std::atomic<std::uint64_t> completed{0};
-    std::atomic<std::uint64_t> failed{0};
-    std::atomic<std::uint64_t> in_flight{0};
+    std::shared_ptr<State> state;
 };
 
 }  // namespace tg
