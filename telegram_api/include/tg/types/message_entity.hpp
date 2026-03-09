@@ -15,6 +15,8 @@ struct MessageEntity {
     Optional<User> user;
     Optional<String> language;
     Optional<String> custom_emoji_id;
+    Optional<Integer> unix_time;
+    Optional<String> date_time_format;
 };
 
 MessageEntity Parse(const Value& value, To<MessageEntity>);

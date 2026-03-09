@@ -76,6 +76,8 @@ namespace internal {
 class JsonClient;
 }
 
+// Current Bot API version: 9.5
+// https://core.telegram.org/bots/api#march-1-2026
 class BotApi final {
    public:
     using Json = userver::formats::json::Value;
