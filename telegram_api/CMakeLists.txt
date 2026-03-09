@@ -12,7 +12,13 @@ target_sources(telegram PRIVATE ${TELEGRAM_SOURCES})
 
 target_include_directories(
     telegram
-    PUBLIC
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_include_directories(
+    telegram
+    SYSTEM INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
