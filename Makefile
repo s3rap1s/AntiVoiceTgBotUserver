@@ -27,11 +27,13 @@ $(addprefix build-, $(PRESETS)): build-%: build-%/CMakeCache.txt
 .PHONY: $(addprefix test-, $(PRESETS))
 $(addprefix test-, $(PRESETS)): test-%: build-%/CMakeCache.txt
 	cmake --build build-$* -j $(NPROCS)
+	set -a; [ -f .env ] && . ./.env; set +a; \
 	cd build-$* && ((test -t 1 && GTEST_COLOR=1 PYTEST_ADDOPTS="--color=yes" ctest -V) || ctest -V)
 
 # Start the service (via testsuite service runner)
 .PHONY: $(addprefix start-, $(PRESETS))
 $(addprefix start-, $(PRESETS)): start-%:
+	set -a; [ -f .env ] && . ./.env; set +a; \
 	cmake --build build-$* -v --target start-$(PROJECT_NAME)
 
 # Cleanup data

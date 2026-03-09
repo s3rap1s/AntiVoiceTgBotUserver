@@ -1,10 +1,9 @@
 worker-threads: 4
 worker-fs-threads: 2
 
-logger-level: debug
-is-testing: true
+logger-level: info
 
-bot-token: test-bot-token
+bot-token: your-bot-token
 bot-token#env: BOT_TOKEN
 
 server-port: 8080

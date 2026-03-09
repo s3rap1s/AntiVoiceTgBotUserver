@@ -37,7 +37,6 @@
       "generator": "Ninja",
       "cacheVariables": {
         "USERVER_FEATURE_POSTGRESQL": "ON",
-        "USERVER_FEATURE_PATCH_LIBPQ": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_PREFIX_PATH": "/opt/userver/2.14",
         "CMAKE_IGNORE_PATH": "/usr/local",

@@ -18,6 +18,8 @@ To create your own userver-based service follow the following steps:
 `PRESET` is either `debug`, `release`, or if you've added custom presets in `CMakeUserPresets.json`, it
 can also be `debug-custom`, `release-custom`.
 
+Before `make start-*` or `make test-*`, create `.env` from `.env.example` and set `BOT_TOKEN`.
+
 * `make cmake-PRESET` - run cmake configure, update cmake options and source file lists
 * `make build-PRESET` - build the service
 * `make test-PRESET` - build the service and run all tests
