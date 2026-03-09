@@ -1,5 +1,6 @@
 #include "bot/bot_app.hpp"
 
+#include "bot/config.hpp"
 #include "bot/core/gradual_editor.hpp"
 
 namespace tg_bot {
@@ -19,14 +20,14 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
             else {
                 if (!is_sender_premium)
                     bot.AnswerCallbackQuery(callback_query.id, "", true,
-                                            std::format("t.me/{}?start={}", alias, "offerPrem"));
+                                            std::format("t.me/{}?start={}", alias, OFFER_PREM_ARG));
                 else
                     bot.AnswerCallbackQuery(callback_query.id, "The sender is also a <b>💎Premium user</b>");
             }
         } else {
             bot.AnswerCallbackQuery(callback_query.id, "Message is deleted");
         }
-    } else if (*callback_query.data == "relisten" || *callback_query.data == "listen") {
+    } else if (*callback_query.data == "listen") {
         const std::string inline_message_id = *callback_query.inline_message_id;
         auto result = message_storage.GetMessage(inline_message_id);
         if (result.has_value()) {

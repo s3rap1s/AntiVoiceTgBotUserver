@@ -8,6 +8,13 @@
 namespace tg_bot {
 
 void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
+    if (inline_query.query.size() > MAX_QUERY_SIZE - 20) {
+        tg::InlineQueryResultButton button;
+        button.start_parameter = SAVE_TEXT_ARG;
+        button.text = "Query is too long, save text in PM";
+        bot.AnswerInlineQuery(inline_query.id, {}, std::nullopt, std::nullopt, std::nullopt, button);
+        return;
+    }
     std::vector<tg::InlineQueryResult> results;
     std::string text = inline_query.query;
     auto first_non_space = std::find_if(text.begin(), text.end(), [](unsigned char ch) { return !std::isspace(ch); });
@@ -21,7 +28,15 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
     }
     if (text.empty()) {
         auto saved_text = user_storage.GetText(inline_query.from.id);
-        if (saved_text) text = *saved_text;
+        if (saved_text)
+            text = *saved_text;
+        else {
+            tg::InlineQueryResultButton button;
+            button.start_parameter = SAVE_TEXT_ARG;
+            button.text = "Start typing query or save text in PM";
+            bot.AnswerInlineQuery(inline_query.id, {}, std::nullopt, std::nullopt, std::nullopt, button);
+            return;
+        }
     }
     std::string description;
     if (!text.empty()) {
@@ -38,7 +53,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
             input_content.message_text = "<i>Hidden message</i>";
             input_content.parse_mode = "HTML";
             result.input_message_content = input_content;
-            result.reply_markup = CreateKeyboard(KeyboardMode::JustSent);
+            result.reply_markup = CreateKeyboard(KeyboardMode::Waiting);
             results.push_back(result);
         }
         bot.AnswerInlineQuery(inline_query.id, results, std::nullopt, true);

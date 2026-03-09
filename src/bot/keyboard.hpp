@@ -12,13 +12,6 @@ inline tg::InlineKeyboardButton CreateShowFullTextButton() {
     return button;
 }
 
-inline tg::InlineKeyboardButton CreateListenAgainButton() {
-    tg::InlineKeyboardButton button;
-    button.text = "🔄 Listen again";
-    button.callback_data = "relisten";
-    return button;
-}
-
 inline tg::InlineKeyboardButton CreateListenButton() {
     tg::InlineKeyboardButton button;
     button.text = "▶️ Listen";
@@ -26,14 +19,11 @@ inline tg::InlineKeyboardButton CreateListenButton() {
     return button;
 }
 
-enum class KeyboardMode { DuringUpdate, JustSent, DoneUpdating };
+enum class KeyboardMode { DuringUpdate, Waiting };
 
 inline tg::InlineKeyboardMarkup CreateKeyboard(KeyboardMode mode) {
     tg::InlineKeyboardMarkup keyboard;
     keyboard.inline_keyboard.push_back({CreateShowFullTextButton()});
-    if (mode == KeyboardMode::JustSent)
-        keyboard.inline_keyboard.push_back({CreateListenButton()});
-    else if (mode == KeyboardMode::DoneUpdating)
-        keyboard.inline_keyboard.push_back({CreateListenAgainButton()});
+    if (mode == KeyboardMode::Waiting) keyboard.inline_keyboard.push_back({CreateListenButton()});
     return keyboard;
 }

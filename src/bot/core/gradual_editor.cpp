@@ -17,8 +17,6 @@ void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_i
 
     auto keyboard = CreateKeyboard(KeyboardMode::DuringUpdate);
     if (!is_accumulated) chunks.push_back("<i>End of the message</i>");
-    // else
-    //     messageStorage.forgetMessage(inlineMessageId);
 
     for (size_t i = 0; i < chunks.size(); ++i) {
         std::string display_text = chunks[i];
@@ -28,7 +26,7 @@ void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_i
             if (is_accumulated)
                 keyboard.inline_keyboard.clear();
             else
-                keyboard.inline_keyboard.push_back({CreateListenAgainButton()});
+                keyboard.inline_keyboard.push_back({CreateListenButton()});
         }
         try {
             bot.EditMessageText(display_text, std::nullopt, std::nullopt, std::nullopt, inline_message_id, "HTML",
