@@ -25,34 +25,30 @@ userver_setup_environment()
 # Common sources
 include_directories(src)
 
-file(GLOB TELEGRAM_API_SOURCES CONFIGURE_DEPENDS
-    telegram_api/src/internal/json_client.cpp
-    telegram_api/src/bot_api.cpp
-    telegram_api/src/types/*.cpp
-    telegram_api/src/methods/*.cpp
-)
-
-add_library(
-    ${PROJECT_NAME}_objs OBJECT
-    src/telegram/bot.cpp
-    ${TELEGRAM_API_SOURCES}
-)
-
-target_include_directories(
-    ${PROJECT_NAME}_objs
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/telegram_api/include
-)
-target_link_libraries(
-    ${PROJECT_NAME}_objs
-    PUBLIC userver::core #
-           userver::postgresql
-)
-
+add_subdirectory(telegram_api)
 
 # The Service
-add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
+add_executable(${PROJECT_NAME}
+    src/bot/core/gradual_editor.cpp
+    src/bot/db/message_storage.cpp
+    src/bot/db/user_storage.cpp
+    src/bot/handlers/callback_query.cpp
+    src/bot/handlers/command.cpp
+    src/bot/handlers/inline_query.cpp
+    src/bot/handlers/message.cpp
+    src/bot/types/speed.cpp
+    src/bot/utils/text_utils.cpp
+    src/bot/bot_app.cpp
+    src/components/tg_bot_component.cpp
+    src/main.cpp
+)
+target_link_libraries(
+    ${PROJECT_NAME}
+    PRIVATE
+        telegram::api
+        userver::core
+        userver::postgresql
+)
 
 # # Unit Tests
 # add_executable(${PROJECT_NAME}_unittest src/greeting_test.cpp)

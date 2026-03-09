@@ -1,8 +1,14 @@
-DROP SCHEMA IF EXISTS hello_schema CASCADE;
+CREATE SCHEMA IF NOT EXISTS bot_schema;
 
-CREATE SCHEMA IF NOT EXISTS hello_schema;
-
-CREATE TABLE IF NOT EXISTS hello_schema.users (
-    name TEXT PRIMARY KEY,
-    count INTEGER DEFAULT(1)
+CREATE TABLE IF NOT EXISTS bot_schema.message_storage (
+    inline_message_id TEXT PRIMARY KEY,
+    message_text TEXT NOT NULL,
+    owner_id INT NOT NULL,
+    speed INT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS bot_schema.user_storage (
+    user_id INT PRIMARY KEY,
+    saved_text TEXT,
+    premium_till DATE
+)
