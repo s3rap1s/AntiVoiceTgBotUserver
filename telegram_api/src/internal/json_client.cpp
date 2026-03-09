@@ -82,10 +82,16 @@ JsonClient::Json ParseJsonBody(std::string_view method, std::string_view body,
 
 }  // namespace
 
-JsonClient::JsonClient(userver::clients::http::Client& http, std::string token) : http(http), token(std::move(token)) {}
+JsonClient::JsonClient(userver::clients::http::Client& http, std::string token, std::string base_url)
+    : http(http), token(std::move(token)), base_url(std::move(base_url)) {
+    while (!this->base_url.empty() && this->base_url.back() == '/') {
+        this->base_url.pop_back();
+    }
+}
 
 std::string JsonClient::MakeUrl(std::string_view method) const {
-    std::string url = "https://api.telegram.org/bot";
+    std::string url = base_url;
+    url += "/bot";
     url += token;
     url += "/";
     url += method;

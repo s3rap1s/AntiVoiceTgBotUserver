@@ -82,7 +82,8 @@ class BotApi final {
    public:
     using Json = userver::formats::json::Value;
 
-    explicit BotApi(userver::clients::http::Client& http, std::string token);
+    explicit BotApi(userver::clients::http::Client& http, std::string token,
+                    std::string base_url = "https://api.telegram.org");
     ~BotApi();
 
     // Update

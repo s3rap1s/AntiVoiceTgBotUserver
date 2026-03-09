@@ -15,7 +15,7 @@ class JsonClient final {
    public:
     using Json = userver::formats::json::Value;
 
-    JsonClient(userver::clients::http::Client& http, std::string token);
+    JsonClient(userver::clients::http::Client& http, std::string token, std::string base_url);
 
     Json CallJson(std::string_view method, const Json& payload, std::chrono::milliseconds timeout);
 
@@ -26,6 +26,7 @@ class JsonClient final {
 
     userver::clients::http::Client& http;
     std::string token;
+    std::string base_url;
 };
 
 }  // namespace tg::internal
