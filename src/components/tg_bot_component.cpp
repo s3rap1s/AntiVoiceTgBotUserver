@@ -1,6 +1,7 @@
 #include "tg_bot_component.hpp"
 
 #include "bot/bot_app.hpp"
+#include "bot/config.hpp"
 
 #include <tg/bot_api.hpp>
 #include <tg/errors.hpp>
@@ -76,6 +77,11 @@ properties:
     type: string
     description: Telegram bot token
 
+  api-base-url:
+    type: string
+    description: Telegram Bot API base URL
+    default: https://api.telegram.org
+
   poll-timeout-seconds:
     type: integer
     description: getUpdates long polling timeout (seconds)
@@ -130,6 +136,7 @@ TelegramBotComponent::TelegramBotComponent(const userver::components::ComponentC
       user_storage(context) {
     const auto yaml = config.As<userver::yaml_config::YamlConfig>();
     token = yaml["token"].As<std::string>();
+    api_base_url = yaml["api-base-url"].As<std::string>("https://api.telegram.org");
     poll_timeout = yaml["poll-timeout-seconds"].As<int>(20);
     limit = yaml["limit"].As<int>(100);
     initial_backoff_ms = yaml["initial-backoff-ms"].As<int>(200);
@@ -157,9 +164,13 @@ TelegramBotComponent::~TelegramBotComponent() {
 }
 
 void TelegramBotComponent::Run() {
-    tg::BotApi api(http_client, token);
+    tg::BotApi api(http_client, token, api_base_url);
     BotApp bot(api, tp, message_storage, user_storage);
-    api.DeleteWebhook(true);
+
+    api.DeleteWebhook(true);  // drop pending updates
+
+    api.SetMyCommands({START_COMMAND, CLEAR_COMMAND});
+
     const std::chrono::milliseconds initial_backoff{initial_backoff_ms};
     const std::chrono::milliseconds max_backoff{max_backoff_ms};
     const std::chrono::milliseconds protocol_delay{protocol_delay_ms};

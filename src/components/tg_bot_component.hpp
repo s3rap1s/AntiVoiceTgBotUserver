@@ -33,6 +33,7 @@ class TelegramBotComponent final : public userver::components::ComponentBase {
     UserStorage user_storage;
 
     std::string token;
+    std::string api_base_url{"https://api.telegram.org"};
     int poll_timeout{20};
     int limit{100};
     int64_t offset{0};
