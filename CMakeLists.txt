@@ -22,10 +22,10 @@ endif()
 
 userver_setup_environment()
 
+find_package(telegram_api CONFIG REQUIRED)
+
 # Common sources
 include_directories(src)
-
-add_subdirectory(telegram_api)
 
 # The Service
 add_executable(${PROJECT_NAME}
