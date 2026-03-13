@@ -4,6 +4,8 @@
 
 #include <userver/logging/log.hpp>
 
+#include <format>
+
 namespace tg_bot {
 void BotApp::HandleMessage(const tg::Message& message) {
     if (message.text->front() == '/') {

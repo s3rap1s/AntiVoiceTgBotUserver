@@ -2,6 +2,8 @@
 
 #include "bot/config.hpp"
 
+#include <format>
+
 namespace tg_bot {
 
 namespace {

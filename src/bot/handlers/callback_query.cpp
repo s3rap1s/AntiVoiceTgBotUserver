@@ -3,6 +3,8 @@
 #include "bot/config.hpp"
 #include "bot/core/gradual_editor.hpp"
 
+#include <format>
+
 namespace tg_bot {
 
 void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
@@ -31,8 +33,10 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
         const std::string inline_message_id = *callback_query.inline_message_id;
         auto result = message_storage.GetMessage(inline_message_id);
         if (result.has_value()) {
-            auto [text, owner_id, speed] = result.value();
-            background_tasks.AsyncDetach(inline_message_id, [this, inline_message_id, text = std::move(text), speed]() {
+            auto message_data = std::move(result.value());
+            auto text = std::move(message_data.text);
+            auto speed = message_data.speed;
+            background_tasks.AsyncDetach(inline_message_id, [this, inline_message_id, text = std::move(text), speed] {
                 GraduallyUpdateMessage(bot, inline_message_id, text, speed, false, message_storage);
             });
         } else {

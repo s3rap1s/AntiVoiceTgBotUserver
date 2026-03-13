@@ -5,6 +5,8 @@
 #include "bot/keyboard.hpp"
 #include "bot/utils/text_utils.hpp"
 
+#include <format>
+
 namespace tg_bot {
 
 void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
@@ -12,7 +14,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
         tg::InlineQueryResultButton button;
         button.start_parameter = SAVE_TEXT_ARG;
         button.text = "Query is too long, save text in PM";
-        bot.AnswerInlineQuery(inline_query.id, {}, std::nullopt, std::nullopt, std::nullopt, button);
+        bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
         return;
     }
     std::vector<tg::InlineQueryResult> results;
@@ -34,7 +36,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
             tg::InlineQueryResultButton button;
             button.start_parameter = SAVE_TEXT_ARG;
             button.text = "Start typing query or save text in PM";
-            bot.AnswerInlineQuery(inline_query.id, {}, std::nullopt, std::nullopt, std::nullopt, button);
+            bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
             return;
         }
     }
@@ -56,7 +58,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
             result.reply_markup = CreateKeyboard(KeyboardMode::Waiting);
             results.push_back(result);
         }
-        bot.AnswerInlineQuery(inline_query.id, results, std::nullopt, true);
+        bot.AnswerInlineQuery(inline_query.id, results, 1, true);
     }
 }
 

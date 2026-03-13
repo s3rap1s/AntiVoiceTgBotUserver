@@ -40,7 +40,7 @@ std::chrono::milliseconds GetRetryDelay(const tg::ApiError& error, std::chrono::
                                         const std::chrono::seconds retry_after_cap) {
     if (const auto retry_after = error.RetryAfter()) {
         backoff = initial_backoff;
-        const auto capped = std::clamp(*retry_after, int64_t{1}, retry_after_cap.count());
+        const auto capped = std::clamp<int64_t>(*retry_after, int64_t{1}, retry_after_cap.count());
         return std::chrono::seconds{capped};
     }
 

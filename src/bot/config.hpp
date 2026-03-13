@@ -4,7 +4,7 @@
 
 #include <tg/types/bot_command.hpp>
 
-#include <string>
+#include <string_view>
 #include <vector>
 
 inline constexpr size_t MAX_QUERY_SIZE = 256;
@@ -20,7 +20,7 @@ inline tg::BotCommand START_COMMAND = {"/start", "Show initial command"};
 inline tg::BotCommand CLEAR_COMMAND = {"/clear", "Clear saved text"};
 inline std::vector<tg::BotCommand> COMMANDS = {START_COMMAND, CLEAR_COMMAND};
 
-inline constexpr std::string ACCUMULATE_COMMAND = "/a";
+inline constexpr std::string_view ACCUMULATE_COMMAND = "/a";
 
-inline constexpr std::string OFFER_PREM_ARG = "offer_prem";
-inline constexpr std::string SAVE_TEXT_ARG = "save_text";
+inline constexpr std::string_view OFFER_PREM_ARG = "offer_prem";
+inline constexpr std::string_view SAVE_TEXT_ARG = "save_text";
