@@ -22,10 +22,9 @@ class MessageStorage {
     explicit MessageStorage(const userver::components::ComponentContext& context,
                             std::string db_component_name = "postgres-db-1");
 
-    bool SaveMessage(std::string_view inline_message_id, std::string_view text, tg::Integer owner_id,
+    void SaveMessage(std::string_view inline_message_id, std::string_view text, tg::Integer owner_id,
                      size_t speed) const;
     std::optional<MessageInfo> GetMessage(std::string_view inline_message_id) const;
-    bool ForgetMessage(std::string_view inline_message_id) const;
 
    private:
     userver::storages::postgres::ClusterPtr pg_cluster;

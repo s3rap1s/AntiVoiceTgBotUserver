@@ -10,13 +10,28 @@ namespace tg_bot {
 void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
     std::string alias = *bot.GetMe().username;
     if (callback_query.data == "show_full") {
-        auto result = message_storage.GetMessage(*callback_query.inline_message_id);
+        std::optional<MessageStorage::MessageInfo> result;
+        try {
+            result = message_storage.GetMessage(*callback_query.inline_message_id);
+        } catch (const std::exception&) {
+            bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+            return;
+        }
+
         if (result.has_value()) {
             auto [text, owner_id, speed] = result.value();
             tg::Integer sender_id = callback_query.from.id;
             bool is_owner = owner_id == sender_id;
-            bool is_sender_premium = user_storage.IsPremiumUser(sender_id);
-            bool is_owner_premium = user_storage.IsPremiumUser(owner_id);
+            bool is_sender_premium = false;
+            bool is_owner_premium = false;
+            try {
+                is_sender_premium = user_storage.IsPremiumUser(sender_id);
+                is_owner_premium = user_storage.IsPremiumUser(owner_id);
+            } catch (const std::exception&) {
+                bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+                return;
+            }
+
             if ((is_sender_premium && !is_owner_premium) || is_owner)
                 bot.AnswerCallbackQuery(callback_query.id, text, true);
             else {
@@ -31,13 +46,20 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
         }
     } else if (*callback_query.data == "listen") {
         const std::string inline_message_id = *callback_query.inline_message_id;
-        auto result = message_storage.GetMessage(inline_message_id);
+        std::optional<MessageStorage::MessageInfo> result;
+        try {
+            result = message_storage.GetMessage(inline_message_id);
+        } catch (const std::exception&) {
+            bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+            return;
+        }
+
         if (result.has_value()) {
             auto message_data = std::move(result.value());
             auto text = std::move(message_data.text);
             auto speed = message_data.speed;
             background_tasks.AsyncDetach(inline_message_id, [this, inline_message_id, text = std::move(text), speed] {
-                GraduallyUpdateMessage(bot, inline_message_id, text, speed, false, message_storage);
+                GraduallyUpdateMessage(bot, inline_message_id, text, speed);
             });
         } else {
             bot.AnswerCallbackQuery(callback_query.id, "Message is deleted");

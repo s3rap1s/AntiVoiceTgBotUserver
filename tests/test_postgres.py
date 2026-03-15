@@ -1,6 +1,5 @@
 # Start the tests via `make test-debug` or `make test-release`
 
-import pytest
 import asyncio
 
 

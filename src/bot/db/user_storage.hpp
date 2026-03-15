@@ -16,11 +16,11 @@ class UserStorage {
     explicit UserStorage(const userver::components::ComponentContext& context,
                          std::string db_component_name = "postgres-db-1");
 
-    bool SaveText(tg::Integer user_id, std::string_view text) const;
+    void SaveText(tg::Integer user_id, std::string_view text) const;
     std::optional<std::string> GetText(tg::Integer user_id) const;
-    bool ClearText(tg::Integer user_id) const;
+    void ClearText(tg::Integer user_id) const;
 
-    bool MakeUserPremium(tg::Integer user_id, size_t subscription_duration_days) const;
+    void MakeUserPremium(tg::Integer user_id, size_t subscription_duration_days) const;
     bool IsPremiumUser(tg::Integer user_id) const;
 
    private:

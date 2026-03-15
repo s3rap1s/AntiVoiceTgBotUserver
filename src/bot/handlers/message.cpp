@@ -13,7 +13,12 @@ void BotApp::HandleMessage(const tg::Message& message) {
         return;
     }
     if (*message.text == "makeMePremiumUser") {
-        user_storage.MakeUserPremium(message.from->id, 1);
+        try {
+            user_storage.MakeUserPremium(message.from->id, 1);
+        } catch (const std::exception&) {
+            bot.SendMessage(message.chat.id, "Temporary error, try again later.");
+            return;
+        }
         return;
     }
 
@@ -21,7 +26,12 @@ void BotApp::HandleMessage(const tg::Message& message) {
     auto words = SplitText(text);
     size_t word_count = words.size();
     size_t char_count = text.size();
-    user_storage.SaveText(message.from->id, *message.text);
+    try {
+        user_storage.SaveText(message.from->id, *message.text);
+    } catch (const std::exception&) {
+        bot.SendMessage(message.chat.id, "Temporary error, try again later.");
+        return;
+    }
 
     std::string response = std::format(
         "✅ Text saved!\n\n"

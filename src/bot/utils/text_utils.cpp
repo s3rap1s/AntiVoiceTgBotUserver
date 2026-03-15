@@ -20,7 +20,7 @@ std::vector<std::string> SplitText(std::string_view text) {
     return words;
 }
 
-std::vector<std::string> SplitTextByWordsCount(std::string_view text, size_t wordsPerChunk, bool isAccumulated) {
+std::vector<std::string> SplitTextByWordsCount(std::string_view text, size_t words_per_chunk) {
     auto words = SplitText(text);
     std::vector<std::string> chunks;
 
@@ -28,20 +28,15 @@ std::vector<std::string> SplitTextByWordsCount(std::string_view text, size_t wor
         return {};
     }
 
-    size_t currentWordIndex = 0;
-    while (currentWordIndex < words.size()) {
-        size_t endIndex = std::min(currentWordIndex + wordsPerChunk, words.size());
+    size_t curr_word_idx = 0;
+    while (curr_word_idx < words.size()) {
+        size_t end_idx = std::min(curr_word_idx + words_per_chunk, words.size());
 
         std::string chunk;
-        if (isAccumulated && !chunks.empty()) chunk = chunks.back() + " ";
-
-        for (size_t i = currentWordIndex; i < endIndex; ++i) {
-            if (i > currentWordIndex) {
-                chunk += " ";
-            }
-            chunk += words[i];
+        for (size_t i = curr_word_idx; i < end_idx; ++i) {
+            chunk += words[i] + (i + 1 < end_idx ? " " : "");
         }
-        currentWordIndex = endIndex;
+        curr_word_idx = end_idx;
         chunks.push_back(chunk);
     }
     return chunks;

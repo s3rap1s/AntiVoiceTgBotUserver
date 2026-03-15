@@ -22,20 +22,24 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
     auto first_non_space = std::find_if(text.begin(), text.end(), [](unsigned char ch) { return !std::isspace(ch); });
     text = std::string(first_non_space, text.end());
     std::string saved_text;
-    bool is_accumulated = text.starts_with(ACCUMULATE_COMMAND);
-    if (is_accumulated) {
-        auto first_non_space_after_command = std::find_if(text.begin() + ACCUMULATE_COMMAND.size(), text.end(),
-                                                          [](unsigned char ch) { return !std::isspace(ch); });
-        text = std::string(first_non_space_after_command, text.end());
-    }
     if (text.empty()) {
-        auto saved_text = user_storage.GetText(inline_query.from.id);
+        std::optional<std::string> saved_text;
+        try {
+            saved_text = user_storage.GetText(inline_query.from.id);
+        } catch (const std::exception&) {
+            tg::InlineQueryResultButton button;
+            button.start_parameter = SAVE_TEXT_ARG;
+            button.text = "Temporary error, try again later.";
+            bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
+            return;
+        }
+
         if (saved_text)
             text = *saved_text;
         else {
             tg::InlineQueryResultButton button;
             button.start_parameter = SAVE_TEXT_ARG;
-            button.text = "Start typing query or save text in PM";
+            button.text = "Start typing text or save it in PM";
             bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
             return;
         }
@@ -43,11 +47,10 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
     std::string description;
     if (!text.empty()) {
         description = "Query: " + text;
-        if (is_accumulated) description = "(Accumulative mode) " + description;
         for (size_t speed = 0; speed < SPEEDS.size(); ++speed) {
             SpeedInformation speedConfig = GetSpeedInformation(speed);
             tg::InlineQueryResultArticle result;
-            result.id = std::format("{}-{}", speed, (is_accumulated ? 1 : 0));
+            result.id = std::format("{}", speed);
             result.title = speedConfig.title;
             result.description = speedConfig.speed_str + " - " + description;
             tg::InputTextMessageContent input_content;
@@ -64,19 +67,28 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
 
 void BotApp::HandleChosenInlineResult(const tg::ChosenInlineResult chosen_inline_result) {
     if (!chosen_inline_result.query || !chosen_inline_result.inline_message_id) return;
-
     std::string query_id = chosen_inline_result.result_id;
-    size_t separator_pos = query_id.find("-");
-    size_t speed = ToInteger(query_id.substr(0, separator_pos));
-    bool is_accumulated = query_id.substr(separator_pos + 1) == "1" ? true : false;
+    size_t speed = ToInteger(query_id);
     std::string text = *chosen_inline_result.query;
-    if (is_accumulated) text = text.substr(ACCUMULATE_COMMAND.size());
     if (text.empty()) {
-        auto saved_text = user_storage.GetText(chosen_inline_result.from.id);
+        std::optional<std::string> saved_text;
+        try {
+            saved_text = user_storage.GetText(chosen_inline_result.from.id);
+        } catch (const std::exception&) {
+            bot.EditMessageText("Temporary error, try again later.", std::nullopt, std::nullopt, std::nullopt,
+                                chosen_inline_result.inline_message_id);
+            return;
+        }
+
         if (saved_text) text = *saved_text;
     }
     std::string inline_message_id = *chosen_inline_result.inline_message_id;
     tg::Integer owner_id = chosen_inline_result.from.id;
-    message_storage.SaveMessage(inline_message_id, text, owner_id, static_cast<int>(speed));
+    try {
+        message_storage.SaveMessage(inline_message_id, text, owner_id, static_cast<int>(speed));
+    } catch (const std::exception&) {
+        bot.EditMessageText("Temporary error, try again later.", std::nullopt, std::nullopt, std::nullopt,
+                            chosen_inline_result.inline_message_id);
+    }
 }
 }  // namespace tg_bot

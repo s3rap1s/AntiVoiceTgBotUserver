@@ -50,18 +50,19 @@ void HandleStartCommand(tg::BotApi& bot, const std::string& alias, const tg::Mes
     for (const auto& command : COMMANDS) {
         commands_info += std::format("{} - {}\n", command.command, command.description);
     }
-    std::string options_info = std::format(
-        "\n<b>🔧 Options:</b>\n"
-        "{} - insert this at the beginning of the query so that "
-        "the displayed text remains in the message",
-        ACCUMULATE_COMMAND);
-    const std::string full_text = general_info + speeds_info + commands_info + options_info;
+    const std::string full_text = general_info + speeds_info + commands_info;
     bot.SendMessage(message.chat.id, full_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
 }
 
 void HandleClearCommand(tg::BotApi& bot, const tg::Message& message, UserStorage& user_storage) {
-    user_storage.ClearText(message.from->id);
-    std::string text = "🧹Saved text cleared!";
+    try {
+        user_storage.ClearText(message.from->id);
+    } catch (const std::exception&) {
+        bot.SendMessage(message.chat.id, "Temporary error, try again later.");
+        return;
+    }
+
+    std::string text = "🧹Saved text cleared! Send me another text message to save new one.";
     bot.SendMessage(message.chat.id, text);
 }
 
