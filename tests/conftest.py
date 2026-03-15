@@ -1,12 +1,16 @@
-import os
-
 import pytest
 
 from testsuite.databases.pgsql import discover
 
+
+TEST_BOT_TOKEN = 'test-bot-token'
+
+def _get_components(config_yaml):
+    return config_yaml['components_manager']['components']
+
+
 # These hooks patch static config/config_vars before service start in testsuite.
 USERVER_CONFIG_HOOKS = [
-    'userver_config_bot_token',
     'userver_config_telegram_base_url',
     'userver_pg_config',
 ]
@@ -34,8 +38,7 @@ def userver_pg_config(pytestconfig, pgsql_local):
     if pytestconfig.option.service_runner_mode:
         # Keep start-debug lightweight: do not block startup on PostgreSQL readiness.
         def _patch_config(config_yaml, config_vars):
-            components = config_yaml['components_manager']['components']
-            postgres = components.get('postgres-db-1')
+            postgres = _get_components(config_yaml).get('postgres-db-1')
             if postgres:
                 postgres['sync-start'] = False
 
@@ -45,22 +48,10 @@ def userver_pg_config(pytestconfig, pgsql_local):
 
     def _patch_config(config_yaml, config_vars):
         # Point service Postgres component to testsuite-managed DB URI.
-        components = config_yaml['components_manager']['components']
-        postgres = components.get('postgres-db-1')
+        postgres = _get_components(config_yaml).get('postgres-db-1')
         if postgres:
             postgres['dbconnection'] = uri
             postgres.pop('dbalias', None)
-
-    return _patch_config
-
-
-@pytest.fixture(scope='session')
-def userver_config_bot_token():
-    def _patch_config(config_yaml, config_vars):
-        # Use BOT_TOKEN from environment instead of hardcoded test token.
-        token = os.environ.get('BOT_TOKEN')
-        if token:
-            config_vars['bot-token'] = token
 
     return _patch_config
 
@@ -71,8 +62,7 @@ def userver_config_telegram_base_url(pytestconfig, mockserver_info):
         if pytestconfig.option.service_runner_mode:
             return
         # Redirect Telegram API calls to mockserver for deterministic tests.
-        components = config_yaml['components_manager']['components']
-        telegram = components.get('telegram-bot')
+        telegram = _get_components(config_yaml).get('telegram-bot')
         if telegram:
             telegram['api-base-url'] = mockserver_info.base_url.rstrip('/')
 
@@ -82,16 +72,22 @@ def userver_config_telegram_base_url(pytestconfig, mockserver_info):
 @pytest.fixture
 def telegram_api_mock(mockserver):
     # Shared queue of update batches returned by mocked getUpdates.
-    token = os.environ['BOT_TOKEN']
-    state = {'updates': []}
+    token = TEST_BOT_TOKEN
+    state = {
+        'updates': [],
+        'send_messages': [],
+        'answer_inline_queries': [],
+        'answer_callback_queries': [],
+        'edit_message_texts': [],
+    }
 
-    @mockserver.json_handler(f'/bot{token}/deleteWebhook')
-    def _delete_webhook(request):
+    def _ok_result():
         return {'ok': True, 'result': True}
 
     @mockserver.json_handler(f'/bot{token}/setMyCommands')
-    def _set_my_commands(request):
-        return {'ok': True, 'result': True}
+    @mockserver.json_handler(f'/bot{token}/deleteWebhook')
+    def _simple_true_response(request):
+        return _ok_result()
 
     @mockserver.json_handler(f'/bot{token}/getMe')
     def _get_me(request):
@@ -112,6 +108,7 @@ def telegram_api_mock(mockserver):
 
     @mockserver.json_handler(f'/bot{token}/sendMessage')
     def _send_message(request):
+        state['send_messages'].append(request.json)
         return {
             'ok': True,
             'result': {
@@ -123,15 +120,18 @@ def telegram_api_mock(mockserver):
 
     @mockserver.json_handler(f'/bot{token}/answerInlineQuery')
     def _answer_inline_query(request):
-        return {'ok': True, 'result': True}
+        state['answer_inline_queries'].append(request.json)
+        return _ok_result()
 
     @mockserver.json_handler(f'/bot{token}/answerCallbackQuery')
     def _answer_callback_query(request):
-        return {'ok': True, 'result': True}
+        state['answer_callback_queries'].append(request.json)
+        return _ok_result()
 
     @mockserver.json_handler(f'/bot{token}/editMessageText')
     def _edit_message_text(request):
-        return {'ok': True, 'result': True}
+        state['edit_message_texts'].append(request.json)
+        return _ok_result()
 
     return state
 

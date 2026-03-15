@@ -60,7 +60,17 @@ target_link_libraries(
 # target_link_libraries(${PROJECT_NAME}_benchmark PRIVATE ${PROJECT_NAME}_objs userver::ubench)
 # add_google_benchmark_tests(${PROJECT_NAME}_benchmark)
 
+userver_add_sql_library(
+    ${PROJECT_NAME}_sql
+    NAMESPACE tg_bot
+    SOURCE_DIR postgresql/queries
+    OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/gen/sql
+    SQL_FILES **/*.sql
+)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_sql)
+
 # Functional testing / service runner target (`start-${PROJECT_NAME}`)
+# Enable `SQL_LIBRARY ${PROJECT_NAME}_sql` after moving from background polling to webhook. 
 userver_testsuite_add_simple()
 
 # Install
