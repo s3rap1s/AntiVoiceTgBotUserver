@@ -3,12 +3,9 @@
 #include <tg_bot/sql_queries.hpp>
 
 #include <userver/logging/log.hpp>
-#include <userver/storages/postgres/component.hpp>
-
 namespace tg_bot {
 
-UserStorage::UserStorage(const userver::components::ComponentContext& context, std::string db_component_name)
-    : pg_cluster(context.FindComponent<userver::components::Postgres>(db_component_name).GetCluster()) {}
+UserStorage::UserStorage(userver::storages::postgres::ClusterPtr pg_cluster) : pg_cluster(std::move(pg_cluster)) {}
 
 void UserStorage::SaveText(tg::Integer user_id, std::string_view text) const try {
     pg_cluster->Execute(userver::storages::postgres::ClusterHostType::kMaster, sql::kSaveText, user_id, text);

@@ -3,12 +3,11 @@
 #include <tg_bot/sql_queries.hpp>
 
 #include <userver/logging/log.hpp>
-#include <userver/storages/postgres/component.hpp>
 
 namespace tg_bot {
 
-MessageStorage::MessageStorage(const userver::components::ComponentContext& context, std::string db_component_name)
-    : pg_cluster(context.FindComponent<userver::components::Postgres>(db_component_name).GetCluster()) {}
+MessageStorage::MessageStorage(userver::storages::postgres::ClusterPtr pg_cluster)
+    : pg_cluster(std::move(pg_cluster)) {}
 
 void MessageStorage::SaveMessage(std::string_view inline_message_id, std::string_view text, tg::Integer owner_id,
                                  size_t speed) const try {

@@ -13,6 +13,7 @@
 #include <userver/engine/async.hpp>
 #include <userver/engine/sleep.hpp>
 #include <userver/logging/log.hpp>
+#include <userver/storages/postgres/component.hpp>
 #include <userver/yaml_config/schema.hpp>
 #include <userver/yaml_config/yaml_config.hpp>
 
@@ -132,8 +133,8 @@ TelegramBotComponent::TelegramBotComponent(const userver::components::ComponentC
     : userver::components::ComponentBase(config, context),
       http_client(context.FindComponent<userver::components::HttpClient>().GetHttpClient()),
       tp(context.GetTaskProcessor("main-task-processor")),
-      message_storage(context),
-      user_storage(context) {
+      message_storage(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()),
+      user_storage(context.FindComponent<userver::components::Postgres>("postgres-db-1").GetCluster()) {
     const auto yaml = config.As<userver::yaml_config::YamlConfig>();
     token = yaml["token"].As<std::string>();
     api_base_url = yaml["api-base-url"].As<std::string>("https://api.telegram.org");

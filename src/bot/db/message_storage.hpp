@@ -2,7 +2,6 @@
 
 #include <tg/types/common.hpp>
 
-#include <userver/components/component_context.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 
 #include <optional>
@@ -19,8 +18,7 @@ class MessageStorage {
         size_t speed;
     };
 
-    explicit MessageStorage(const userver::components::ComponentContext& context,
-                            std::string db_component_name = "postgres-db-1");
+    explicit MessageStorage(userver::storages::postgres::ClusterPtr pg_cluster);
 
     void SaveMessage(std::string_view inline_message_id, std::string_view text, tg::Integer owner_id,
                      size_t speed) const;

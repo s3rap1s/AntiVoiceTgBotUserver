@@ -2,7 +2,6 @@
 
 #include <tg/types/common.hpp>
 
-#include <userver/components/component_context.hpp>
 #include <userver/storages/postgres/cluster.hpp>
 
 #include <optional>
@@ -13,8 +12,7 @@ namespace tg_bot {
 
 class UserStorage {
    public:
-    explicit UserStorage(const userver::components::ComponentContext& context,
-                         std::string db_component_name = "postgres-db-1");
+    explicit UserStorage(userver::storages::postgres::ClusterPtr pg_cluster);
 
     void SaveText(tg::Integer user_id, std::string_view text) const;
     std::optional<std::string> GetText(tg::Integer user_id) const;
