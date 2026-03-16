@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from testsuite.databases.pgsql import discover
@@ -11,6 +13,7 @@ def _get_components(config_yaml):
 
 # These hooks patch static config/config_vars before service start in testsuite.
 USERVER_CONFIG_HOOKS = [
+    'userver_config_bot_token',
     'userver_config_telegram_base_url',
     'userver_pg_config',
 ]
@@ -31,6 +34,19 @@ def pgsql_local(service_source_dir, pgsql_local_create, pytestconfig):
         [service_source_dir.joinpath('postgresql/schemas')],
     )
     return pgsql_local_create(list(databases.values()))
+
+
+@pytest.fixture(scope='session')
+def userver_config_bot_token(pytestconfig):
+    def _patch_config(config_yaml, config_vars):
+        if not pytestconfig.option.service_runner_mode:
+            return
+
+        bot_token = os.environ.get('BOT_TOKEN')
+        if bot_token:
+            config_vars['bot-token'] = bot_token
+
+    return _patch_config
 
 
 @pytest.fixture(scope='session')
