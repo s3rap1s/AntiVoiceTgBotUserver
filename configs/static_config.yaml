@@ -1,11 +1,11 @@
 components_manager:
   task_processors:
     main-task-processor:
-      worker_threads: 4
+      worker_threads: $worker-threads
 
     fs-task-processor:
-      worker_threads: 2
-  
+      worker_threads: $worker-fs-threads
+
   coro_pool:
     stack_size: $stack_size
 
@@ -32,8 +32,7 @@ components_manager:
 
     testsuite-support: {}
 
-
-    http-client:
+    http-client: {}
     dns-client:
       fs-task-processor: fs-task-processor
 
@@ -44,8 +43,9 @@ components_manager:
 
     telegram-bot:
       token: $bot-token
-      poll-timeout-seconds: 20
-      limit: 100
+      poll-timeout-seconds: $bot-poll-timeout-seconds
+      initial-backoff-ms: $bot-initial-backoff-ms
+      max-backoff-ms: $bot-max-backoff-ms
 
     postgres-db-1:
       dbconnection: $pg-connection

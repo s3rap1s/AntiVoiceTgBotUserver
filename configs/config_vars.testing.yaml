@@ -6,9 +6,12 @@ is-testing: true
 
 bot-token: test-bot-token
 bot-token#env: BOT_TOKEN
+bot-poll-timeout-seconds: 20
+bot-initial-backoff-ms: 200
+bot-max-backoff-ms: 5000
 
 server-port: 8080
 
 stack_size: 1048576
 
-pg-connection: postgresql://testsuite@localhost:15433/telegram_bot_db_1
+pg-connection: postgresql://testsuite@localhost:15434/telegram_bot_db_1
