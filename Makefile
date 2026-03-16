@@ -1,49 +1,66 @@
 PROJECT_NAME = telegram_bot
 NPROCS ?= $(shell nproc)
 CLANG_FORMAT ?= clang-format
-DOCKER_IMAGE ?= ghcr.io/userver-framework/ubuntu-24.04-userver:latest
+DOCKER_IMAGE ?= ghcr.io/userver-framework/ubuntu-22.04-userver-pg-dev:v2.14
+COMPOSE ?= docker compose
+DB_SERVICE ?= postgres-db
+BUILD_ROOT ?= $(HOME)/.cache/telegram-bot
 CMAKE_OPTS ?=
 # If we're under TTY, pass "-it" to "docker run"
 DOCKER_ARGS = $(shell /bin/test -t 0 && /bin/echo -it || echo)
-PRESETS ?= debug release debug-custom release-custom
+PRESETS ?= debug release
 
 .PHONY: all
 all: test-debug test-release
+
+.PHONY: db-up db-down db-reset db-logs
+db-up:
+	$(COMPOSE) up -d --wait $(DB_SERVICE)
+
+db-down:
+	$(COMPOSE) down
+
+db-reset:
+	$(COMPOSE) down -v
+	$(COMPOSE) up -d --wait $(DB_SERVICE)
+
+db-logs:
+	$(COMPOSE) logs $(DB_SERVICE)
 
 # Run cmake
 .PHONY: $(addprefix cmake-, $(PRESETS))
 $(addprefix cmake-, $(PRESETS)): cmake-%:
 	cmake --preset $* $(CMAKE_OPTS)
 
-$(addsuffix /CMakeCache.txt, $(addprefix build-, $(PRESETS))): build-%/CMakeCache.txt:
+$(addsuffix /CMakeCache.txt, $(addprefix $(BUILD_ROOT)/build-, $(PRESETS))): $(BUILD_ROOT)/build-%/CMakeCache.txt:
 	$(MAKE) cmake-$*
 
 # Build using cmake
 .PHONY: $(addprefix build-, $(PRESETS))
-$(addprefix build-, $(PRESETS)): build-%: build-%/CMakeCache.txt
-	cmake --build build-$* -j $(NPROCS) --target $(PROJECT_NAME)
+$(addprefix build-, $(PRESETS)): build-%: $(BUILD_ROOT)/build-%/CMakeCache.txt
+	cmake --build $(BUILD_ROOT)/build-$* -j $(NPROCS) --target $(PROJECT_NAME)
 
 # Test
 .PHONY: $(addprefix test-, $(PRESETS))
-$(addprefix test-, $(PRESETS)): test-%: build-%/CMakeCache.txt
-	cmake --build build-$* -j $(NPROCS)
+$(addprefix test-, $(PRESETS)): test-%: $(BUILD_ROOT)/build-%/CMakeCache.txt
+	cmake --build $(BUILD_ROOT)/build-$* -j $(NPROCS)
 	set -a; [ -f .env ] && . ./.env; set +a; \
-	cd build-$* && ((test -t 1 && GTEST_COLOR=1 PYTEST_ADDOPTS="--color=yes" ctest -V) || ctest -V)
+	cd $(BUILD_ROOT)/build-$* && ((test -t 1 && GTEST_COLOR=1 PYTEST_ADDOPTS="--color=yes" ctest -V) || ctest -V)
 
 # Start the service (via testsuite service runner)
 .PHONY: $(addprefix start-, $(PRESETS))
-$(addprefix start-, $(PRESETS)): start-%:
+$(addprefix start-, $(PRESETS)): db-up
 	set -a; [ -f .env ] && . ./.env; set +a; \
-	cmake --build build-$* -v --target start-$(PROJECT_NAME)
+	cmake --build $(BUILD_ROOT)/build-$(patsubst start-%,%,$@) -v --target start-$(PROJECT_NAME)
 
 # Cleanup data
 .PHONY: $(addprefix clean-, $(PRESETS))
 $(addprefix clean-, $(PRESETS)): clean-%:
-	cmake --build build-$* --target clean
+	cmake --build $(BUILD_ROOT)/build-$* --target clean
 
 .PHONY: dist-clean
 dist-clean:
-	rm -rf build*
+	rm -rf $(BUILD_ROOT)/build-*
 	rm -rf tests/__pycache__/
 	rm -rf tests/.pytest_cache/
 	rm -rf .ccache
@@ -53,7 +70,7 @@ dist-clean:
 # Install
 .PHONY: $(addprefix install-, $(PRESETS))
 $(addprefix install-, $(PRESETS)): install-%: build-%
-	cmake --install build-$* -v --component $(PROJECT_NAME)
+	cmake --install $(BUILD_ROOT)/build-$* -v --component $(PROJECT_NAME)
 
 .PHONY: install
 install: install-release
@@ -76,5 +93,5 @@ $(addprefix docker-cmake-, $(PRESETS)) $(addprefix docker-build-, $(PRESETS)) $(
 		-w $$PWD \
 		$(DOCKER_IMAGE) \
 		env CCACHE_DIR=$$PWD/.ccache \
-		    HOME=$$HOME \
+		    HOME=/home/user \
 		    $$PWD/run_as_user.sh $(shell /bin/id -u) $(shell /bin/id -g) make $*
