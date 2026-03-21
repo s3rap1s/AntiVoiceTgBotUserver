@@ -42,10 +42,12 @@ components_manager:
       task_processor: main-task-processor
 
     telegram-bot:
+      path: /telegram/webhook
+      method: POST
+      task_processor: main-task-processor
       token: $bot-token
-      poll-timeout-seconds: $bot-poll-timeout-seconds
-      initial-backoff-ms: $bot-initial-backoff-ms
-      max-backoff-ms: $bot-max-backoff-ms
+      webhook-url: $bot-webhook-url
+      webhook-secret-token: $bot-webhook-secret-token
 
     postgres-db-1:
       dbconnection: $pg-connection

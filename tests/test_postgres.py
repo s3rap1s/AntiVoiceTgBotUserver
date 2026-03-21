@@ -87,7 +87,12 @@ def _message_update(update_id, user_id, text):
 
 
 async def _poll_service(service_client):
-    response = await service_client.get('/ping')
+    response = await service_client.post('/telegram/webhook', json={})
+    assert response.status == 400
+
+
+async def _send_update(service_client, update):
+    response = await service_client.post('/telegram/webhook', json=update)
     assert response.status == 200
 
 
@@ -133,8 +138,7 @@ async def test_save_text_query(telegram_api_mock, service_client, pgsql):
     user_id = 101
     text = 'saved text from bot message'
 
-    telegram_api_mock['updates'].append([_message_update(1, user_id, text)])
-    await _poll_service(service_client)
+    await _send_update(service_client, _message_update(1, user_id, text))
 
     await _wait_until(lambda: _get_saved_text(pgsql, user_id) == (text,))
 
@@ -149,8 +153,7 @@ async def test_get_text_query(telegram_api_mock, service_client, pgsql):
         (user_id, text),
     )
 
-    telegram_api_mock['updates'].append([_inline_query_update(2, user_id)])
-    await _poll_service(service_client)
+    await _send_update(service_client, _inline_query_update(2, user_id))
 
     await _wait_until(lambda: bool(telegram_api_mock['answer_inline_queries']))
     request = telegram_api_mock['answer_inline_queries'][-1]
@@ -163,8 +166,7 @@ async def test_save_message_query(telegram_api_mock, service_client, pgsql):
     inline_message_id = 'inline-msg-save'
     text = 'chosen inline text'
 
-    telegram_api_mock['updates'].append([_chosen_inline_update(3, user_id, inline_message_id, query=text)])
-    await _poll_service(service_client)
+    await _send_update(service_client, _chosen_inline_update(3, user_id, inline_message_id, query=text))
 
     await _wait_until(lambda: _get_message_info(pgsql, inline_message_id) == (text, user_id, 0))
 
@@ -180,8 +182,7 @@ async def test_get_message_query(telegram_api_mock, service_client, pgsql):
         (inline_message_id, text, user_id, 0),
     )
 
-    telegram_api_mock['updates'].append([_callback_query_update(4, user_id, inline_message_id, 'show_full')])
-    await _poll_service(service_client)
+    await _send_update(service_client, _callback_query_update(4, user_id, inline_message_id, 'show_full'))
 
     await _wait_until(lambda: bool(telegram_api_mock['answer_callback_queries']))
     request = telegram_api_mock['answer_callback_queries'][-1]
@@ -198,8 +199,7 @@ async def test_clear_text_query(telegram_api_mock, service_client, pgsql):
         (user_id, 'to be cleared'),
     )
 
-    telegram_api_mock['updates'].append([_message_update(5, user_id, '/clear')])
-    await _poll_service(service_client)
+    await _send_update(service_client, _message_update(5, user_id, '/clear'))
 
     await _wait_until(lambda: _get_saved_text(pgsql, user_id) == (None,))
 
@@ -207,8 +207,7 @@ async def test_clear_text_query(telegram_api_mock, service_client, pgsql):
 async def test_make_user_premium_query(telegram_api_mock, service_client, pgsql):
     user_id = 106
 
-    telegram_api_mock['updates'].append([_message_update(6, user_id, 'makeMePremiumUser')])
-    await _poll_service(service_client)
+    await _send_update(service_client, _message_update(6, user_id, 'makeMePremiumUser'))
 
     expected = datetime.date.today() + datetime.timedelta(days=1)
     await _wait_until(lambda: _get_premium_till(pgsql, user_id) == (expected,))
@@ -233,8 +232,7 @@ async def test_is_premium_user_positive_query(telegram_api_mock, service_client,
         (reader_id,),
     )
 
-    telegram_api_mock['updates'].append([_callback_query_update(7, reader_id, inline_message_id, 'show_full')])
-    await _poll_service(service_client)
+    await _send_update(service_client, _callback_query_update(7, reader_id, inline_message_id, 'show_full'))
 
     await _wait_until(lambda: bool(telegram_api_mock['answer_callback_queries']))
     request = telegram_api_mock['answer_callback_queries'][-1]
@@ -260,10 +258,38 @@ async def test_is_premium_user_negative_query(telegram_api_mock, service_client,
         (owner_id,),
     )
 
-    telegram_api_mock['updates'].append([_callback_query_update(8, reader_id, inline_message_id, 'show_full')])
-    await _poll_service(service_client)
+    await _send_update(service_client, _callback_query_update(8, reader_id, inline_message_id, 'show_full'))
 
     await _wait_until(lambda: bool(telegram_api_mock['answer_callback_queries']))
     request = telegram_api_mock['answer_callback_queries'][-1]
     assert request['url'] == 't.me/tests_bot?start=offer_prem'
     assert request['show_alert'] is True
+
+
+async def test_listen_continues_after_message_not_modified(telegram_api_mock, service_client, pgsql):
+    user_id = 111
+    inline_message_id = 'inline-msg-listen-repeat'
+    text = 'one two three four five one two three four five end'
+    speed = 3
+
+    _execute(
+        pgsql,
+        'INSERT INTO bot_schema.message_storage(inline_message_id, message_text, owner_id, speed) '
+        'VALUES (%s, %s, %s, %s)',
+        (inline_message_id, text, user_id, speed),
+    )
+
+    await _send_update(service_client, _callback_query_update(9, user_id, inline_message_id, 'listen'))
+
+    await _wait_until(lambda: bool(telegram_api_mock['answer_callback_queries']))
+    callback_request = telegram_api_mock['answer_callback_queries'][-1]
+    assert callback_request['callback_query_id'] == 'callback-query-1'
+
+    await _wait_until(
+        lambda: any(
+            request.get('inline_message_id') == inline_message_id
+            and request.get('text') == '<i>End of the message</i>'
+            for request in telegram_api_mock['edit_message_texts']
+        ),
+        timeout=4.0,
+    )

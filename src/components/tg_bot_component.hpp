@@ -1,48 +1,42 @@
 #pragma once
 
+#include "bot/bot_app.hpp"
 #include "bot/db/message_storage.hpp"
 #include "bot/db/user_storage.hpp"
 
-#include <userver/clients/http/client.hpp>
-#include <userver/components/component_base.hpp>
-#include <userver/engine/task/task_processor_fwd.hpp>
-#include <userver/engine/task/task_with_result.hpp>
+#include <tg/bot_api.hpp>
 
-#include <cstdint>
+#include <userver/clients/http/client.hpp>
+#include <userver/engine/task/task_processor_fwd.hpp>
+#include <userver/server/handlers/http_handler_base.hpp>
+
 #include <string>
 
 namespace tg_bot {
 
-class TelegramBotComponent final : public userver::components::ComponentBase {
+class TelegramBotComponent final : public userver::server::handlers::HttpHandlerBase {
    public:
     static constexpr std::string_view kName = "telegram-bot";
 
     static userver::yaml_config::Schema GetStaticConfigSchema();
 
     TelegramBotComponent(const userver::components::ComponentConfig&, const userver::components::ComponentContext&);
-    ~TelegramBotComponent() override;
+
+    std::string HandleRequestThrow(const userver::server::http::HttpRequest&,
+                                   userver::server::request::RequestContext&) const override;
 
    private:
-    void Run();
-
     userver::clients::http::Client& http_client;
     userver::engine::TaskProcessor& tp;
-    userver::engine::TaskWithResult<void> task;
 
     MessageStorage message_storage;
     UserStorage user_storage;
 
-    std::string token;
-    std::string api_base_url{"https://api.telegram.org"};
-    int poll_timeout{20};
-    int limit{100};
-    int64_t offset{0};
+    std::string webhook_url;
+    std::string webhook_secret_token;
 
-    int initial_backoff_ms{200};
-    int max_backoff_ms{5000};
-    int protocol_delay_ms{1000};
-    int parse_delay_ms{5000};
-    int retry_after_cap_seconds{120};
+    tg::BotApi api;
+    BotApp bot;
 };
 
 }  // namespace tg_bot

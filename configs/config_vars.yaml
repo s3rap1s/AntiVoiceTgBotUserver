@@ -5,9 +5,10 @@ logger-level: info
 
 bot-token: your-bot-token
 bot-token#env: BOT_TOKEN
-bot-poll-timeout-seconds: 20
-bot-initial-backoff-ms: 200
-bot-max-backoff-ms: 5000
+bot-webhook-url: ""
+bot-webhook-url#env: BOT_WEBHOOK_URL
+bot-webhook-secret-token: ""
+bot-webhook-secret-token#env: BOT_WEBHOOK_SECRET_TOKEN
 
 server-port: 8080
 

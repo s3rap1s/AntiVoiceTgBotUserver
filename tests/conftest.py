@@ -46,6 +46,14 @@ def userver_config_bot_token(pytestconfig):
         if bot_token:
             config_vars['bot-token'] = bot_token
 
+        webhook_url = os.environ.get('BOT_WEBHOOK_URL')
+        if webhook_url:
+            config_vars['bot-webhook-url'] = webhook_url
+
+        webhook_secret = os.environ.get('BOT_WEBHOOK_SECRET_TOKEN')
+        if webhook_secret:
+            config_vars['bot-webhook-secret-token'] = webhook_secret
+
     return _patch_config
 
 
@@ -87,10 +95,9 @@ def userver_config_telegram_base_url(pytestconfig, mockserver_info):
 
 @pytest.fixture
 def telegram_api_mock(mockserver):
-    # Shared queue of update batches returned by mocked getUpdates.
     token = TEST_BOT_TOKEN
     state = {
-        'updates': [],
+        'set_webhooks': [],
         'send_messages': [],
         'answer_inline_queries': [],
         'answer_callback_queries': [],
@@ -101,8 +108,12 @@ def telegram_api_mock(mockserver):
         return {'ok': True, 'result': True}
 
     @mockserver.json_handler(f'/bot{token}/setMyCommands')
-    @mockserver.json_handler(f'/bot{token}/deleteWebhook')
     def _simple_true_response(request):
+        return _ok_result()
+
+    @mockserver.json_handler(f'/bot{token}/setWebhook')
+    def _set_webhook(request):
+        state['set_webhooks'].append(request.json)
         return _ok_result()
 
     @mockserver.json_handler(f'/bot{token}/getMe')
@@ -116,11 +127,6 @@ def telegram_api_mock(mockserver):
                 'username': 'tests_bot',
             },
         }
-
-    @mockserver.json_handler(f'/bot{token}/getUpdates')
-    def _get_updates(request):
-        batch = state['updates'].pop(0) if state['updates'] else []
-        return {'ok': True, 'result': batch}
 
     @mockserver.json_handler(f'/bot{token}/sendMessage')
     def _send_message(request):
