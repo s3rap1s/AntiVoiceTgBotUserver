@@ -3,8 +3,8 @@
 #include "db/message_storage.hpp"
 #include "db/user_storage.hpp"
 
-#include <tg/async_dispatcher.hpp>
 #include <tg/bot_api.hpp>
+#include <tg/dispatcher.hpp>
 #include <tg/types/update.hpp>
 
 #include <userver/concurrent/background_task_storage.hpp>
@@ -29,7 +29,7 @@ class BotApp {
     tg::BotApi& bot;
     MessageStorage& message_storage;
     UserStorage& user_storage;
-    tg::AsyncDispatcher dispatcher;
+    tg::Dispatcher dispatcher;
     userver::concurrent::BackgroundTaskStorage background_tasks;
 };
 
