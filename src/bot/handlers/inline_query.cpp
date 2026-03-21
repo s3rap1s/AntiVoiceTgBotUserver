@@ -58,7 +58,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
             input_content.message_text = "<i>Hidden message</i>";
             input_content.parse_mode = "HTML";
             result.input_message_content = input_content;
-            result.reply_markup = CreateKeyboard(KeyboardMode::Waiting);
+            result.reply_markup = CreateKeyboard(KeyboardMode::kWaiting);
             results.push_back(result);
         }
         bot.AnswerInlineQuery(inline_query.id, results, 1, true);
