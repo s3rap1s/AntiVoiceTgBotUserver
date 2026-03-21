@@ -16,7 +16,7 @@ void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_i
     auto speed_info = GetSpeedInformation(speed);
     auto chunks = SplitTextByWordsCount(full_text, speed_info.words_per_chunk);
 
-    auto keyboard = CreateKeyboard(KeyboardMode::DuringUpdate);
+    auto keyboard = CreateKeyboard(KeyboardMode::kUpdating);
     chunks.push_back("<i>End of the message</i>");
 
     for (size_t i = 0; i < chunks.size(); ++i) {
@@ -30,7 +30,7 @@ void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_i
             bot.EditMessageText(display_text, std::nullopt, std::nullopt, std::nullopt, inline_message_id, "HTML",
                                 std::nullopt, std::nullopt, keyboard);
         } catch (const tg::ApiException& e) {
-            if (!std::string(e.what()).starts_with("Bad Request: message is not modified")) {
+            if (e.Error().description.find("message is not modified") == std::string::npos) {
                 throw;
             }
         } catch (const std::exception& e) {
