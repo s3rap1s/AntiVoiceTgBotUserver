@@ -58,6 +58,7 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
             auto message_data = std::move(result.value());
             auto text = std::move(message_data.text);
             auto speed = message_data.speed;
+            bot.AnswerCallbackQuery(callback_query.id);
             background_tasks.AsyncDetach(inline_message_id, [this, inline_message_id, text = std::move(text), speed] {
                 GraduallyUpdateMessage(bot, inline_message_id, text, speed);
             });
