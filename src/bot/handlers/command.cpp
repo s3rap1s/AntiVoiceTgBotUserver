@@ -62,7 +62,7 @@ void HandleClearCommand(tg::BotApi& bot, const tg::Message& message, UserStorage
         return;
     }
 
-    std::string text = "🧹Saved text cleared! Send me another text message to save new one.";
+    std::string text = "🧹Saved text is cleared! Send me another text message to save new one.";
     bot.SendMessage(message.chat.id, text);
 }
 
