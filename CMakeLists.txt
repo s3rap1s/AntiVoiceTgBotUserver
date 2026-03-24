@@ -36,7 +36,6 @@ add_executable(${PROJECT_NAME}
     src/bot/handlers/command.cpp
     src/bot/handlers/inline_query.cpp
     src/bot/handlers/message.cpp
-    src/bot/types/speed.cpp
     src/bot/utils/text_utils.cpp
     src/bot/bot_app.cpp
     src/components/tg_bot_component.cpp

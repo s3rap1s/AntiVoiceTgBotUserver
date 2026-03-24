@@ -18,7 +18,6 @@
 #include <userver/yaml_config/yaml_config.hpp>
 
 #include <optional>
-#include <stdexcept>
 #include <string>
 
 namespace tg_bot {
@@ -68,11 +67,7 @@ TelegramBotComponent::TelegramBotComponent(const userver::components::ComponentC
       api(http_client, config.As<userver::yaml_config::YamlConfig>()["token"].As<std::string>(),
           config.As<userver::yaml_config::YamlConfig>()["api-base-url"].As<std::string>("https://api.telegram.org")),
       bot(api, tp, message_storage, user_storage) {
-    if (webhook_url.empty()) {
-        throw std::runtime_error("telegram-bot webhook-url must not be empty");
-    }
-
-    api.SetMyCommands({START_COMMAND, CLEAR_COMMAND});
+    api.SetMyCommands(COMMANDS);
     api.SetWebhook(webhook_url, std::nullopt, std::nullopt, std::nullopt, std::nullopt, true,
                    webhook_secret_token.empty() ? std::nullopt : std::make_optional(webhook_secret_token));
 }

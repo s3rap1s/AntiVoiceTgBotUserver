@@ -1,7 +1,6 @@
 #include "gradual_editor.hpp"
 
 #include "bot/keyboard.hpp"
-#include "bot/types/speed.hpp"
 #include "bot/utils/text_utils.hpp"
 
 #include <userver/engine/sleep.hpp>
@@ -11,9 +10,11 @@
 #include <string_view>
 #include <vector>
 
+namespace tg_bot {
+
 void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_id, std::string_view full_text,
-                            size_t speed) {
-    auto speed_info = GetSpeedInformation(speed);
+                            size_t speed_id, UserStorage& user_storage) {
+    auto speed_info = user_storage.GetSpeedInformation(speed_id);
     auto chunks = SplitTextByWordsCount(full_text, speed_info.words_per_chunk);
 
     auto keyboard = CreateKeyboard(KeyboardMode::kUpdating);
@@ -38,9 +39,11 @@ void GraduallyUpdateMessage(tg::BotApi& bot, const std::string& inline_message_i
         }
 
         if (i + 1 < chunks.size()) {
-            const auto delay =
-                std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::duration<double>(speed_info.delay));
-            userver::engine::SleepFor(delay);
+            const auto delay_s = std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::duration<double>(speed_info.delay_s));
+            userver::engine::SleepFor(delay_s);
         }
     }
 }
+
+}  // namespace tg_bot

@@ -3,6 +3,7 @@
 #include "bot/config.hpp"
 #include "bot/db/message_storage.hpp"
 #include "bot/keyboard.hpp"
+#include "bot/text.hpp"
 #include "bot/utils/text_utils.hpp"
 
 #include <format>
@@ -29,7 +30,7 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
         } catch (const std::exception&) {
             tg::InlineQueryResultButton button;
             button.start_parameter = SAVE_TEXT_ARG;
-            button.text = "Temporary error, try again later.";
+            button.text = TEMPORARY_ERROR;
             bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
             return;
         }
@@ -45,14 +46,23 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
         }
     }
     std::string description;
+    std::vector<SpeedInformation> speeds;
+    try {
+        speeds = user_storage.GetUserSpeeds(inline_query.from.id);
+    } catch (const std::exception&) {
+        tg::InlineQueryResultButton button;
+        button.start_parameter = SAVE_TEXT_ARG;
+        button.text = TEMPORARY_ERROR;
+        bot.AnswerInlineQuery(inline_query.id, {}, 1, std::nullopt, std::nullopt, button);
+        return;
+    }
     if (!text.empty()) {
         description = "Query: " + text;
-        for (size_t speed = 0; speed < SPEEDS.size(); ++speed) {
-            SpeedInformation speedConfig = GetSpeedInformation(speed);
+        for (const auto& speed : speeds) {
             tg::InlineQueryResultArticle result;
-            result.id = std::format("{}", speed);
-            result.title = speedConfig.title;
-            result.description = speedConfig.speed_str + " - " + description;
+            result.id = std::format("{}", speed.speed_id);
+            result.title = speed.title;
+            result.description = BuildSpeedStr(speed.words_per_chunk, speed.delay_s) + " - " + description;
             tg::InputTextMessageContent input_content;
             result.type = "article";
             input_content.message_text = "<i>Hidden message</i>";
@@ -68,14 +78,20 @@ void BotApp::HandleInlineQuery(const tg::InlineQuery& inline_query) {
 void BotApp::HandleChosenInlineResult(const tg::ChosenInlineResult chosen_inline_result) {
     if (!chosen_inline_result.query || !chosen_inline_result.inline_message_id) return;
     std::string query_id = chosen_inline_result.result_id;
-    size_t speed = ToInteger(query_id);
+    size_t speed_id;
+    if (auto value = ToNumber<size_t>(query_id); !value) {
+        LOG_ERROR() << "Failed to convert query_id to integer, query_id=" << query_id;
+        speed_id = DEFAULT_SPEED_INDEX;
+    } else {
+        speed_id = static_cast<size_t>(*value);
+    }
     std::string text = *chosen_inline_result.query;
     if (text.empty()) {
         std::optional<std::string> saved_text;
         try {
             saved_text = user_storage.GetText(chosen_inline_result.from.id);
         } catch (const std::exception&) {
-            bot.EditMessageText("Temporary error, try again later.", std::nullopt, std::nullopt, std::nullopt,
+            bot.EditMessageText(TEMPORARY_ERROR, std::nullopt, std::nullopt, std::nullopt,
                                 chosen_inline_result.inline_message_id);
             return;
         }
@@ -85,9 +101,9 @@ void BotApp::HandleChosenInlineResult(const tg::ChosenInlineResult chosen_inline
     std::string inline_message_id = *chosen_inline_result.inline_message_id;
     tg::Integer owner_id = chosen_inline_result.from.id;
     try {
-        message_storage.SaveMessage(inline_message_id, text, owner_id, static_cast<int>(speed));
+        message_storage.SaveMessage(inline_message_id, text, owner_id, static_cast<int>(speed_id));
     } catch (const std::exception&) {
-        bot.EditMessageText("Temporary error, try again later.", std::nullopt, std::nullopt, std::nullopt,
+        bot.EditMessageText(TEMPORARY_ERROR, std::nullopt, std::nullopt, std::nullopt,
                             chosen_inline_result.inline_message_id);
     }
 }

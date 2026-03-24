@@ -1,6 +1,8 @@
 #include "bot/bot_app.hpp"
 
 #include "bot/config.hpp"
+#include "bot/text.hpp"
+#include "bot/utils/text_utils.hpp"
 
 #include <format>
 
@@ -17,7 +19,7 @@ void HandleSaveTextStartCommand(tg::BotApi& bot, const std::string& alias, const
         "2. Use @{} in any chat\n"
         "3. Choose sending speed\n",
         "Send /start to check out the bot's functionality", alias);
-    bot.SendMessage(message.chat.id, offer_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
+    bot.SendMessage(message.from->id, offer_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
 }
 
 void HandleOfferPremiumStartCommand(tg::BotApi& bot, const tg::Message& message) {
@@ -26,10 +28,11 @@ void HandleOfferPremiumStartCommand(tg::BotApi& bot, const tg::Message& message)
         "• Ability to view full text without waiting\n"
         "• Prohibiting other premium users from viewing the full text\n\n"
         "Send /start to check out the bot's functionality";
-    bot.SendMessage(message.chat.id, offer_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
+    bot.SendMessage(message.from->id, offer_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
 }
 
-void HandleStartCommand(tg::BotApi& bot, const std::string& alias, const tg::Message& message) {
+void HandleStartCommand(tg::BotApi& bot, const std::string& alias, const tg::Message& message,
+                        UserStorage& user_storage) {
     const std::string general_info = std::format(
         "<b>🤖 Hi!</b> I'm a bot for gradual message sending.\n\n"
         "<b>📝 How to use:</b>\n\n"
@@ -42,28 +45,65 @@ void HandleStartCommand(tg::BotApi& bot, const std::string& alias, const tg::Mes
         "3. Choose sending speed\n",
         MAX_QUERY_SIZE, alias, MAX_MESSAGE_SIZE, alias);
     std::string speeds_info = "\n<b>⚡ Available speeds:</b>\n";
-    for (const auto& speed : SPEEDS) {
-        speeds_info +=
-            std::format("{} - {} words per {:.1f} seconds\n", speed.title, speed.words_per_chunk, speed.delay);
+    std::vector<SpeedInformation> speeds;
+    try {
+        speeds = user_storage.GetUserSpeeds(message.from->id);
+    } catch (const std::exception&) {
+        bot.SendMessage(message.from->id, TEMPORARY_ERROR);
+        return;
+    }
+    for (const auto& speed : speeds) {
+        speeds_info += std::format("{} - {}\n", speed.title, BuildSpeedStr(speed.words_per_chunk, speed.delay_s));
     }
     std::string commands_info = "\n<b>📋 Commands:</b>\n";
     for (const auto& command : COMMANDS) {
         commands_info += std::format("{} - {}\n", command.command, command.description);
     }
     const std::string full_text = general_info + speeds_info + commands_info;
-    bot.SendMessage(message.chat.id, full_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
+    bot.SendMessage(message.from->id, full_text, std::nullopt, std::nullopt, std::nullopt, "HTML");
 }
 
 void HandleClearCommand(tg::BotApi& bot, const tg::Message& message, UserStorage& user_storage) {
     try {
         user_storage.ClearText(message.from->id);
     } catch (const std::exception&) {
-        bot.SendMessage(message.chat.id, "Temporary error, try again later.");
+        bot.SendMessage(message.from->id, TEMPORARY_ERROR);
         return;
     }
 
-    std::string text = "🧹Saved text is cleared! Send me another text message to save new one.";
-    bot.SendMessage(message.chat.id, text);
+    std::string text = "🧹 Saved text is cleared! Send me another text message to save new one.";
+    bot.SendMessage(message.from->id, text);
+}
+
+void HandleCancelCommand(tg::BotApi& bot, const tg::Message& message, UserStorage& user_storage) {
+    try {
+        user_storage.ChangeState(message.from->id, std::nullopt);
+    } catch (const std::exception&) {
+        bot.SendMessage(message.from->id, TEMPORARY_ERROR);
+        return;
+    }
+
+    std::string text = "🚫 Current action is cancelled";
+    bot.SendMessage(message.from->id, text);
+}
+
+void HandleCreateCustomSpeedCommand(tg::BotApi& bot, const tg::Message& message, UserStorage& user_storage) {
+    try {
+        if (!user_storage.IsPremiumUser(message.from->id)) {
+            bot.SendMessage(message.from->id, "This feature is available for premium users only.");
+            return;
+        }
+        user_storage.ChangeState(message.from->id, UserStorage::State::kAwaitingCustomSpeed);
+    } catch (const std::exception&) {
+        bot.SendMessage(message.from->id, TEMPORARY_ERROR);
+        return;
+    }
+    bot.SendMessage(
+        message.from->id,
+        "Send the value in this format: [number of words]/[seconds between updates]/[speed name]\n\n"
+        "Example: <code>3/1.5/🦮 Medium</code>\n"
+        "This means 3 words will be shown every 1.5 seconds, and the inline query will display the label “🦮 Medium”.",
+        std::nullopt, std::nullopt, std::nullopt, "HTML");
 }
 
 }  // namespace
@@ -89,9 +129,13 @@ void BotApp::HandleCommand(const tg::Message& message) {
                 return;
             }
         }
-        HandleStartCommand(bot, alias, message);
+        HandleStartCommand(bot, alias, message, user_storage);
     } else if (command_token == CLEAR_COMMAND.command) {
         HandleClearCommand(bot, message, user_storage);
+    } else if (command_token == CREATE_COMMAND.command) {
+        HandleCreateCustomSpeedCommand(bot, message, user_storage);
+    } else if (command_token == CANCEL_COMMAND.command) {
+        HandleCancelCommand(bot, message, user_storage);
     }
 }
 

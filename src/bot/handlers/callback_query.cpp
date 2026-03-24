@@ -2,6 +2,7 @@
 
 #include "bot/config.hpp"
 #include "bot/core/gradual_editor.hpp"
+#include "bot/text.hpp"
 
 #include <format>
 
@@ -14,7 +15,7 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
         try {
             result = message_storage.GetMessage(*callback_query.inline_message_id);
         } catch (const std::exception&) {
-            bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+            bot.AnswerCallbackQuery(callback_query.id, TEMPORARY_ERROR);
             return;
         }
 
@@ -28,7 +29,7 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
                 is_sender_premium = user_storage.IsPremiumUser(sender_id);
                 is_owner_premium = user_storage.IsPremiumUser(owner_id);
             } catch (const std::exception&) {
-                bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+                bot.AnswerCallbackQuery(callback_query.id, TEMPORARY_ERROR);
                 return;
             }
 
@@ -50,7 +51,7 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
         try {
             result = message_storage.GetMessage(inline_message_id);
         } catch (const std::exception&) {
-            bot.AnswerCallbackQuery(callback_query.id, "Temporary error, try again later.");
+            bot.AnswerCallbackQuery(callback_query.id, TEMPORARY_ERROR);
             return;
         }
 
@@ -60,7 +61,7 @@ void BotApp::HandleCallbackQuery(const tg::CallbackQuery& callback_query) {
             auto speed = message_data.speed;
             bot.AnswerCallbackQuery(callback_query.id);
             background_tasks.AsyncDetach(inline_message_id, [this, inline_message_id, text = std::move(text), speed] {
-                GraduallyUpdateMessage(bot, inline_message_id, text, speed);
+                GraduallyUpdateMessage(bot, inline_message_id, text, speed, user_storage);
             });
         } else {
             bot.AnswerCallbackQuery(callback_query.id, "Message is deleted");

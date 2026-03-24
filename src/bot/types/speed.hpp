@@ -3,10 +3,8 @@
 #include <string>
 
 struct SpeedInformation {
-    double delay;
+    size_t speed_id;
     size_t words_per_chunk;
+    float delay_s;
     std::string title;
-    std::string speed_str;
 };
-
-SpeedInformation GetSpeedInformation(size_t speed);

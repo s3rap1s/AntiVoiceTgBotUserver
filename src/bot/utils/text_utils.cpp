@@ -1,27 +1,19 @@
 #include "text_utils.hpp"
 
 #include <sstream>
-#include <string_view>
 
-size_t ToInteger(std::string_view str) {
-    std::stringstream ss((std::string(str)));
-    size_t res{};
-    ss >> res;
-    return res;
-}
-
-std::vector<std::string> SplitText(std::string_view text) {
+std::vector<std::string> SplitText(std::string_view text, char delimiter) {
     std::vector<std::string> words;
-    std::stringstream ss((std::string(text)));
     std::string word;
-    while (ss >> word) {
+    std::stringstream ss((std::string(text)));
+    while (getline(ss, word, delimiter)) {
         words.push_back(word);
     }
     return words;
 }
 
 std::vector<std::string> SplitTextByWordsCount(std::string_view text, size_t words_per_chunk) {
-    auto words = SplitText(text);
+    auto words = SplitText(text, ' ');
     std::vector<std::string> chunks;
 
     if (words.empty()) {
@@ -40,4 +32,9 @@ std::vector<std::string> SplitTextByWordsCount(std::string_view text, size_t wor
         chunks.push_back(chunk);
     }
     return chunks;
+}
+
+std::string BuildSpeedStr(size_t words_per_chunk, float delay_s) {
+    return std::format("{}word{} / {:.1f} sec", (words_per_chunk > 1 ? std::to_string(words_per_chunk) + " " : ""),
+                       (words_per_chunk > 1 ? "s" : ""), delay_s);
 }
